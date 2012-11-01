@@ -4,5 +4,5 @@ class Endereco < ActiveRecord::Base
 
   validates_presence_of :cep, :bairro, :tipo_logradouro, :logradouro, :municipio
   validates_numericality_of :cep, :numero
-  validates_length_of :cep, :minimum => 8, :maximum => 8
+  validates :cep, :length => { :minimum => 8, :maximum => 8 }
 end
