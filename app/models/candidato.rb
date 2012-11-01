@@ -3,7 +3,7 @@ class Candidato < ActiveRecord::Base
   belongs_to :eleitor
 
   validates_presence_of :eleitor, :nome_campanha
-  validates_length_of :nome_campanha, :minimun => 5
+#  validates_length_of :nome_campanha, :minimun => 5
   validates_uniqueness_of :nome_campanha
 
 end
