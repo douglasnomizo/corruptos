@@ -5,7 +5,7 @@ class Eleitor < ActiveRecord::Base
   belongs_to :endereco
   has_many :titulos
 
-  accepts_nested_attributes_for :titulo
+  accepts_nested_attributes_for :titulos
   
   validates_presence_of :data_nascimento, :nome, :nome_mae, :rg, :message => "Campo não pode ser em branco"
   validate :cpf, :numericality => :true
