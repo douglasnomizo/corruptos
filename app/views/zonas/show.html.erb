@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Endereco:</b>
+  <%= @zona.endereco %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_zona_path(@zona) %> |
+<%= link_to content_tag(:span, "Voltar"), zonas_path %>

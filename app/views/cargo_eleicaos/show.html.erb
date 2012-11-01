@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cargo:</b>
+  <%= @cargo_eleicao.cargo %>
+</p>
+
+<p>
+  <b>Eleicao:</b>
+  <%= @cargo_eleicao.eleicao %>
+</p>
+
+<p>
+  <b>Municipio:</b>
+  <%= @cargo_eleicao.municipio %>
+</p>
+
+<p>
+  <b>Uf:</b>
+  <%= @cargo_eleicao.uf %>
+</p>
+
+<p>
+  <b>Vagas:</b>
+  <%= @cargo_eleicao.vagas %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_cargo_eleicao_path(@cargo_eleicao) %> |
+<%= link_to content_tag(:span, "Voltar"), cargo_eleicaos_path %>

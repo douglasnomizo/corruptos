@@ -1,0 +1,17 @@
+<%= simple_form_for(@endereco) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :estado %>
+    <%= f.input :municipio %>
+    <%= f.input :logradouro %>
+    <%= f.input :numero %>
+    <%= f.input :bairro %>
+    <%= f.input :cep %>
+    <%= f.input :complemento %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

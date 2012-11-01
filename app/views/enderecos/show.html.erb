@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Municipio:</b>
+  <%= @endereco.municipio %>
+</p>
+
+<p>
+  <b>Logradouro:</b>
+  <%= @endereco.logradouro %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @endereco.numero %>
+</p>
+
+<p>
+  <b>Bairro:</b>
+  <%= @endereco.bairro %>
+</p>
+
+<p>
+  <b>Cep:</b>
+  <%= @endereco.cep %>
+</p>
+
+<p>
+  <b>Complemento:</b>
+  <%= @endereco.complemento %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_endereco_path(@endereco) %> |
+<%= link_to content_tag(:span, "Voltar"), enderecos_path %>

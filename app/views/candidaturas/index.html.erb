@@ -1,0 +1,29 @@
+<h1>Lista de candidaturas</h1>
+
+<table>
+  <tr>
+    <th>Candidato</th>
+    <th>Cargo eleicao</th>
+    <th>Partido</th>
+    <th>Codigo candidato</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @candidaturas.each do |candidatura| %>
+  <tr>
+    <td><%= candidatura.candidato %></td>
+    <td><%= candidatura.cargo_eleicao %></td>
+    <td><%= candidatura.partido %></td>
+    <td><%= candidatura.codigo_candidato %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), candidatura %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(candidatura) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), candidatura, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Candidatura', new_candidatura_path %>

@@ -1,0 +1,2 @@
+module VotosUrnasHelper
+end

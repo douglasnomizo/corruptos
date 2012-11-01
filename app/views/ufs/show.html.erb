@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sigla:</b>
+  <%= @uf.sigla %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @uf.nome %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_uf_path(@uf) %> |
+<%= link_to content_tag(:span, "Voltar"), ufs_path %>

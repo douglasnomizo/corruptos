@@ -1,0 +1,13 @@
+<%= simple_form_for(@votos_urna) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :secao %>
+    <%= f.association :candidatura %>
+    <%= f.input :qtd_votos %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

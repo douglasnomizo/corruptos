@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @candidato.nome_campanha %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_candidato_path(@candidato) %> |
+<%= link_to content_tag(:span, "Voltar"), candidatos_path %>

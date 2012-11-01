@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Coligacao:</b>
+  <%= @coligacao_partido.coligacao %>
+</p>
+
+<p>
+  <b>Partido:</b>
+  <%= @coligacao_partido.partido %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_coligacao_partido_path(@coligacao_partido) %> |
+<%= link_to content_tag(:span, "Voltar"), coligacao_partidos_path %>

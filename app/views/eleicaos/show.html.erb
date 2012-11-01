@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ano:</b>
+  <%= @eleicao.ano %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @eleicao.status %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_eleicao_path(@eleicao) %> |
+<%= link_to content_tag(:span, "Voltar"), eleicaos_path %>

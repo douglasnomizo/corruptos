@@ -1,0 +1,12 @@
+<%= simple_form_for(@eleicao) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :ano %>
+    <%= f.input :status, :label => "Ativa" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

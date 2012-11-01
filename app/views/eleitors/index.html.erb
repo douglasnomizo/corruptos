@@ -1,0 +1,33 @@
+<h1>Lista de eleitors</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Nome mae</th>
+    <th>Rg</th>
+    <th>Data nascimento</th>
+    <th>Cpf</th>
+    <th>Endereco</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @eleitors.each do |eleitor| %>
+  <tr>
+    <td><%= eleitor.nome %></td>
+    <td><%= eleitor.nome_mae %></td>
+    <td><%= eleitor.rg %></td>
+    <td><%= eleitor.data_nascimento %></td>
+    <td><%= eleitor.cpf %></td>
+    <td><%= eleitor.endereco %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), eleitor %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(eleitor) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), eleitor, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Eleitor', new_eleitor_path %>

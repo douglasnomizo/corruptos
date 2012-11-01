@@ -1,0 +1,12 @@
+<%= simple_form_for(@coligacao) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :cargo_eleicao %>
+    <%= f.input :nome %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

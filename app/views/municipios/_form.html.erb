@@ -1,0 +1,12 @@
+<%= simple_form_for(@municipio) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :uf, :label => f.uf.nome %>
+    <%= f.input :nome %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<%= simple_form_for(@zona) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :descricao %>
+    <%= f.association :endereco %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

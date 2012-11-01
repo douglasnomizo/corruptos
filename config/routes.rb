@@ -1,4 +1,36 @@
 Corruptos::Application.routes.draw do
+  resources :votos_urnas
+
+  resources :candidaturas
+
+  resources :coligacao_partidos
+
+  resources :coligacaos
+
+  resources :cargo_eleicaos
+
+  resources :partidos
+
+  resources :candidatos
+
+  resources :cargos
+
+  resources :eleicaos
+
+  resources :secaos
+
+  resources :zonas
+
+  resources :titulos
+
+  resources :eleitors
+
+  resources :enderecos
+
+  resources :municipios
+
+  resources :ufs
+
   authenticated :user do
     root :to => 'home#index'
   end

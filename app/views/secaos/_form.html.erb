@@ -1,0 +1,12 @@
+<%= simple_form_for(@secao) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :limite_eleitores %>
+    <%= f.association :zona %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

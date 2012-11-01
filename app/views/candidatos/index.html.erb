@@ -1,0 +1,23 @@
+<h1>Lista de candidatos</h1>
+
+<table>
+  <tr>
+    <th>Nome de Campanha</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @candidatos.each do |candidato| %>
+  <tr>
+    <td><%= candidato.nome_campanha %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), candidato %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_candidato_path(candidato) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), candidato, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Candidato', new_candidato_path %>

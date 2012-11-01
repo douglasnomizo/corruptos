@@ -1,0 +1,33 @@
+<h1>Lista de enderecos</h1>
+
+<table>
+  <tr>
+    <th>Municipio</th>
+    <th>Logradouro</th>
+    <th>Numero</th>
+    <th>Bairro</th>
+    <th>Cep</th>
+    <th>Complemento</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @enderecos.each do |endereco| %>
+  <tr>
+    <td><%= endereco.municipio %></td>
+    <td><%= endereco.logradouro %></td>
+    <td><%= endereco.numero %></td>
+    <td><%= endereco.bairro %></td>
+    <td><%= endereco.cep %></td>
+    <td><%= endereco.complemento %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), endereco %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_endereco_path(endereco) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), endereco, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Endereco', new_endereco_path %>

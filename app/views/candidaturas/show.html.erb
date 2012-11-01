@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Candidato:</b>
+  <%= @candidatura.candidato %>
+</p>
+
+<p>
+  <b>Cargo eleicao:</b>
+  <%= @candidatura.cargo_eleicao %>
+</p>
+
+<p>
+  <b>Partido:</b>
+  <%= @candidatura.partido %>
+</p>
+
+<p>
+  <b>Codigo candidato:</b>
+  <%= @candidatura.codigo_candidato %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(@candidatura) %> |
+<%= link_to content_tag(:span, "Voltar"), candidaturas_path %>

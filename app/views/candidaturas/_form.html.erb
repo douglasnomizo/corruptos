@@ -1,0 +1,14 @@
+<%= simple_form_for(@candidatura) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :candidato %>
+    <%= f.association :cargo_eleicao %>
+    <%= f.association :partido %>
+    <%= f.input :codigo_candidato %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

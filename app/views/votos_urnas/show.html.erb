@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Secao:</b>
+  <%= @votos_urna.secao %>
+</p>
+
+<p>
+  <b>Candidatura:</b>
+  <%= @votos_urna.candidatura %>
+</p>
+
+<p>
+  <b>Qtd votos:</b>
+  <%= @votos_urna.qtd_votos %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_votos_urna_path(@votos_urna) %> |
+<%= link_to content_tag(:span, "Voltar"), votos_urnas_path %>

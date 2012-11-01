@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cargo eleicao:</b>
+  <%= @coligacao.cargo_eleicao %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @coligacao.nome %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_coligacao_path(@coligacao) %> |
+<%= link_to content_tag(:span, "Voltar"), coligacaos_path %>

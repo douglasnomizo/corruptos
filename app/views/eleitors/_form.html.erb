@@ -1,0 +1,25 @@
+<%= simple_form_for(@eleitor) do |ele| %>
+  <%= ele.error_notification %>
+
+  <div class="form-inputs">
+    <%= ele.input :nome %>
+    <%= ele.input :nome_mae %>
+    <%= ele.input :rg %>
+    <%= ele.input :data_nascimento %>
+    <%= ele.input :cpf %>
+    <%= ele.simple_fields_for :endereco do |ende| %>
+      <div>
+      <%= ende.input :cep %>
+      <%= link_to "Pesquisar CEP" %>
+    </div>
+      <%= ende.input :logradouro %>
+      <%= ende.input :numero %>
+      <%= ende.input :bairro %>
+      <%= ende.input :complemento %>
+    <% end %>
+  </div>
+
+  <div class="form-inputs">
+    <%= ele.button :submit %>
+  </div>
+<% end %>

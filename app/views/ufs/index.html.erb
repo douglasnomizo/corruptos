@@ -1,0 +1,25 @@
+<h1>Lista de ufs</h1>
+
+<table>
+  <tr>
+    <th>Sigla</th>
+    <th>Nome</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ufs.each do |uf| %>
+  <tr>
+    <td><%= uf.sigla %></td>
+    <td><%= uf.nome %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), uf %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_uf_path(uf) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), uf, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Uf', new_uf_path %>

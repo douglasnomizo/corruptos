@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Uf:</b>
+  <%= @municipio.uf %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @municipio.nome %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_municipio_path(@municipio) %> |
+<%= link_to content_tag(:span, "Voltar"), municipios_path %>

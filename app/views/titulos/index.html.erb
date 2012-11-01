@@ -1,0 +1,31 @@
+<h1>Lista de titulos</h1>
+
+<table>
+  <tr>
+    <th>Data emissao</th>
+    <th>Juiz eleitoral</th>
+    <th>Status</th>
+    <th>Eleitor</th>
+    <th>Secao</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @titulos.each do |titulo| %>
+  <tr>
+    <td><%= titulo.data_emissao %></td>
+    <td><%= titulo.juiz_eleitoral %></td>
+    <td><%= titulo.status %></td>
+    <td><%= titulo.eleitor %></td>
+    <td><%= titulo.secao %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), titulo %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_titulo_path(titulo) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), titulo, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Titulo', new_titulo_path %>

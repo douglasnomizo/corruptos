@@ -1,0 +1,15 @@
+<%= simple_form_for(@titulo) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :data_emissao %>
+    <%= f.input :juiz_eleitoral %>
+    <%= f.input :status %>
+    <%= f.association :eleitor %>
+    <%= f.association :secao %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

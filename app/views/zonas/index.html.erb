@@ -1,0 +1,27 @@
+<h1>Lista de zonas</h1>
+
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Descrição</th>
+    <th>Endereco</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @zonas.each do |zona| %>
+  <tr>
+    <td><%= adiciona_zero_esquerda(zona.id) %></td>
+    <td><%= zona.descricao %></td>
+    <td><%= zona.endereco %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), zona %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_zona_path(zona) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), zona, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Zona', new_zona_path %>

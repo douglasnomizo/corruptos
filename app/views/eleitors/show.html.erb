@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @eleitor.nome %>
+</p>
+
+<p>
+  <b>Nome mae:</b>
+  <%= @eleitor.nome_mae %>
+</p>
+
+<p>
+  <b>Rg:</b>
+  <%= @eleitor.rg %>
+</p>
+
+<p>
+  <b>Data nascimento:</b>
+  <%= @eleitor.data_nascimento %>
+</p>
+
+<p>
+  <b>Cpf:</b>
+  <%= @eleitor.cpf %>
+</p>
+
+<p>
+  <b>Endereco:</b>
+  <%= @eleitor.endereco %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(@eleitor) %> |
+<%= link_to content_tag(:span, "Voltar"), eleitors_path %>

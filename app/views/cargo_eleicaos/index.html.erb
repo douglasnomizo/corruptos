@@ -1,0 +1,31 @@
+<h1>Lista de cargo_eleicaos</h1>
+
+<table>
+  <tr>
+    <th>Cargo</th>
+    <th>Eleicao</th>
+    <th>Municipio</th>
+    <th>Uf</th>
+    <th>Vagas</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cargo_eleicaos.each do |cargo_eleicao| %>
+  <tr>
+    <td><%= cargo_eleicao.cargo %></td>
+    <td><%= cargo_eleicao.eleicao %></td>
+    <td><%= cargo_eleicao.municipio %></td>
+    <td><%= cargo_eleicao.uf %></td>
+    <td><%= cargo_eleicao.vagas %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), cargo_eleicao %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_cargo_eleicao_path(cargo_eleicao) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), cargo_eleicao, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Cargo eleicao', new_cargo_eleicao_path %>

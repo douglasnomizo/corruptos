@@ -1,0 +1,33 @@
+<h1>Lista de votos_urnas</h1>
+
+<table>
+  <tr>
+    <th>Estado</th>
+    <th>Município</th>
+    <th>Zona</th>
+    <th>Secao</th>
+    <th>Candidatura</th>
+    <th>Qtd votos</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @votos_urnas.each do |votos_urna| %>
+  <tr>
+    <td><%= votos_urna.secao.zona.endereco.municipio.uf.nome %></td>
+    <td><%= votos_urna.secao.zona.endereco.municipio.nome %></td>
+    <td><%= votos_urna.secao.zona.descricao %></td>
+    <td><%= votos_urna.secao %></td>
+    <td><%= votos_urna.candidatura.candidato.nome %></td>
+    <td><%= votos_urna.qtd_votos %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), votos_urna %></td>
+    <td><%= link_to content_tag(:span, "Alter ar"), edit_votos_urna_path(votos_urna) %></td>
+    <td><%= link_to content_tag(:span, "Excluir"), votos_urna, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Votos urna', new_votos_urna_path %>

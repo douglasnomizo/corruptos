@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Limite eleitores:</b>
+  <%= @secao.limite_eleitores %>
+</p>
+
+<p>
+  <b>Zona:</b>
+  <%= @secao.zona %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_secao_path(@secao) %> |
+<%= link_to content_tag(:span, "Voltar"), secaos_path %>

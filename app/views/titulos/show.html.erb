@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Data emissao:</b>
+  <%= @titulo.data_emissao %>
+</p>
+
+<p>
+  <b>Juiz eleitoral:</b>
+  <%= @titulo.juiz_eleitoral %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @titulo.status %>
+</p>
+
+<p>
+  <b>Eleitor:</b>
+  <%= @titulo.eleitor %>
+</p>
+
+<p>
+  <b>Secao:</b>
+  <%= @titulo.secao %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_titulo_path(@titulo) %> |
+<%= link_to content_tag(:span, "Voltar"), titulos_path %>

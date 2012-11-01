@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @partido.nome %>
+</p>
+
+<p>
+  <b>Sigla:</b>
+  <%= @partido.sigla %>
+</p>
+
+
+<%= link_to content_tag(:span, "Alterar"), edit_partido_path(@partido) %> |
+<%= link_to content_tag(:span, "Voltar"), partidos_path %>
