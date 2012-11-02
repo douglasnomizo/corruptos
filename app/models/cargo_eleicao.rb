@@ -6,7 +6,7 @@ class CargoEleicao < ActiveRecord::Base
   belongs_to :municipio
   belongs_to :uf
 
-  attr_accessible :vagas
+  attr_accessible :vagas, :cargo_id, :eleicao_id, :uf_id, :municipio_id
 
   validates_presence_of :cargo, :eleicao
   

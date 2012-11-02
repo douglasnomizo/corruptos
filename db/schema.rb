@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101011525) do
+ActiveRecord::Schema.define(:version => 20121102133124) do
 
   create_table "candidatos", :force => true do |t|
     t.datetime "created_at",    :null => false
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20121101011525) do
     t.string   "sigla"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "numero"
   end
 
   create_table "roles", :force => true do |t|
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20121101011525) do
     t.integer  "zona_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "codigo"
   end
 
   add_index "secaos", ["zona_id"], :name => "index_secaos_on_zona_id"

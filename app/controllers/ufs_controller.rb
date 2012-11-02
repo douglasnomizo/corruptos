@@ -1,4 +1,11 @@
 class UfsController < ApplicationController
+  
+  def municipios_do_estado
+    val = params[:id]
+    options = Uf.find(val).municipios.collect{|x| "'#{x.id}' : '#{x.label}'"}    
+    render :text => "{#{options.join(",")}}" 
+  end
+
   # GET /ufs
   # GET /ufs.json
   def index

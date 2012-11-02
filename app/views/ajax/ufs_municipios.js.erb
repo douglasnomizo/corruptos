@@ -1,0 +1,1 @@
+$("#cargo_eleicao_uf_id").html('&lt;%= options_for_select(@municipios.map {|mun| [mun.nome, mun.id]}).gsub(/n/, '') %&gt;');

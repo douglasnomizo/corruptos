@@ -1,5 +1,8 @@
 class Partido < ActiveRecord::Base
-  attr_accessible :nome, :sigla
+  attr_accessible :nome, :sigla, :numero
 
-  validates_presence_of :nome, :sigla
+  has_and_belongs_to_many :coligacaos
+
+  validates_presence_of :nome, :sigla, :numero
+  validates_uniqueness_of :nome, :sigla, :numero
 end

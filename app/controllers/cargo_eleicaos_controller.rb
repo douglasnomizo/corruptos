@@ -2,7 +2,7 @@ class CargoEleicaosController < ApplicationController
   # GET /cargo_eleicaos
   # GET /cargo_eleicaos.json
   def index
-    @cargo_eleicaos = CargoEleicao.all
+    @cargo_eleicaos = CargoEleicao.paginate(:page => params[:page], :per_page => 30)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,9 @@ class CargoEleicaosController < ApplicationController
   # GET /cargo_eleicaos/new
   # GET /cargo_eleicaos/new.json
   def new
-    @cargo_eleicao = CargoEleicao.new
+    @uf = Uf.first
+    @municipios = @uf.municipios
+    @cargo_eleicao = Eleicao.find(:first, :conditions => "status = true").cargo_eleicaos
 
     respond_to do |format|
       format.html # new.html.erb

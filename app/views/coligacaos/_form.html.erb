@@ -1,8 +1,8 @@
 <%= simple_form_for(@coligacao) do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.association :cargo_eleicao %>
+  	
+  	<%= f.label	"Cargo", :required => true %>
+  	<%= select_tag "Cargos", options_for_select(@cargos.collect {|p| [ p.nome, p.id ] }), :onchange => "" %>
     <%= f.input :nome %>
   </div>
 

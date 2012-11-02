@@ -2,10 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :cargo %>
-    <%= f.association :eleicao %>
+    <%= f.association :eleicao, :include_blank => false, :label_method => lambda { |ele| "#{ele.ano}" if ele.status == true } %>
+    <%= f.association :cargo, :include_blank => false, :label_method => lambda { |car| "#{car.nome}" } %>
+    <%= f.association :uf, :include_blank => false, :label_method => lambda { |uf| "#{uf.nome}" }, :input_html => { :rel => "/uf/municipios_do_estado", :class => "estado" } %>
     <%= f.association :municipio %>
-    <%= f.association :uf %>
+
     <%= f.input :vagas %>
   </div>
 

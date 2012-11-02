@@ -1,9 +1,16 @@
 <h1>Lista de secaos</h1>
 
+<% Zona.all.each do |zo| %>
+  <%= link_to zo.descricao, secaos_path(:zona => zo.id)%>
+<% end %>
+
 <table>
   <tr>
-    <th>Limite eleitores</th>
+    <th>Estado</th>
+    <th>Municipio</th>
     <th>Zona</th>
+    <th>Seção</th>
+    <th>Limite de eleitores</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +18,11 @@
 
 <% @secaos.each do |secao| %>
   <tr>
+    <td><%= secao.zona.endereco.municipio.uf.nome %></td>
+    <td><%= secao.zona.endereco.municipio.nome %></td>
+    <td><%= secao.zona.id %></td>
+    <td><%= secao.codigo %></td>
     <td><%= secao.limite_eleitores %></td>
-    <td><%= secao.zona %></td>
     <td><%= link_to content_tag(:span, "Exibir"), secao %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_secao_path(secao) %></td>
     <td><%= link_to content_tag(:span, "Excluir"), secao, method: :delete, data: { confirm: 'Tem certeza?' } %></td>

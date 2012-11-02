@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .	
+
+$("select").change(function(){
+	alert('a');
+  var url = 'uf/municipios_do_estado?id=' + $(this).val()
+  $("select .municipios").removeOption(/./)
+  $.get(url, function(data) {
+    $("select .municipios").addOption(data, false);
+  });
+});

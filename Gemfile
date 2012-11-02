@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+gem 'will_paginate'
+gem 'debugger'
 gem 'mysql2'
 gem 'rails', '3.2.8'
 group :assets do

@@ -4,8 +4,8 @@
   <tr>
     <th>Cargo</th>
     <th>Eleicao</th>
-    <th>Municipio</th>
     <th>Uf</th>
+    <th>Municipio</th>
     <th>Vagas</th>
     <th></th>
     <th></th>
@@ -14,10 +14,10 @@
 
 <% @cargo_eleicaos.each do |cargo_eleicao| %>
   <tr>
-    <td><%= cargo_eleicao.cargo %></td>
-    <td><%= cargo_eleicao.eleicao %></td>
-    <td><%= cargo_eleicao.municipio %></td>
-    <td><%= cargo_eleicao.uf %></td>
+    <td><%= cargo_eleicao.cargo.nome %></td>
+    <td><%= cargo_eleicao.eleicao.ano %></td>
+    <td><%= cargo_eleicao.uf.sigla if cargo_eleicao.uf %></td>
+    <td><%= cargo_eleicao.municipio.nome if cargo_eleicao.municipio%></td>
     <td><%= cargo_eleicao.vagas %></td>
     <td><%= link_to content_tag(:span, "Exibir"), cargo_eleicao %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_cargo_eleicao_path(cargo_eleicao) %></td>
@@ -25,6 +25,8 @@
   </tr>
 <% end %>
 </table>
+
+<%= will_paginate @posts %>
 
 <br />
 

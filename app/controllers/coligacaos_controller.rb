@@ -2,7 +2,7 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos
   # GET /coligacaos.json
   def index
-    @coligacaos = Coligacao.all
+    @coligacoes = Coligacao.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +25,7 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos/new.json
   def new
     @coligacao = Coligacao.new
+    @cargos = Cargo.all
 
     respond_to do |format|
       format.html # new.html.erb

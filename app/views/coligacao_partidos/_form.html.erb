@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :coligacao %>
-    <%= f.association :partido %>
+  	<%= f.association :coligacao, :include_blank => false, :label_method => lambda { |col| "#{col.nome}"} %>
+    <%= f.input :partido_id, :collection => @partidos, :include_blank => false, :label_method => lambda { |par| "#{par.nome}"} %>
   </div>
 
   <div class="form-inputs">

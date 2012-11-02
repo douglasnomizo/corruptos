@@ -25,6 +25,7 @@ class ColigacaoPartidosController < ApplicationController
   # GET /coligacao_partidos/new.json
   def new
     @coligacao_partido = ColigacaoPartido.new
+    @partidos = Partido.find(:all, :order => "nome")
 
     respond_to do |format|
       format.html # new.html.erb

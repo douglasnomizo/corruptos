@@ -2,7 +2,11 @@ class SecaosController < ApplicationController
   # GET /secaos
   # GET /secaos.json
   def index
-    @secaos = Secao.all
+    if params[:zona]
+      @secaos = Zona.find(params[:zona]).secaos
+    else
+      @secaos = Zona.first.secaos
+    end
 
     respond_to do |format|
       format.html # index.html.erb
