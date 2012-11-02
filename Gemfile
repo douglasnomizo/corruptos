@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'thin'
 gem 'will_paginate'
 gem 'debugger'
 gem 'mysql2'
