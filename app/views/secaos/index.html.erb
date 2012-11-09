@@ -1,8 +1,12 @@
-<div class="page-header"><h1>Lista de secaos</h1></div>
+<div class="page-header"><h1>Lista de Seções</h1></div>
 
 <% Zona.all.each do |zo| %>
-  <%= link_to zo.descricao, secaos_path(:zona => zo.id)%>
+  <%= link_to zo.descricao, secaos_path(:zona => zo.id), :class => "btn btn-small" %>
 <% end %>
+
+<br>
+<br>
+
 
 <table class="table table-condensed table-striped">
   <tr>

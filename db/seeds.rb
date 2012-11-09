@@ -5781,7 +5781,7 @@ cargos.each do |cargo|
 	end
 end	
 
-puts 'CRIANDO ZONAS E SEÇÕOES'
+puts 'CRIANDO ZONAS E SEÇÕES'
 
 Endereco.create(:cep => "74800000", :complemento => "Goiânia", :municipio_id => 1008)
 @ei = Endereco.find(:first, :conditions => "cep = '74800000' and complemento = 'Goiania'")

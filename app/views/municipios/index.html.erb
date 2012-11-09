@@ -1,8 +1,12 @@
 <div class="page-header"><h1>Lista de municipios</h1></div>
 
-<% Uf.all.each do |uf| %>
-  <%= link_to uf.nome, municipios_path(:estado => uf.id)%>
-<% end %>
+<div class="btn-group">
+  <% Uf.all.each do |uf| %>
+    <%= link_to uf.sigla, municipios_path(:estado => uf.id), :class => "btn btn-small" %>
+  <% end %>
+</div>
+
+<br>
 
 <table class="table table-condensed table-striped">
   <tr>
@@ -25,4 +29,4 @@
 
 <br />
 
-<%= link_to 'Nova Municipio', new_municipio_path %>
+<%= link_to 'Novo Municipio', new_municipio_path %>

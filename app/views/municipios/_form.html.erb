@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :uf, :label => f.uf.nome %>
+    <%= f.association :uf, :include_blank => false, :collection => Uf.all, :label_method => lambda { |obj| obj.nome } %>
     <%= f.input :nome %>
   </div>
 
