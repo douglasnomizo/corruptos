@@ -16,7 +16,7 @@ Role.create([
 puts 'CRIANDO OS USUÁRIOS DEFAULT'
 user = User.create! :name => 'Douglas Nomizo', :email => 'd@d.d', :password => '123456', :password_confirmation => '123456'
 puts 'Usuário criado: ' << user.name
-user2 = User.create! :name => 'Usuário Dois', :email => 'user2@mail.com', :password => 'user2', :password_confirmation => 'user2'
+user2 = User.create! :name => 'Usuário', :email => 'usuario@mail.com', :password => 'usuario', :password_confirmation => 'usuario'
 puts 'Usuário criado: ' << user2.name
 user.add_role :admin
 user2.add_role :VIP

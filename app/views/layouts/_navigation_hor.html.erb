@@ -28,6 +28,13 @@
       <%= link_to 'Importação de Urna', votos_urnas_path %>
     </li>
   <% else %>
+  <div class="alert">
     <p>Faça login para visualizar o menu</p>
+  </div>
+  <div class="alert alert-info">
+    <p>Email: usuario@mail.com</p>
+    <p>Senha: usuario</p>
+  </div>
+    
   <% end %>
 </ul>
