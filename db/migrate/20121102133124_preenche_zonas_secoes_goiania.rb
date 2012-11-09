@@ -1,5 +1,7 @@
+# encoding: utf-8
 class PreencheZonasSecoesGoiania < ActiveRecord::Migration
   def up
+    Endereco.create(:cep => "74800000", :complemento => "Goiânia", :municipio_id => 1008)
   	@ei = Endereco.find(:first, :conditions => "cep = '74800000' and complemento = 'Goiania'")
     limite_eleitores = 200
 

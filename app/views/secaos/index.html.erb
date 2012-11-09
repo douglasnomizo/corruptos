@@ -1,10 +1,10 @@
-<h1>Lista de secaos</h1>
+<div class="page-header"><h1>Lista de secaos</h1></div>
 
 <% Zona.all.each do |zo| %>
   <%= link_to zo.descricao, secaos_path(:zona => zo.id)%>
 <% end %>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Estado</th>
     <th>Municipio</th>
@@ -23,8 +23,8 @@
     <td><%= secao.zona.id %></td>
     <td><%= secao.codigo %></td>
     <td><%= secao.limite_eleitores %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), secao %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_secao_path(secao) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), secao, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_secao_path(secao), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

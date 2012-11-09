@@ -1,6 +1,6 @@
-<h1>Lista de eleitors</h1>
+<div class="page-header"><h1>Lista de eleitors</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Nome</th>
     <th>Nome mae</th>
@@ -21,8 +21,8 @@
     <td><%= eleitor.data_nascimento %></td>
     <td><%= eleitor.cpf %></td>
     <td><%= eleitor.endereco %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), eleitor %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(eleitor) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), eleitor, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(eleitor), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
-<h1>Lista de candidatos</h1>
+<div class="page-header"><h1>Lista de candidatos</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Nome de Campanha</th>
     <th></th>
@@ -11,8 +11,8 @@
 <% @candidatos.each do |candidato| %>
   <tr>
     <td><%= candidato.nome_campanha %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), candidato %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_candidato_path(candidato) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), candidato, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_candidato_path(candidato), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
-<h1>Lista de candidaturas</h1>
+<div class="page-header"><h1>Lista de candidaturas</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Candidato</th>
     <th>Cargo eleicao</th>
@@ -17,8 +17,8 @@
     <td><%= candidatura.cargo_eleicao %></td>
     <td><%= candidatura.partido %></td>
     <td><%= candidatura.codigo_candidato %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), candidatura %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(candidatura) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), candidatura, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(candidatura), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

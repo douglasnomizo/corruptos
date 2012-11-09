@@ -1,6 +1,6 @@
-<h1>Lista de ufs</h1>
+<div class="page-header"><h1>Lista de ufs</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Sigla</th>
     <th>Nome</th>
@@ -13,8 +13,8 @@
   <tr>
     <td><%= uf.sigla %></td>
     <td><%= uf.nome %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), uf %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_uf_path(uf) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), uf, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_uf_path(uf), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

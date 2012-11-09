@@ -1,6 +1,6 @@
-<h1>Lista de eleicaos</h1>
+<div class="page-header"><h1>Lista de eleicaos</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Ano</th>
     <th>Status</th>
@@ -13,8 +13,8 @@
   <tr>
     <td><%= eleicao.ano %></td>
     <td><%= eleicao.status ? "Em andamento" : "Fechada" %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), eleicao %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_eleicao_path(eleicao) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), eleicao, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_eleicao_path(eleicao), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

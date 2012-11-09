@@ -1,6 +1,6 @@
-<h1>Lista de titulos</h1>
+<div class="page-header"><h1>Lista de titulos</h1></div>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Data emissao</th>
     <th>Juiz eleitoral</th>
@@ -19,8 +19,8 @@
     <td><%= titulo.status %></td>
     <td><%= titulo.eleitor %></td>
     <td><%= titulo.secao %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), titulo %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_titulo_path(titulo) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), titulo, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_titulo_path(titulo), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

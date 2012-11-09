@@ -1,10 +1,10 @@
-<h1>Lista de municipios</h1>
+<div class="page-header"><h1>Lista de municipios</h1></div>
 
 <% Uf.all.each do |uf| %>
   <%= link_to uf.nome, municipios_path(:estado => uf.id)%>
 <% end %>
 
-<table>
+<table class="table table-condensed table-striped">
   <tr>
     <th>Uf</th>
     <th>Nome</th>
@@ -17,8 +17,8 @@
   <tr>
     <td><%= municipio.uf.nome %></td>
     <td><%= municipio.nome %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), municipio %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_municipio_path(municipio) %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), municipio, :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_municipio_path(municipio), :class => "btn btn-info btn-small" %></td>
   </tr>
 <% end %>
 </table>

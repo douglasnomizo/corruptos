@@ -3,9 +3,9 @@ class Endereco < ActiveRecord::Base
   belongs_to :municipio
   attr_accessible :bairro, :cep, :complemento, :tipo_logradouro, :logradouro, :numero, :municipio_id
 
-  validates_presence_of :cep, :bairro, :tipo_logradouro, :logradouro, :municipio
-  validates_numericality_of :cep, :numero
-  #validates :cep, :length => { :minimum => 8, :maximum => 8 }
+  validates_presence_of :municipio
+  validates :cep, :numericality => true
+  validates :numero, :numericality => true, :allow_nil => true
 
   def descricao
   	descricao = ""
