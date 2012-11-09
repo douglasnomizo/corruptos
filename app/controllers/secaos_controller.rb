@@ -5,7 +5,11 @@ class SecaosController < ApplicationController
     if params[:zona]
       @secaos = Zona.find(params[:zona]).secaos
     else
-      @secaos = Zona.first.secaos
+      if Zona.first
+        @secaos = Zona.first.secaos
+      else
+        @secaos = []
+      end
     end
 
     respond_to do |format|
