@@ -12,6 +12,7 @@ Corruptos::Application.routes.draw do
   resources :partidos
 
   resources :candidatos
+  match 'candidatos/carrega_dados/:cpf', :to => 'candidatos#carrega_dados'
 
   resources :cargos
 
