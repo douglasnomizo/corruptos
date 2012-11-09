@@ -1,12 +1,26 @@
-<%= simple_form_for(@candidato) do |f| %>
-  <%= f.error_notification %>
-
+<h4>Dados do Eleitor</h4>
   <div class="form-inputs">
-    <%= f.input :nome_campanha %>
-    <%= f.association :eleitor %>
-  </div>
+  	
+	<%= simple_form_for @eleitor, :html => {:class => 'form-horizontal'} do |ele| %>
+	  <div class="form-inputs">
+	    <%= render "candidatos/dados_eleitor", :ele => ele %>
+	  </div>
+  
 
-  <div class="form-inputs">
-    <%= f.button :submit, "Salvar" %>
-  </div>
-<% end %>
+		<h4>Dados do Candidato</h4>
+		<%= ele.simple_fields_for :candidato do |c| %>
+		    <%= c.input :nome_campanha, :label => "Nome de Campanha" %>
+		    <%= c.input :partido, :include_blank => false, :collection => Partido.all, :label_method => lambda { |obj| obj.nome } %>
+		<% end %>
+
+		<%= ele.simple_fields_for :candidatura do |can| %>
+			<%= can.input :cargo_id, :include_blank => false, :collection => @eleicao.cargos.uniq, :label_method => lambda { |obj| obj.nome } %>
+  	<% end %>
+
+		<div class="form-inputs">
+	  	<%= submit_tag 'Cancelar', :type => 'button', :class=> "btn", :onclick => "history.back();" %>
+	  	<%= ele.button :submit, "Salvar" %>
+	  </div>
+	  <br/>
+  <% end %>
+	</div>

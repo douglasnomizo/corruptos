@@ -15,7 +15,6 @@
     <td><%= uf.nome %></td>
     <td><%= link_to content_tag(:span, "Exibir"), uf %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_uf_path(uf) %></td>
-    <td><%= link_to content_tag(:span, "Excluir"), uf, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>

@@ -1,0 +1,16 @@
+<div class="control-group string optional disabled">
+  <label class="string optional control-label" for="eleitor_cpf">CPF</label>
+  <div class="controls">
+    <div class="input-append">
+      <input class="string required" id="eleitor_cpf" name="eleitor[cpf]" size="50" type="text">
+  		<label class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></label>    
+    </div>
+  </div>
+</div>
+
+<%= ele.input :id, :required => false, :disabled => true, :as => :hidden %>
+<%= ele.input :nome, :required => false, :disabled => true %>
+<%= ele.input :nome_mae, :required => false, :disabled => true %>
+<%= ele.input :rg, :required => false, :disabled => true %>
+<%= ele.input :data_nascimento, :as => :string, :required => false, :disabled => true %>
+<%= ele.input :endereco, :as => :string, :required => false, :disabled => true, :input_html => {:style => 'width: 450px'} %>

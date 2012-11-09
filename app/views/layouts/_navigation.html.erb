@@ -1,61 +1,9 @@
 <ul class="nav">
+  <li>
+    <%= link_to "Corruptos", root_path, :class => 'brand' %>
+  </li>    
   <% if user_signed_in? %>
-    <li>
-      <%= link_to "Corruptos", root_path, :class => 'brand' %>
-    </li>
-    
-    <li>
-      <%= link_to 'Eleição', eleicaos_path %>
-    </li>
-    <li>
-      <%= link_to 'Estados', ufs_path %>
-    </li>
-    <li>
-      <%= link_to 'Municípios', municipios_path %>
-    </li>
-    <li>
-      <%= link_to 'Eleitores', eleitors_path %>
-    </li>
-    <li>
-      <%= link_to 'Títulos', titulos_path %>
-    </li>
-    <li>
-      <%= link_to 'Zonas', zonas_path %>
-    </li>
-    <li>
-      <%= link_to 'Seções', secaos_path %>
-    </li>
-    <li>
-      <%= link_to 'Endereços', enderecos_path %>
-    </li>
-    <li>
-      <%= link_to 'Cargos', cargos_path %>
-    </li>
-    <li>
-      <%= link_to 'Cargos das Eleições', cargo_eleicaos_path %>
-    </li>
-    <li>
-      <%= link_to 'Candidatos', candidatos_path %>
-    </li>
-    <li>
-      <%= link_to 'Candidaturas', candidaturas_path %>
-    </li>
-    <li>
-      <%= link_to 'Partidos', partidos_path %>
-    </li>
-    <li>
-      <%= link_to 'Coligações', coligacaos_path %>
-    </li>
-    <li>
-      <%= link_to 'Coligações Partidos', coligacao_partidos_path %>
-    </li>
-    <li>
-      <%= link_to 'Usuários', users_path %>
-    </li>
-    <li>
-      <%= link_to 'Importação de Urna', votos_urnas_path %>
-    </li>
-    <li>
+    <li>   
       <%= link_to 'Sair', destroy_user_session_path, :method=>'delete' %>        
     </li>
   <% else %>

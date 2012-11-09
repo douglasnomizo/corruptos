@@ -1,4 +1,15 @@
+# encoding: utf-8
 class CandidatosController < ApplicationController
+
+  def carrega_dados
+    @eleitor = Eleitor.find(:first, :conditions => ["cpf = ?", params[:cpf]])
+    if @eleitor
+      render :json => @eleitor
+    else
+      render :json => '{"erro":"true"}'
+    end
+  end
+
   # GET /candidatos
   # GET /candidatos.json
   def index
@@ -25,6 +36,8 @@ class CandidatosController < ApplicationController
   # GET /candidatos/new.json
   def new
     @candidato = Candidato.new
+    @eleitor = Eleitor.new
+    @eleicao = Eleicao.find(:first, :conditions => "status = true")
 
     respond_to do |format|
       format.html # new.html.erb

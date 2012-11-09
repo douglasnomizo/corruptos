@@ -19,7 +19,6 @@
     <td><%= candidatura.codigo_candidato %></td>
     <td><%= link_to content_tag(:span, "Exibir"), candidatura %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(candidatura) %></td>
-    <td><%= link_to content_tag(:span, "Excluir"), candidatura, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>

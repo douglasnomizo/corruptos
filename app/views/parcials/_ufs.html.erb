@@ -1,0 +1,4 @@
+<div class="form-inputs">
+	<%= label_tag 'Estados', nil, :class => "required" %>	
+  <%= select_tag :uf_js, options_from_collection_for_select(Uf.all, :id, :nome) %>
+</div>

@@ -1,4 +1,5 @@
 class ColigacaosController < ApplicationController
+
   # GET /coligacaos
   # GET /coligacaos.json
   def index
@@ -25,8 +26,21 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos/new.json
   def new
     @coligacao = Coligacao.new
-    @cargos = Cargo.all
+    @eleicao = Eleicao.find(:first, :conditions => "status = true")
 
+    if params[:uf_id]
+      @uf = Uf.find(params[:uf_id])
+    else
+      @uf = Uf.first
+    end
+
+    if params[:municipio_id]
+      @municipio = Municipio.find(params[:municipio_id])
+    else
+      @municipio = Municipio.new
+      @municipio.id = 0
+    end    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @coligacao }

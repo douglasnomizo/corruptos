@@ -1,0 +1,33 @@
+<ul class="nav nav-tabs nav-stacked">
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to 'Eleitores', eleitors_path %>
+    </li>
+    <li>
+      <%= link_to 'Títulos', titulos_path %>
+    </li>
+    <li>
+      <%= link_to 'Zonas', zonas_path %>
+    </li>
+    <li>
+      <%= link_to 'Seções', secaos_path %>
+    </li>
+    <li>
+      <%= link_to 'Candidatos', candidatos_path %>
+    </li>
+    <li>
+      <%= link_to 'Candidaturas', candidaturas_path %>
+    </li>
+    <li>
+      <%= link_to 'Coligações', coligacaos_path %>
+    </li>
+    <li>
+      <%= link_to 'Usuários', users_path %>
+    </li>
+    <li>
+      <%= link_to 'Importação de Urna', votos_urnas_path %>
+    </li>
+  <% else %>
+    <p>Faça login para visualizar o menu</p>
+  <% end %>
+</ul>

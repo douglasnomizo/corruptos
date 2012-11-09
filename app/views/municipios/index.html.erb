@@ -19,7 +19,6 @@
     <td><%= municipio.nome %></td>
     <td><%= link_to content_tag(:span, "Exibir"), municipio %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_municipio_path(municipio) %></td>
-    <td><%= link_to content_tag(:span, "Excluir"), municipio, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>

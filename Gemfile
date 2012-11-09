@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+gem 'brazilian-rails'
+gem 'rails-backbone'
 gem 'thin'
 gem 'will_paginate'
 gem 'debugger'

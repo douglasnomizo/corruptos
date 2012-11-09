@@ -21,7 +21,6 @@
     <td><%= titulo.secao %></td>
     <td><%= link_to content_tag(:span, "Exibir"), titulo %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_titulo_path(titulo) %></td>
-    <td><%= link_to content_tag(:span, "Excluir"), titulo, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>

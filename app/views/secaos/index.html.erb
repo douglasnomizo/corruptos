@@ -25,7 +25,6 @@
     <td><%= secao.limite_eleitores %></td>
     <td><%= link_to content_tag(:span, "Exibir"), secao %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_secao_path(secao) %></td>
-    <td><%= link_to content_tag(:span, "Excluir"), secao, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
   </tr>
 <% end %>
 </table>
