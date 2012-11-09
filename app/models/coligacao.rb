@@ -6,4 +6,5 @@ class Coligacao < ActiveRecord::Base
   attr_accessible :nome
 
   validates_presence_of :cargo_eleicao, :nome
+  validates_uniqueness_of :nome
 end

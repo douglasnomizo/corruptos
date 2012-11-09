@@ -1,6 +1,7 @@
 class CargoEleicao < ActiveRecord::Base
   belongs_to :cargo
   belongs_to :eleicao
+  has_one :coligacao
 
   # Deve possuir uf ou município ou vazio (presidente) 
   belongs_to :municipio
