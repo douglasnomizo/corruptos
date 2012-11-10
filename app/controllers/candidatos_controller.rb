@@ -2,7 +2,7 @@
 class CandidatosController < ApplicationController
 
   def carrega_dados
-    @eleitor = Eleitor.find(:first, :conditions => ["cpf = ?", params[:cpf]])
+    @eleitor = Eleitor.find(:first, :joins => :endereco, :conditions => ["cpf = ?", params[:cpf]])
     if @eleitor
       render :json => @eleitor
     else

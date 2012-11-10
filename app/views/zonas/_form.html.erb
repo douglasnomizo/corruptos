@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :descricao %>
-    <%= f.association :endereco %>
+    <%= f.association :endereco, :include_blank => false, :collection => Endereco.all, :label_method => lambda { |obj| obj.descricao } %>  
   </div>
 
   <div class="form-inputs">
