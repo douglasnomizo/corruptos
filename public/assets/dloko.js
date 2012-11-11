@@ -9,6 +9,7 @@ function preenche_campos_eleitor(data) {
   if(data.erro == "true") {
     alert('Eleitor não encontrado!');
   } else {
+    $("#candidato_eleitor_id").val(data.id);
     $("#candidato_eleitor_nome").val(data.nome);
     $("#candidato_eleitor_nome_mae").val(data.nome_mae);
     $("#candidato_eleitor_rg").val(data.rg);

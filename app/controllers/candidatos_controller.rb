@@ -13,7 +13,8 @@ class CandidatosController < ApplicationController
   # GET /candidatos
   # GET /candidatos.json
   def index
-    @candidatos = Candidato.all
+    @q = Candidato.search(params[:q])
+    @candidatos = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,7 +37,8 @@ class CandidatosController < ApplicationController
   # GET /candidatos/new.json
   def new
     @candidato = Candidato.new
-    @eleitor = Eleitor.new
+    @candidato.candidaturas.build
+
     @eleicao = Eleicao.find(:first, :conditions => "status = true")
 
     respond_to do |format|
@@ -54,7 +56,7 @@ class CandidatosController < ApplicationController
   # POST /candidatos.json
   def create
     @candidato = Candidato.new(params[:candidato])
-
+    
     respond_to do |format|
       if @candidato.save
         format.html { redirect_to @candidato, notice: 'Candidato criado com sucesso.' }

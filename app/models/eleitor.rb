@@ -3,6 +3,7 @@ class Eleitor < ActiveRecord::Base
   attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco
 
   has_many :titulos
+  has_many :candidatos
   belongs_to :endereco
 
   accepts_nested_attributes_for :titulos
@@ -18,9 +19,9 @@ class Eleitor < ActiveRecord::Base
       :endereco => self.endereco.descricao,
       :nome => self.nome,
       :nome_mae => self.nome_mae,
-      :rg => self.rg }
+      :rg => self.rg,
+      :id => self.id }
   end
-
 
   private 
 

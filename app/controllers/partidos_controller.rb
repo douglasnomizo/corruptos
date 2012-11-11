@@ -2,7 +2,8 @@ class PartidosController < ApplicationController
   # GET /partidos
   # GET /partidos.json
   def index
-    @partidos = Partido.all
+    @q = Partido.search(params[:q])
+    @partidos = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

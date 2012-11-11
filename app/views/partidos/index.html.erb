@@ -1,9 +1,14 @@
 <div class="page-header"><h1>Lista de partidos</h1></div>
 
+<%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
+  <%= f.text_field :nome_cont, :placeholder => "Nome do Partido" %>
+  <%= f.submit "Buscar", :class => "btn btn-success" %>
+<% end %>
+
 <table class="table table-condensed table-striped">
   <tr>
-    <th>Nome</th>
-    <th>Sigla</th>
+    <th><%= sort_link @q, :nome, "Nome" %></th>
+    <th><%= sort_link @q, :sigla, "Sigla" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,12 +18,12 @@
   <tr>
     <td><%= partido.nome %></td>
     <td><%= partido.sigla %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), partido, :class => "btn btn-info btn-small" %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_partido_path(partido), :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), partido, :class => "btn btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_partido_path(partido), :class => "btn btn-small" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Nova Partido', new_partido_path %>
+<%= link_to 'Novo Partido', new_partido_path, :class => "btn btn-small" %>

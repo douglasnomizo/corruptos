@@ -21,8 +21,8 @@
     <td><%= eleitor.data_nascimento.strftime('%d/%m/%Y') %></td>
     <td><%= eleitor.cpf %></td>
     <td><%= eleitor.endereco.descricao %></td>
-    <td><%= link_to content_tag(:span, "Exibir"), eleitor, :class => "btn btn-info btn-small" %></td>
-    <td><%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(eleitor), :class => "btn btn-info btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Exibir"), eleitor, :class => "btn btn-small" %></td>
+    <td><%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(eleitor), :class => "btn btn-small" %></td>
   </tr>
 <% end %>
 </table>

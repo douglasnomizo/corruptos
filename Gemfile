@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+gem 'ransack'
+gem 'pry'
 gem 'tlsmail'
 gem 'brazilian-rails'
 gem 'rails-backbone'
