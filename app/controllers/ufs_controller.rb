@@ -1,9 +1,9 @@
 class UfsController < ApplicationController
   
-  def municipios_do_estado
-    val = params[:id]
-    options = Uf.find(val).municipios.collect{|x| "'#{x.id}' : '#{x.label}'"}    
-    render :text => "{#{options.join(",")}}" 
+  def busca_municipios
+    options = Uf.find(params[:uf]).municipios
+    
+    render :json => options
   end
 
   # GET /ufs

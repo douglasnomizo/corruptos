@@ -26,8 +26,8 @@ class EleitorsController < ApplicationController
   # GET /eleitors/new.json
   def new
     @eleitor = Eleitor.new
-    @titulo = Titulo.new
-    @endereco = Endereco.new
+    @eleitor.titulos.build
+    @eleitor.build_endereco
     
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,10 @@ class EleitorsController < ApplicationController
   # POST /eleitors
   # POST /eleitors.json
   def create
+    debugger
+    params.delete :uf_id
     @eleitor = Eleitor.new(params[:eleitor])
+    @eleitor.errors.each {|a| puts a; }
 
     respond_to do |format|
       if @eleitor.save

@@ -1,4 +1,32 @@
+# encoding: utf-8
 class EnderecosController < ApplicationController
+  
+  def busca_cep
+    require 'net/http'
+    require 'cgi'
+
+    url = URI.parse("http://cep.republicavirtual.com.br/web_cep.php?cep=#{params[:cep]}&formato=query_string")
+    consulta = Net::HTTP.get_response(url)
+    pesquisa = CGI::parse(consulta.body)
+    pesquisa = Hash[*pesquisa.map { |k, v| [k, v[0]] }.flatten]
+    
+    pesquisa['bairro'] = pesquisa['bairro'].force_encoding("ISO-8859-1").encode("UTF-8")
+    pesquisa['cidade'] = pesquisa['cidade'].force_encoding("ISO-8859-1").encode("UTF-8")
+    pesquisa['resultado_txt'] = pesquisa['resultado_txt'].force_encoding("ISO-8859-1").encode("UTF-8")
+
+    @cidade = Municipio.find(:first, :conditions => ["nome = ?", pesquisa['cidade']])
+    @uf = Uf.find(:first, :conditions => ["sigla = ?", pesquisa['uf']])
+
+    pesquisa['cidade'] = @cidade.id.to_s if @cidade
+    pesquisa['uf'] = @uf.id.to_s if @uf
+
+    if pesquisa['resultado'] == "1" or pesquisa['resultado'] == "2"
+      render :json => pesquisa
+    else
+      render :json => '{"erro":"true"}'
+    end
+  end
+
   # GET /enderecos
   # GET /enderecos.json
   def index

@@ -1,12 +1,12 @@
 # encoding: utf-8
 class Eleitor < ActiveRecord::Base
-  attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco
+  attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco_attributes, :titulos, :endereco_id
 
   has_many :titulos
   has_many :candidatos
   belongs_to :endereco
 
-  accepts_nested_attributes_for :titulos
+  accepts_nested_attributes_for :titulos, :endereco
   
   validates_presence_of :data_nascimento, :nome, :nome_mae, :rg, :endereco_id, :message => "Campo não pode ser em branco"
   validate :cpf, :numericality => :true

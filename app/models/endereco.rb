@@ -1,9 +1,10 @@
 # encoding: utf-8
 class Endereco < ActiveRecord::Base
-  attr_accessible :bairro, :cep, :complemento, :tipo_logradouro, :logradouro, :numero, :municipio_id
+  attr_accessible :bairro, :cep, :complemento, :tipo_logradouro, :logradouro, :numero, :municipio, :municipio_id
 
   belongs_to :municipio
   has_one :eleitor
+  has_one :uf, :through => :municipio
 
   validates_presence_of :municipio
   validates :cep, :numericality => true

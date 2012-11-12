@@ -31,10 +31,12 @@ Corruptos::Application.routes.draw do
   resources :eleitors
 
   resources :enderecos
+  match 'enderecos/busca_cep/:cep', :to => 'enderecos#busca_cep'
 
   resources :municipios
 
   resources :ufs
+  match 'ufs/busca_municipios/:uf', :to => 'ufs#busca_municipios'
 
   authenticated :user do
     root :to => 'home#index'

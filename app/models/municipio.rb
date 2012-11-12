@@ -6,4 +6,8 @@ class Municipio < ActiveRecord::Base
   attr_accessible :nome
 
   validates_presence_of :nome, :uf
+
+  def as_json(options={})
+    { :id => self.id, :nome => self.nome }
+  end
 end
