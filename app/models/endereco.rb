@@ -16,7 +16,7 @@ class Endereco < ActiveRecord::Base
   	descricao += " " + self.logradouro if self.logradouro
   	descricao += ", nº " + self.numero.to_s if self.numero
   	descricao += " " + self.bairro if self.bairro
-  	descricao += ", " + self.municipio.nome if self.municipio
+  	descricao += " " + self.municipio.nome if self.municipio
 		descricao += " - " + self.municipio.uf.nome if self.municipio and self.municipio.uf
 		return descricao
   end

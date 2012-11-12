@@ -1,4 +1,4 @@
-<div class="page-header"><h1>Lista de coligacao_partidos</h1></div>
+<div class="page-header"><h1>Partidos Coligados</h1></div>
 
 <table class="table table-condensed table-striped">
   <tr>
@@ -11,8 +11,8 @@
 
 <% @coligacao_partidos.each do |coligacao_partido| %>
   <tr>
-    <td><%= coligacao_partido.coligacao %></td>
-    <td><%= coligacao_partido.partido %></td>
+    <td><%= coligacao_partido.coligacao.nome %></td>
+    <td><%= coligacao_partido.partido.nome %></td>
     <td><%= link_to content_tag(:span, "Exibir"), coligacao_partido, :class => "btn btn-small" %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_coligacao_partido_path(coligacao_partido), :class => "btn btn-small" %></td>
   </tr>
@@ -21,4 +21,4 @@
 
 <br />
 
-<%= link_to 'Nova Coligacao partido', new_coligacao_partido_path %>
+<%= link_to 'Nova Coligacao partido', new_coligacao_partido_path, :class => "btn btn-small btn-info" %>

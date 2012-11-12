@@ -1,19 +1,8 @@
-<div class="control-group string optional disabled">
-  <label class="string optional control-label" for="eleitor_cpf">CPF</label>
-  <div class="controls">
-    <div class="input-append">
-      <input class="string required" id="eleitor_cpf" name="candidato_eleitor[cpf]" size="50" type="text" value="38687098863">
-  		<label class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></label>    
-    </div>
-  </div>
-</div>
+<%= ele.input :id, :as => :hidden %>
 
-<div class="control-group hidden">
-  <div class="controls">
-    <input class="hidden" id="candidato_eleitor_id" name="candidato[eleitor_id]" type="hidden">
-  </div>
-</div>
-
+<%= ele.input :cpf, :required => false, :label => "CPF", :wrapper => :append do %>
+  <%= ele.input_field :cpf %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></span>
+<% end %>
 <%= ele.input :nome, :required => false, :disabled => true %>
 <%= ele.input :nome_mae, :required => false, :disabled => true %>
 <%= ele.input :rg, :required => false, :disabled => true %>

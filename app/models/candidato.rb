@@ -15,4 +15,8 @@ class Candidato < ActiveRecord::Base
 	validates_length_of :nome_campanha, :in => 5..150
   
 
+  def candidatura
+    self.candidaturas.last
+  end
+
 end

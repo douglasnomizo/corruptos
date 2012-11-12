@@ -10,4 +10,11 @@ class Municipio < ActiveRecord::Base
   def as_json(options={})
     { :id => self.id, :nome => self.nome }
   end
+
+  def cidade_uf
+    descricao = ""
+    descricao += self.nome
+    descricao += "/" + self.uf.nome if self.uf
+    return descricao
+  end
 end

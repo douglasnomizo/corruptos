@@ -1,7 +1,7 @@
-<div class="page-header"><h1>Lista de candidatos</h1></div>
+<div class="page-header"><h1>Candidatos</h1></div>
 
 <%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
-  <%= f.text_field :eleitor_nome_cont, :placeholder => "Nome do Candidato" %> ou 
+  <%= f.text_field :eleitor_nome_cont, :placeholder => "Nome do Candidato" %> <strong>ou</strong>
   <%= f.text_field :eleitor_cpf_eq, :placeholder => "CPF Candidato" %>
   <%= f.submit "Buscar", :class => "btn btn-success" %>
 <% end %>
@@ -9,8 +9,9 @@
 <table class="table table-condensed table-striped">
   <tr>
     <th><%= sort_link @q, :nome_campanha, "Nome de Campanha" %></th>
-    <th><%= sort_link @q, :eleitor_id, Eleitor.human_attribute_name(:eleitor) %></th>
-    <th></th>
+    <th><%= sort_link @q, :eleitor_id, "Nome do Candidato" %></th>
+    <th>Partido</th>
+    <th>Cargo</th>
     <th></th>
     <th></th>
   </tr>
@@ -19,6 +20,8 @@
   <tr>
     <td><%= candidato.nome_campanha %></td>
     <td><%= candidato.eleitor.nome %></td>
+    <td><%= candidato.candidatura.partido.nome %></td>
+    <td><%= candidato.candidatura.cargo_eleicao.cargo.nome %></td>
     <td><%= link_to content_tag(:span, "Exibir"), candidato, :class => "btn btn-small" %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_candidato_path(candidato), :class => "btn btn-small" %></td>
   </tr>
@@ -27,4 +30,4 @@
 
 <br />
 
-<%= link_to 'Novo Candidato', new_candidato_path %>
+<%= link_to 'Novo Candidato', new_candidato_path, :class => "btn btn-info btn-small" %>

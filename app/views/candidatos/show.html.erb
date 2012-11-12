@@ -9,6 +9,31 @@
 </p>
 
 <p>
+  <b>Código do Candidato:</b>
+  <%= @candidato.candidaturas.first.codigo_candidato %>
+</p>
+
+<p>
+  <b>Partido:</b>
+  <%= @candidato.candidatura.partido.nome %>
+</p>
+
+<p>
+  <b>Cargo:</b>
+  <%= @candidato.candidatura.cargo_eleicao.cargo.nome %>
+</p>
+
+<p>
+  <b>Município:</b>
+  <%= @candidato.eleitor.endereco.municipio.nome %>
+</p>
+
+<p>
+  <b>UF:</b>
+  <%= @candidato.eleitor.endereco.municipio.uf.nome %>
+</p>
+
+<p>
   <b>CPF:</b>
   <%= @candidato.eleitor.cpf %>
 </p>
@@ -21,6 +46,11 @@
 <p>
   <b>Data de Nascimento:</b>
   <%= @candidato.eleitor.data_nascimento.strftime('%d/%m/%Y')	 %>
+</p>
+
+<p>
+  <b>Data de Nascimento:</b>
+  <%= @candidato.eleitor.data_nascimento.strftime('%d/%m/%Y')  %>
 </p>
 
 

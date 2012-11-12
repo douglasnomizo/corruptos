@@ -1,4 +1,4 @@
-<div class="page-header"><h1>Lista de partidos</h1></div>
+<div class="page-header"><h1>Partidos</h1></div>
 
 <%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
   <%= f.text_field :nome_cont, :placeholder => "Nome do Partido" %>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'Novo Partido', new_partido_path, :class => "btn btn-small" %>
+<%= link_to 'Novo Partido', new_partido_path, :class => "btn btn-small btn-info" %>

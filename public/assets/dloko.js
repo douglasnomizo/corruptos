@@ -1,5 +1,5 @@
 function busca_eleitor_cpf() {
-	var input_cpf = $("#eleitor_cpf").val();
+	var input_cpf = $("#candidato_eleitor_cpf").val();
 	$.get("/candidatos/carrega_dados/" + input_cpf, function(data) {
 		preenche_campos_eleitor(data);
   });

@@ -55,11 +55,11 @@ class CandidatosController < ApplicationController
   def create
     respond_to do |format|
       @candidato = Candidato.new
-      @candidato.eleitor_id = params[:candidato][:eleitor_id]
+      @candidato.eleitor_id = params[:candidato][:eleitor][:id]
       @candidato.nome_campanha = params[:candidato][:nome_campanha]
       if @candidato.save
         @candidatura = Candidatura.new
-        cargo_eleicao = CargoEleicao.find(:first, :conditions => ["eleicao_id = ? and cargo_id = ?", eleicao_atual.id, params[:candidato][:candidatura][:cargo_id]])
+        cargo_eleicao = CargoEleicao.find(:first, :conditions => ["eleicao_id = ? and cargo_id = ? and municipio_id = 1008", eleicao_atual.id, params[:candidato][:candidatura][:cargo_id]])
         
         @candidatura.cargo_eleicao_id = cargo_eleicao.id
         @candidatura.partido_id = params[:candidato][:candidatura][:partido_id]

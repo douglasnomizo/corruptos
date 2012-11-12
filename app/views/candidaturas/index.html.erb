@@ -1,9 +1,11 @@
-<div class="page-header"><h1>Lista de candidaturas</h1></div>
+<div class="page-header"><h1>Candidaturas</h1></div>
 
 <table class="table table-condensed table-striped">
   <tr>
     <th>Candidato</th>
-    <th>Cargo eleicao</th>
+    <th>Eleição</th>
+    <th>Cargo</th>
+    <th>Cidade/Uf</th>
     <th>Partido</th>
     <th>Codigo candidato</th>
     <th></th>
@@ -13,9 +15,17 @@
 
 <% @candidaturas.each do |candidatura| %>
   <tr>
-    <td><%= candidatura.candidato %></td>
-    <td><%= candidatura.cargo_eleicao %></td>
-    <td><%= candidatura.partido %></td>
+    <td><%= candidatura.candidato.nome_campanha %></td>
+    <td><%= candidatura.cargo_eleicao.eleicao.ano %></td>
+    <td><%= candidatura.cargo_eleicao.cargo.nome %></td>
+    <td>
+      <% if candidatura.cargo_eleicao.municipio %>
+        <%= candidatura.cargo_eleicao.municipio.cidade_uf %>
+      <% else %>
+          <%= "Nacional" %>
+      <% end %>
+    </td>
+    <td><%= candidatura.partido.nome %></td>
     <td><%= candidatura.codigo_candidato %></td>
     <td><%= link_to content_tag(:span, "Exibir"), candidatura, :class => "btn btn-small" %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_candidatura_path(candidatura), :class => "btn btn-small" %></td>
@@ -25,4 +35,4 @@
 
 <br />
 
-<%= link_to 'Nova Candidatura', new_candidatura_path %>
+<%= link_to 'Nova Candidatura', new_candidatura_path, :class => "btn btn-small btn-info" %>
