@@ -1,3 +1,5 @@
+<div class="page-header"><h1>Dados do Candidato</h1></div>
+
 <p>
   <b>Nome:</b>
   <%= @candidato.eleitor.nome %>
@@ -52,7 +54,6 @@
   <b>Data de Nascimento:</b>
   <%= @candidato.eleitor.data_nascimento.strftime('%d/%m/%Y')  %>
 </p>
-
 
 <%= link_to content_tag(:span, "Alterar"), edit_candidato_path(@candidato) %> |
 <%= link_to content_tag(:span, "Voltar"), candidatos_path %>
