@@ -1,8 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Nome:</b>
+  <%= @candidato.eleitor.nome %>
+</p>
+
+<p>
+  <b>Nome de Campanha:</b>
   <%= @candidato.nome_campanha %>
+</p>
+
+<p>
+  <b>CPF:</b>
+  <%= @candidato.eleitor.cpf %>
+</p>
+
+<p>
+  <b>RG:</b>
+  <%= @candidato.eleitor.rg %>
+</p>
+
+<p>
+  <b>Data de Nascimento:</b>
+  <%= @candidato.eleitor.data_nascimento.strftime('%d/%m/%Y')	 %>
 </p>
 
 

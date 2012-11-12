@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_cache_buster
 
+  def eleicao_atual
+    Eleicao.find(:first, :conditions => "status = true")
+  end
+
   def set_cache_buster
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
     response.headers["Pragma"] = "no-cache"

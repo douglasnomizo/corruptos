@@ -2,6 +2,7 @@
   <div class="form-inputs">
   	
 	<%= simple_form_for :candidato, :url => :candidatos, :html => {:class => 'form-horizontal'}  do |c| %>
+		<%= c.error_notification %>
 		<%= c.simple_fields_for :eleitor do |ele| %>
 		  <div class="form-inputs">
 		    <%= render "candidatos/dados_eleitor", :ele => ele %>
@@ -12,7 +13,8 @@
 	    
 	    <%= c.simple_fields_for :candidatura do |can| %>
 	    	<%= can.input :partido_id, :include_blank => false, :collection => Partido.all, :label_method => lambda { |obj| obj.nome } %>
-				<%= can.input :cargo_eleicao_id, :include_blank => false, :collection => @eleicao.cargos.uniq, :label_method => lambda { |obj| obj.nome } %>
+				<%= can.input :cargo_id, :include_blank => false, :collection => eleicao_atual.cargos.uniq, :label_method => lambda { |obj| obj.nome } %>
+				<%= can.input :codigo_candidato %>
 	  	<% end %>
 			<div class="form-inputs">
 		  	<%= submit_tag 'Cancelar', :type => 'button', :class=> "btn", :onclick => "history.back();" %>

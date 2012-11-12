@@ -35,6 +35,14 @@
       <%= ende.input :numero, :required => false %>
       <%= ende.input :complemento, :required => false, :as => :text, :input_html => {:rows => 3} %>
     <% end %>
+
+    <%= ele.simple_fields_for :titulo do |tit| %>
+      <%= tit.input :secao_codigo, :include_blank => false, :collection => Zona.first.secaos, :label_method => lambda { |obj| obj.codigo } %>
+      <%= tit.input :juiz_eleitoral %>
+
+
+    <% end %>
+
   </div>
 
   <div class="form-inputs">

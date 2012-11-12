@@ -3,7 +3,7 @@ class Municipio < ActiveRecord::Base
   belongs_to :uf
 
   accepts_nested_attributes_for :enderecos
-  attr_accessible :nome
+  attr_accessible :nome, :uf_id
 
   validates_presence_of :nome, :uf
 

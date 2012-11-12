@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Eleitor < ActiveRecord::Base
-  attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco_attributes, :titulos, :endereco_id
+  attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco_attributes, :titulos
 
   has_many :titulos
   has_many :candidatos

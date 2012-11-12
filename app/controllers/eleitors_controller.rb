@@ -46,7 +46,10 @@ class EleitorsController < ApplicationController
     debugger
     params.delete :uf_id
     @eleitor = Eleitor.new(params[:eleitor])
-    @eleitor.errors.each {|a| puts a; }
+    @eleitor.endereco.save
+    @eleitor.endereco_id = @eleitor.endereco.id
+    @eleitor.titulo.save
+    @eleitor.titulo_id = @eleitor.titulo.id
 
     respond_to do |format|
       if @eleitor.save

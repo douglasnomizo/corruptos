@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Candidato < ActiveRecord::Base
-  attr_accessible :nome_campanha, :eleitor, :partidos, :candidaturas
+  attr_accessible :nome_campanha, :eleitor, :partidos, :candidaturas, :eleitor_id
   belongs_to :eleitor
   has_many :candidaturas
   has_many :partidos, :through => :candidaturas
