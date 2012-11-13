@@ -1,35 +1,28 @@
-<h4>Dados do Eleitor</h4>
-  <div class="form-inputs">
-  	
-	<%= simple_form_for @candidato, :url => :candidatos, :html => {:class => 'form-horizontal'}  do |c| %>
+<div class="form-inputs">	
+	<%= simple_form_for @candidato, url: :candidatos, html: {class: 'form-horizontal'}  do |c| %>
 		<%= c.error_notification %>
-		<%= c.simple_fields_for :eleitor do |ele| %>
-		  <div class="form-inputs">
-		    <%= ele.input :id, :as => :hidden %>
-
-				<%= ele.input :cpf, :required => false, :label => "CPF", :wrapper => :append do %>
-				  <%= ele.input_field :cpf %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></span>
-				<% end %>
-				<%= ele.input :nome, :required => false, :disabled => true %>
-				<%= ele.input :nome_mae, :required => false, :disabled => true %>
-				<%= ele.input :rg, :required => false, :disabled => true %>
-				<%= ele.input :data_nascimento, :as => :string, :required => false, :disabled => true %>
-				<%= ele.input :endereco, :as => :string, :required => false, :disabled => true, :input_html => {:style => 'width: 450px', :value => @candidato.eleitor.endereco.descricao } %>
-		  </div>
+		<%= c.simple_fields_for :eleitor do |ele| %>  
+			<h4>Dados do Eleitor</h4>
+			<%= ele.input :cpf, required: false, label: "CPF", wrapper: :append do %>
+			  <%= ele.input_field :cpf %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></span>
+			<% end %>
+			<%= ele.input :id, as: :hidden %>
+			<%= ele.input :nome, required: false, disabled: true %>
+			<%= ele.input :nome_mae, required: false, disabled: true %>
+			<%= ele.input :rg, required: false, disabled: true %>
+			<%= ele.input :data_nascimento, as: :string, required: false, disabled: true %>
+			<%= ele.input :endereco, as: :string, required: false, disabled: true, input_html: {style: 'width: 450px', value: @candidato.eleitor.endereco.descricao } %>
   
 			<h4>Dados do Candidato</h4>
-	    <%= c.input :nome_campanha, :label => "Nome de Campanha" %>
+	    <%= c.input :nome_campanha, label: "Nome de Campanha" %>
 	    
 	    <%= c.simple_fields_for :candidatura do |can| %>
-	    	<%= can.input :partido_id, :include_blank => false, :collection => Partido.all, :label_method => lambda { |obj| obj.nome }, :selected => @candidato.candidatura.partido.id %>
-				<%= can.input :cargo_id, :include_blank => false, :collection => eleicao_atual.cargos.uniq, :label_method => lambda { |obj| obj.nome }, :selected => @candidato.candidatura.cargo_eleicao.cargo.id %>
-				<%= can.input :codigo_candidato %>
+	    	<%= can.input :partido_id, include_blank: false, collection: Partido.all, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.partido.id %>
+				<%= can.input :cargo_id, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.cargo_eleicao.cargo.id %>
+				<%= can.input :codigo_candidato, input_html: { value: @candidato.candidatura.codigo_candidato } %>
 	  	<% end %>
-			<div class="form-inputs">
-		  	<%= submit_tag 'Cancelar', :type => 'button', :class=> "btn", :onclick => "history.back();" %>
-		  	<%= ele.button :submit, "Salvar" %>
-		  </div>
-		  <br/>
+			<%= submit_tag 'Cancelar', type: 'button', class: "btn", onclick: "history.back();" %>
+	  	<%= ele.button :submit, "Salvar" %>
 	  <% end %>
   <% end %>
 	</div>

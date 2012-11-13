@@ -1,0 +1,13 @@
+<%= ende.input :cep, label: "CEP", wrapper: :append do %>
+  <%= ende.input_field :cep, class: "input_cep" %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_endereco_cep();">Buscar CEP</a></span>
+<% end %>
+
+<%= ende.simple_fields_for :municipio do |mun| %>
+  <%= mun.input :uf, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select"} %>
+<% end %>
+<%= ende.association :municipio, include_blank: false, collection: Uf.first.municipios, input_html: {class: "municipio_select"}, label_method: lambda { |obj| obj.nome } %>
+<%= ende.input :tipo_logradouro, input_html: {class: "input_tipo_logradouro"} %>
+<%= ende.input :logradouro, input_html: {class: "input_logradouro"} %>
+<%= ende.input :bairro, input_html: {class: "input_bairro"} %>
+<%= ende.input :numero, required: false %>
+<%= ende.input :complemento, required: false, as: :text, input_html: {rows: 3} %>

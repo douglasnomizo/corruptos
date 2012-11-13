@@ -10,5 +10,4 @@ class CargoEleicao < ActiveRecord::Base
   attr_accessible :vagas, :cargo_id, :eleicao_id, :uf_id, :municipio_id
 
   validates_presence_of :cargo, :eleicao
-  
 end

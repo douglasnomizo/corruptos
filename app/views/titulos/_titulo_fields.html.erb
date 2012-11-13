@@ -1,0 +1,5 @@
+<%= titu.simple_fields_for :secao do |sec| %>
+  <%= sec.input :zona_id, include_blank: false, collection: Zona.all, label_method: lambda { |obj| obj.descricao }, input_html: {onchange: "busca_secoes()", class: "zona_select"} %>
+<% end %>
+<%= titu.input :secao_id, include_blank: false, collection: Zona.first.secaos, label_method: lambda { |obj| obj.codigo }, input_html: {class: "secao_select"} %>
+<%= titu.input :juiz_eleitoral %>

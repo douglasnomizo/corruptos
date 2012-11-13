@@ -25,6 +25,7 @@ Corruptos::Application.routes.draw do
   resources :secaos
 
   resources :zonas
+  match 'zonas/busca_secoes/:id', :to => 'zonas#busca_secoes'
 
   resources :titulos
 

@@ -1,52 +1,24 @@
-<%= simple_form_for @eleitor, :html => {:class => 'form-horizontal'} do |ele| %>
+<%= simple_form_for @eleitor, html: {class: 'form-horizontal'} do |ele| %>
   <%= ele.error_notification %>
 
   <div class="form-inputs">
-    <%= ele.input :nome, :input_html => {:value => "Douglas"} %>
-    <%= ele.input :nome_mae, :input_html => {:value => "Noeme"} %>
-    <%= ele.input :rg, :input_html => {:value => "48182070x"} %>
-    <%= ele.input :cpf, :input_html => {:value => "38687098863"} %>
-    <%= ele.input :data_nascimento, :as => :date, :start_year => 1900, :end_year => Date.today.year %>
+    
+    <%= ele.input :nome %>
+    <%= ele.input :nome_mae %>
+    <%= ele.input :rg %>
+    <%= ele.input :cpf %>
+    <%= ele.input :data_nascimento, as: :date, start_year: 1900, end_year: Date.today.year %>
+
     <%= ele.simple_fields_for :endereco do |ende| %>
-      
-      <div class="control-group string optional disabled">
-      <label class="string optional control-label" for="eleitor_endereco_cep">CEP</label>
-      <div class="controls control-group string required">
-        <div class="input-append">
-          <input class="string required" id="eleitor_endereco_attributes_cep" name="eleitor[endereco_attributes][cep]" size="50" type="text" value="74805260">
-          <label class="add-on"><a class="btn btn-small btn-info" onclick="busca_endereco_cep();">Buscar CEP</a></label>    
-        </div>
-      </div>
-
-      <div class="control-group select required">
-        <label class="select required control-label" for="eleitor_endereco_uf">
-          <abbr title="required">*</abbr>
-           Uf
-        </label>
-        <div class="controls">
-          <%= select_tag 'uf_id', options_for_select(Uf.all.collect{ |u| [u.nome, u.id] }), :onchange => "busca_municipios()" %>
-        </div>
-      </div>
-      
-      <%= ende.association :municipio, :include_blank => false, :collection => Uf.first.municipios, :label_method => lambda { |obj| obj.nome } %>
-      <%= ende.input :tipo_logradouro %>
-      <%= ende.input :logradouro %>
-      <%= ende.input :bairro %>
-      <%= ende.input :numero, :required => false %>
-      <%= ende.input :complemento, :required => false, :as => :text, :input_html => {:rows => 3} %>
+      <% render 'enderecos/endereco_fields', ende: ende %>    
     <% end %>
 
-    <%= ele.simple_fields_for :titulo do |tit| %>
-      <%= tit.input :secao_codigo, :include_blank => false, :collection => Zona.first.secaos, :label_method => lambda { |obj| obj.codigo } %>
-      <%= tit.input :juiz_eleitoral %>
-
-
-    <% end %>
+    <%= ele.simple_fields_for :titulos do |titu| %>
+      <% render 'titulos/titulo_fields', titu: titu %>
+    <% end %> 
 
   </div>
 
-  <div class="form-inputs">
-    <%= submit_tag 'Cancelar', :type => 'button', :class=> "btn", :onclick => "history.back();" %>
-    <%= ele.button :submit %>
-  </div>
+  <%= submit_tag 'Cancelar', type: 'button', class: "btn", onclick: "history.back();" %>
+  <%= ele.button :submit %>
 <% end %>

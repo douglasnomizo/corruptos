@@ -43,14 +43,10 @@ class EleitorsController < ApplicationController
   # POST /eleitors
   # POST /eleitors.json
   def create
-    debugger
-    params.delete :uf_id
     @eleitor = Eleitor.new(params[:eleitor])
-    @eleitor.endereco.save
-    @eleitor.endereco_id = @eleitor.endereco.id
-    @eleitor.titulo.save
-    @eleitor.titulo_id = @eleitor.titulo.id
 
+    puts @eleitor
+    print @eleitor
     respond_to do |format|
       if @eleitor.save
         format.html { redirect_to @eleitor, notice: 'Eleitor was successfully created.' }

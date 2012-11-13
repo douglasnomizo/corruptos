@@ -1,4 +1,11 @@
 class ZonasController < ApplicationController
+
+  def busca_secoes
+    options = Zona.find(params[:id]).secaos
+    puts options.to_json
+    render :json => options
+  end
+
   # GET /zonas
   # GET /zonas.json
   def index

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Eleitor < ActiveRecord::Base
-  attr_accessible :cpf, :data_nascimento, :nome, :nome_mae, :rg, :endereco_attributes, :titulos
+  attr_protected :id
 
   has_many :titulos
   has_many :candidatos
@@ -21,6 +21,10 @@ class Eleitor < ActiveRecord::Base
       :nome_mae => self.nome_mae,
       :rg => self.rg,
       :id => self.id }
+  end
+
+  def titulo
+    self.titulos.last
   end
 
   private 

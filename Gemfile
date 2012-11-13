@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+gem 'slim'
+gem 'cocoon'
 gem 'ransack'
 gem 'pry'
 gem 'tlsmail'

@@ -10,13 +10,21 @@ class Candidatura < ActiveRecord::Base
   accepts_nested_attributes_for :partido
 
   validates_presence_of :candidato_id, :cargo_eleicao_id, :partido_id, :codigo_candidato
-  #validate :candidato_unico?
+  validates_uniqueness_of :codigo_candidato, scope: :cargo_eleicao_id
+  
+  validate :candidato_unico?
+  validate :cargo_existe?
 
   private
 
-  #def candidato_unico?
-  #  cargos_ids = Eleicao.find(:first, :conditions => "status = true").cargo_eleicaos.map(&:id)
-  # 	candidatura = Candidatura.find(:first, :conditions => ["candidato_id = ? and cargo_eleicao in (?)", self.candidato_id, cargos_ids])
-  # 	errors.add(:candidato_id, "Candidato já adicionado para está eleição!") if candidatura
-  # end
+  def candidato_unico?
+    cargos_ids = Eleicao.find(:first, conditions: "status = true").cargo_eleicaos.map(&:id)
+   	candidatura = Candidatura.find(:first, conditions: ["candidato_id = ? and cargo_eleicao_id in (?)", self.candidato_id, cargos_ids])
+   	errors.add(:candidato_id, "Candidato já cadastrado para esta eleição!") if candidatura
+  end
+
+  def cargo_existe?
+    cargo_existe = CargoEleicao.find(:first, conditions: ["cargo_eleicao_id = ?", self.cargo_eleicao_id])
+    errors.add(:cargo_eleicao_id, "Cargo inexistente para esta eleição em seu endereço")
+  end
 end

@@ -37,7 +37,7 @@ class CandidatosController < ApplicationController
   # GET /candidatos/new.json
   def new
     @candidato = Candidato.new
-    @candidato.candidaturas.build
+    @candidato.build_candidatura
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,28 +53,31 @@ class CandidatosController < ApplicationController
   # POST /candidatos
   # POST /candidatos.json
   def create
+    debugger
     respond_to do |format|
-      @candidato = Candidato.new
-      @candidato.eleitor_id = params[:candidato][:eleitor][:id]
-      @candidato.nome_campanha = params[:candidato][:nome_campanha]
-      if @candidato.save
-        @candidatura = Candidatura.new
-        cargo_eleicao = CargoEleicao.find(:first, :conditions => ["eleicao_id = ? and cargo_id = ? and municipio_id = 1008", eleicao_atual.id, params[:candidato][:candidatura][:cargo_id]])
-        
-        @candidatura.cargo_eleicao_id = cargo_eleicao.id
-        @candidatura.partido_id = params[:candidato][:candidatura][:partido_id]
-        @candidatura.codigo_candidato = params[:candidato][:candidatura][:codigo_candidato]
-        @candidatura.candidato_id = @candidato.id
+      ActiveRecord::Base.transaction do
+        @candidato = Candidato.new
+        @candidato.eleitor_id = params[:candidato][:eleitor][:id]
+        @candidato.nome_campanha = params[:candidato][:nome_campanha]
+        if @candidato.save
+          @candidatura = Candidatura.new
+          @candidatura.cargo_eleicao_id = cargo_eleicao.id
+          @candidatura.partido_id = params[:candidato][:candidatura][:partido_id]
+          @candidatura.codigo_candidato = params[:candidato][:candidatura][:codigo_candidato]
+          @candidatura.candidato_id = @candidato.id
 
-        if @candidatura.save
-          format.html { redirect_to @candidato, notice: 'Candidato criado com sucesso.' }
+          if @candidatura.save
+            format.html { redirect_to @candidato, notice: 'Candidato criado com sucesso.' }
+          else
+            puts @candidatura.errors.inspect
+            raise ActiveRecord::Rollback
+            format.html { render action: "new", notice: "Erro!" }          
+          end
         else
-          puts @candidatura.errors.inspect
-          format.html { render action: "new", notice: "Erro!" }          
+            puts @candidato.errors.inspect
+            raise ActiveRecord::Rollback
+            format.html { render action: "new", notice: "Erro!" }
         end
-      else
-          puts @candidato.errors.inspect
-          format.html { render action: "new", notice: "Erro!" }
       end
     end
   end
