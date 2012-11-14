@@ -38,6 +38,7 @@ class EleitorsController < ApplicationController
   # GET /eleitors/1/edit
   def edit
     @eleitor = Eleitor.find(params[:id])
+    @endereco = @eleitor.endereco
   end
 
   # POST /eleitors
@@ -84,16 +85,36 @@ class EleitorsController < ApplicationController
   # PUT /eleitors/1
   # PUT /eleitors/1.json
   def update
-    @eleitor = Eleitor.find(params[:id])
+    completed = false
+    params[:eleitor][:endereco].delete :municipio
+    params[:eleitor][:titulo_attributes].delete :secao
 
-    respond_to do |format|
-      if @eleitor.update_attributes(params[:eleitor])
-        format.html { redirect_to @eleitor, notice: 'Eleitor was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @eleitor.errors, status: :unprocessable_entity }
+    Eleitor.transaction do
+      @eleitor = Eleitor.find(params[:id])
+      
+      if @eleitor.endereco.update_attributes(params[:eleitor][:endereco])
+        params[:eleitor].delete :endereco              
+        titulo = params[:eleitor].delete :titulo_attributes
+        if @eleitor.build_titulo titulo
+          if @eleitor.save
+            completed = true
+          end
+        end
       end
+
+      if completed
+        redirect_to @eleitor, notice: 'Eleitor atualizado com sucesso!'
+      else
+        @endereco = @eleitor.endereco
+        titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
+        if titulo_errors
+          titulo_errors.messages.each do |k,v|
+            @eleitor.titulo.errors.add(k, v.first)
+          end
+        end
+        render action: "edit"
+        raise ActiveRecord::Rollback
+      end  
     end
   end
 

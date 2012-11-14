@@ -8,7 +8,7 @@ class Eleitor < ActiveRecord::Base
   accepts_nested_attributes_for :titulo, :endereco
   
   validates_presence_of :data_nascimento, :nome, :nome_mae, :rg, :endereco_id, :message => "Campo não pode ser em branco"
-  validates_uniqueness_of :cpf
+  validates_uniqueness_of :cpf, :rg
   validate :cpf, numericality: true
   validate :valid_date?
 
