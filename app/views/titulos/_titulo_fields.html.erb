@@ -2,6 +2,6 @@
   <%= sec.input :zona_id, include_blank: false, collection: Zona.all, label_method: lambda { |obj| obj.descricao }, input_html: {onchange: "busca_secoes()", class: "zona_select"} %>
 <% end %>
 <%= f.input :secao_id, include_blank: false, collection: Zona.first.secaos, label_method: lambda { |obj| obj.codigo }, input_html: {class: "secao_select"} %>
-<%= f.input :juiz_eleitoral, input_html: {value: "Juiz"} %>
+<%= f.input :juiz_eleitoral %>
 <%= f.input :data_emissao, as: :hidden, input_html: { value: Date.today } %>
 <%= f.input :status, as: :hidden, input_html: {value: true} %>

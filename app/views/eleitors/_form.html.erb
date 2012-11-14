@@ -1,10 +1,10 @@
 <%= simple_form_for @eleitor, html: {class: 'form-horizontal'} do |ele| %>
   <%= ele.error_notification %>
     
-  <%= ele.input :nome, input_html: {value: "Nome"} %>
-  <%= ele.input :nome_mae, input_html: {value: "Mae"} %>
-  <%= ele.input :rg, input_html: {value: "RG"} %>
-  <%= ele.input :cpf, input_html: {value: "12345678900"} %>
+  <%= ele.input :nome %>
+  <%= ele.input :nome_mae %>
+  <%= ele.input :rg %>
+  <%= ele.input :cpf %>
   <%= ele.input :data_nascimento, start_year: 1900, end_year: Date.today.year %>
 
   <%= ele.simple_fields_for @endereco do |endereco_builder| %>

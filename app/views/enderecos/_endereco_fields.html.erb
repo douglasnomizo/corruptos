@@ -1,13 +1,13 @@
 <%= f.input :cep, label: "CEP", wrapper: :append do %>
-  <%= f.input_field :cep, class: "input_cep", value: "74805260" %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_freco_cep();">Buscar CEP</a></span>
+  <%= f.input_field :cep, class: "input_cep" %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_freco_cep();">Buscar CEP</a></span>
 <% end %>
 
 <%= f.simple_fields_for :municipio do |mun| %>
   <%= mun.input :uf, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select" } %>
 <% end %>
 <%= f.input :municipio_id, include_blank: false, collection: Uf.first.municipios, label_method: lambda { |obj| obj.nome }, input_html: {class: "municipio_select"} %>
-<%= f.input :tipo_logradouro, input_html: {class: "input_tipo_logradouro", value: "Rua"} %>
-<%= f.input :logradouro, input_html: {class: "input_logradouro", value: "23"} %>
-<%= f.input :bairro, input_html: {class: "input_bairro", value: "Jardim Goiás"} %>
-<%= f.input :numero, as: :string, required: false, input_html: {pattern: "\\d+", value: "102"} %>
-<%= f.input :complemento, required: false, as: :text, input_html: {rows: 3, value: "apto 301"} %>
+<%= f.input :tipo_logradouro, input_html: {class: "input_tipo_logradouro"} %>
+<%= f.input :logradouro, input_html: {class: "input_logradouro"} %>
+<%= f.input :bairro, input_html: {class: "input_bairro"} %>
+<%= f.input :numero, as: :string, required: false, input_html: {pattern: "\\d+"} %>
+<%= f.input :complemento, required: false, as: :text, input_html: {rows: 3} %>
