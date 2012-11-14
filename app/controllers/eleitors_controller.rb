@@ -26,8 +26,8 @@ class EleitorsController < ApplicationController
   # GET /eleitors/new.json
   def new
     @eleitor = Eleitor.new
-    @eleitor.titulos.build
-    @eleitor.build_endereco
+    @eleitor.build_titulo
+    @endereco = Endereco.new
     
     respond_to do |format|
       format.html # new.html.erb
@@ -43,19 +43,42 @@ class EleitorsController < ApplicationController
   # POST /eleitors
   # POST /eleitors.json
   def create
-    @eleitor = Eleitor.new(params[:eleitor])
+    completed = false
+    params[:eleitor][:endereco].delete :municipio
+    params[:eleitor][:titulo_attributes].delete :secao
 
-    puts @eleitor
-    print @eleitor
-    respond_to do |format|
-      if @eleitor.save
-        format.html { redirect_to @eleitor, notice: 'Eleitor was successfully created.' }
-        format.json { render json: @eleitor, status: :created, location: @eleitor }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @eleitor.errors, status: :unprocessable_entity }
+    Eleitor.transaction do
+      @endereco = Endereco.new(params[:eleitor][:endereco])
+      params[:eleitor].delete :endereco      
+      titulo_attributes = params[:eleitor].delete :titulo_attributes
+      if @endereco.save        
+        @eleitor = Eleitor.new(params[:eleitor])
+        @eleitor.endereco_id = @endereco.id
+
+        if @eleitor.save
+          @eleitor.build_titulo titulo_attributes
+          if @eleitor.save
+            completed = true
+          end
+        end
       end
+
+      if completed
+        redirect_to @eleitor, notice: 'Eleitor criado com sucesso!'
+      else
+        titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
+        @eleitor.build_titulo titulo_attributes        
+        if titulo_errors
+          titulo_errors.messages.each do |k,v|
+            @eleitor.titulo.errors.add(k, v.first)
+          end
+        end
+        render action: "new"
+        raise ActiveRecord::Rollback
+      end  
     end
+
+    
   end
 
   # PUT /eleitors/1

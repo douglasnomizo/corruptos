@@ -1,15 +1,15 @@
 # encoding: utf-8
 class Eleitor < ActiveRecord::Base
-  attr_protected :id
-
-  has_many :titulos
-  has_many :candidatos
+  attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_mae, :titulo_attributes
+  has_one :titulo
+  has_one :candidato
   belongs_to :endereco
 
-  accepts_nested_attributes_for :titulos, :endereco
+  accepts_nested_attributes_for :titulo, :endereco
   
   validates_presence_of :data_nascimento, :nome, :nome_mae, :rg, :endereco_id, :message => "Campo não pode ser em branco"
-  validate :cpf, :numericality => :true
+  validates_uniqueness_of :cpf
+  validate :cpf, numericality: true
   validate :valid_date?
 
 
@@ -23,17 +23,15 @@ class Eleitor < ActiveRecord::Base
       :id => self.id }
   end
 
-  def titulo
-    self.titulos.last
-  end
-
   private 
 
 	def valid_date?
-		sixteen_years_ago = Date.today
-		16.times { sixteen_years_ago = sixteen_years_ago.prev_year }
-		if data_nascimento > sixteen_years_ago
-			errors.add(:data_nascimento, "Eleitor deve possuir no mínimo 16 anos!")
-		end
+    if self.data_nascimento
+  		sixteen_years_ago = Date.today
+  		16.times { sixteen_years_ago = sixteen_years_ago.prev_year }
+      if self.data_nascimento > sixteen_years_ago
+  			errors.add(:data_nascimento, "Eleitor deve possuir no mínimo 16 anos!")
+  		end
+    end
   end  
 end
