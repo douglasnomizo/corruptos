@@ -1,5 +1,5 @@
 <%= f.input :cep, label: "CEP", wrapper: :append do %>
-  <%= f.input_field :cep, class: "input_cep" %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_freco_cep();">Buscar CEP</a></span>
+  <%= f.input_field :cep, class: "input_cep" %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_cep();">Buscar CEP</a></span>
 <% end %>
 
 <%= f.simple_fields_for :municipio do |mun| %>

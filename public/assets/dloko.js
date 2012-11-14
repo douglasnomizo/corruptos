@@ -18,7 +18,7 @@ function preenche_campos_eleitor(data) {
   }
 }
 
-function busca_endereco_cep() {
+function busca_cep() {
   var input_cep = $(".input_cep").val();
   $.get("/enderecos/busca_cep/" + input_cep, function(data) {
     preenche_campos_endereco(data);
