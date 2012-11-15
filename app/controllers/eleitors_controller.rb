@@ -3,7 +3,8 @@ class EleitorsController < ApplicationController
   # GET /eleitors
   # GET /eleitors.json
   def index
-    @eleitors = Eleitor.all
+    @q = Eleitor.search(params[:q])
+    @eleitors = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

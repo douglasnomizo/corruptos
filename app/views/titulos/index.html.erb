@@ -2,11 +2,11 @@
 
 <table class="table table-condensed table-striped">
   <tr>
-    <th>Data emissao</th>
-    <th>Juiz eleitoral</th>
-    <th>Status</th>
     <th>Eleitor</th>
+    <th>Zona</th>
     <th>Secao</th>
+    <th>Data de Emissao</th>
+    <th>Juiz eleitoral</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +14,11 @@
 
 <% @titulos.each do |titulo| %>
   <tr>
-    <td><%= titulo.data_emissao %></td>
+    <td><%= titulo.eleitor.nome %></td>
+    <td><%= titulo.secao.zona.descricao %></td>
+    <td><%= titulo.secao.codigo %></td>
+    <td><%= titulo.data_emissao.strftime('%d/%m/%Y') %></td>
     <td><%= titulo.juiz_eleitoral %></td>
-    <td><%= titulo.status %></td>
-    <td><%= titulo.eleitor %></td>
-    <td><%= titulo.secao %></td>
     <td><%= link_to content_tag(:span, "Exibir"), titulo, :class => "btn btn-small" %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_titulo_path(titulo), :class => "btn btn-small" %></td>
   </tr>

@@ -2,7 +2,7 @@ class TitulosController < ApplicationController
   # GET /titulos
   # GET /titulos.json
   def index
-    @titulos = Titulo.all
+    @titulos = Titulo.find(:all, conditions: "status is true")
 
     respond_to do |format|
       format.html # index.html.erb

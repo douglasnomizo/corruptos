@@ -1,12 +1,18 @@
 <div class="page-header"><h1>Eleitores</h1></div>
 
+<%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
+  <%= f.text_field :nome_cont, :placeholder => "Nome do Eleitor" %> <strong>ou</strong>
+  <%= f.text_field :cpf_eq, :placeholder => "Número do CPF" %>
+  <%= f.submit "Buscar", :class => "btn btn-success" %>
+<% end %>
+
 <table class="table table-condensed table-striped">
   <tr>
-    <th>Nome</th>
-    <th>Nome mae</th>
-    <th>Rg</th>
-    <th>Data nascimento</th>
-    <th>Cpf</th>
+    <th><%= sort_link @q, :nome, "Nome" %></th>
+    <th><%= sort_link @q, :nome_mae, "Nome da Mãe" %></th>
+    <th><%= sort_link @q, :rg, "RG" %></th>
+    <th><%= sort_link @q, :data_nascimento, "Data de Nascimento" %></th>
+    <th><%= sort_link @q, :cpf, "CPF" %></th>
     <th>Endereco</th>
     <th></th>
     <th></th>
