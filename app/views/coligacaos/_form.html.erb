@@ -7,13 +7,8 @@
   	<%= render "cargo_eleicaos/cargo_eleicao_fields", f: ce %>
   <% end %>
   	
-  <%= c.simple_fields_for :coligacao_partido do |cp| %>  	
-    <label class="select required control-label" for="coligacao_coligacao_partido_partido_ids">
-      <abbr title="required">*</abbr>
-     Partidos <small>(selecione pelo menos 2)</small>
-      </label>
-    <%= cp.collection_check_boxes :partido_ids, Partido.all , :id, :nome, {}, {:class => 'checkbox'} { |input| input.label(class: 'checkbox') { input.check_box + input.text } } %>
-  <% end %>
+  <div id="partidos_disponiveis">
+  </div>
 
   <div class="form-inputs">
     <%= c.button :submit, "Salvar" %>

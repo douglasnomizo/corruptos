@@ -25,9 +25,8 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos/new
   # GET /coligacaos/new.json
   def new
-    @coligacao = Coligacao.new
-    @eleicao = Eleicao.find(:first, :conditions => "status = true")
-    
+    @coligacao = Coligacao.new    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @coligacao }
@@ -42,16 +41,33 @@ class ColigacaosController < ApplicationController
   # POST /coligacaos
   # POST /coligacaos.json
   def create
-    @coligacao = Coligacao.new(params[:coligacao])
+    Coligacao.transaction do
+      coligacao_partido = params[:coligacao].delete :coligacao_partido
+      
+      params[:coligacao].delete :cargo_eleicao
 
-    respond_to do |format|
+      puts params[:coligacao]
+      @coligacao = Coligacao.new(params[:coligacao])
+
+
       if @coligacao.save
-        format.html { redirect_to @coligacao, notice: 'Coligacao was successfully created.' }
-        format.json { render json: @coligacao, status: :created, location: @coligacao }
+        coligacao_partido[:partido_ids].each do |id|
+          cp = ColigacaoPartido.new(partido_id: id)
+          puts cp.inspect
+          @coligacao.coligacao_partidos << cp
+        end
+
+        puts @coligacao.inspect
+        puts @coligacao.coligacao_partidos.inspect
+
+        ActiveRecord::Rollback
+        redirect_to @coligacao, notice: 'Coligacao criado com sucesso!'
       else
-        format.html { render action: "new" }
-        format.json { render json: @coligacao.errors, status: :unprocessable_entity }
+        ActiveRecord::Rollback
+        render action: "new"    
       end
+
+      
     end
   end
 

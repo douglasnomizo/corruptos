@@ -10,6 +10,7 @@ Corruptos::Application.routes.draw do
   resources :cargo_eleicaos
 
   resources :partidos
+  match 'partidos/busca_partidos/', :to => 'partidos#busca_partidos'
 
   resources :partidos do
     collection { post :search, to: 'partidos#index' }

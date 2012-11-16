@@ -28,59 +28,83 @@ class EleitorsController < ApplicationController
   def new
     @eleitor = Eleitor.new
     @eleitor.build_titulo
-    @endereco = Endereco.new
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @eleitor }
-    end
+    @eleitor.build_endereco
   end
 
   # GET /eleitors/1/edit
   def edit
     @eleitor = Eleitor.find(params[:id])
-    @endereco = @eleitor.endereco
   end
 
   # POST /eleitors
   # POST /eleitors.json
   def create
     completed = false
-    params[:eleitor][:endereco].delete :municipio
+    params[:eleitor][:endereco_attributes].delete :municipio
     params[:eleitor][:titulo_attributes].delete :secao
-
+    titulo_attributes = params[:eleitor].delete :titulo_attributes
+    endereco_attributes = params[:eleitor][:endereco_attributes]
     Eleitor.transaction do
-      @endereco = Endereco.new(params[:eleitor][:endereco])
+      @endereco = Endereco.new endereco_attributes
       params[:eleitor].delete :endereco      
-      titulo_attributes = params[:eleitor].delete :titulo_attributes
+
       if @endereco.save        
-        @eleitor = Eleitor.new(params[:eleitor])
+        @eleitor = Eleitor.new params[:eleitor]
         @eleitor.endereco_id = @endereco.id
 
         if @eleitor.save
           @eleitor.build_titulo titulo_attributes
           if @eleitor.save
             completed = true
+          else
+            raise ActiveRecord::Rollback
           end
         end
-      end
-
-      if completed
-        redirect_to @eleitor, notice: 'Eleitor criado com sucesso!'
       else
-        @eleitor = Eleitor.new(params[:eleitor]) unless @eleitor
-        titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
+        @eleitor = Eleitor.new params[:eleitor]
+        @eleitor.build_endereco endereco_attributes
+      end
+    end
+
+    if completed
+      redirect_to @eleitor, notice: 'Eleitor criado com sucesso!'
+    else
+      titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
+      endereco_errors = @endereco.errors
+      eleitor_errors = @eleitor.errors
+      
+      @eleitor = Eleitor.new(params[:eleitor])
+      
+      if titulo_errors
         @eleitor.build_titulo titulo_attributes        
         if titulo_errors
           titulo_errors.messages.each do |k,v|
             @eleitor.titulo.errors.add(k, v.first)
           end
         end
-        render action: "new"
-        raise ActiveRecord::Rollback
-      end  
-    end
+      else
+        @eleitor.build_titulo
+      end
 
+      if endereco_errors
+        @eleitor.build_endereco endereco_attributes        
+        if endereco_errors
+          endereco_errors.messages.each do |k,v|
+            @eleitor.endereco.errors.add(k, v.first)
+          end
+        end
+      else
+        @eleitor.build_endereco
+      end
+
+      if eleitor_errors
+        eleitor_errors.messages.each do |k,v|
+          @eleitor.errors.add(k, v.first)
+        end
+      end
+
+      render action: "new"        
+    end  
     
   end
 
@@ -88,14 +112,14 @@ class EleitorsController < ApplicationController
   # PUT /eleitors/1.json
   def update
     completed = false
-    params[:eleitor][:endereco].delete :municipio
+    params[:eleitor][:endereco_attributes].delete :municipio
     params[:eleitor][:titulo_attributes].delete :secao
 
     Eleitor.transaction do
       @eleitor = Eleitor.find(params[:id])
       
-      if @eleitor.endereco.update_attributes(params[:eleitor][:endereco])
-        params[:eleitor].delete :endereco              
+      if @eleitor.endereco.update_attributes(params[:eleitor][:endereco_attributes])
+        params[:eleitor].delete :endereco_attributes              
         titulo = params[:eleitor].delete :titulo_attributes
         if @eleitor.build_titulo titulo
           if @eleitor.save

@@ -6,7 +6,7 @@ class Endereco < ActiveRecord::Base
   has_one :eleitor
   has_one :uf, :through => :municipio
 
-  validates_presence_of :municipio
+  validates_presence_of :municipio, :logradouro, :tipo_logradouro, :bairro
   validates :cep, :numericality => true
   validates :numero, :numericality => true, :allow_nil => true
 

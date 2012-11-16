@@ -1,13 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Cargo eleicao:</b>
-  <%= @coligacao.cargo_eleicao %>
+  <b>Cargo:</b>
+  <%= @coligacao.cargo_eleicao.cargo.nome %>
 </p>
 
 <p>
   <b>Nome:</b>
   <%= @coligacao.nome %>
+</p>
+
+<p>
+  <b>Partidos Coligados</b>
+  <ul>
+	  <% @coligacao.partidos.each do |p| %>
+	  	 <li><%= p.nome %></li>
+		<% end %>
+	</ul>
 </p>
 
 

@@ -68,3 +68,15 @@ function busca_secoes() {
     }
   });
 }
+
+function busca_partidos_disponiveis() {
+  var input_municipio = $(".").val();
+  $.ajax({
+   type: "GET",
+   url: "/partidos/busca_partidos_disponiveis/" + input_zona,
+   async : false,
+    success: function(data){
+     
+    }
+  }); 
+}
