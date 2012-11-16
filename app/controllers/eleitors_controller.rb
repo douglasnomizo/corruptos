@@ -68,6 +68,7 @@ class EleitorsController < ApplicationController
       if completed
         redirect_to @eleitor, notice: 'Eleitor criado com sucesso!'
       else
+        @eleitor = Eleitor.new(params[:eleitor]) unless @eleitor
         titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
         @eleitor.build_titulo titulo_attributes        
         if titulo_errors
