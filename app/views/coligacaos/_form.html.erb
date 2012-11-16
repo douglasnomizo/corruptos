@@ -1,21 +1,21 @@
-<%= simple_form_for(@coligacao) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for(@coligacao) do |c| %>
+  <%= c.error_notification %>
 
-  <%= f.input :nome %>
+  <%= c.input :nome %>
 
-  <%= f.simple_fields_for :cargo_eleicao do |ce| %>
-  	<%= ce.input :eleicao_id, :as => :hidden, :input_html => { :value => @eleicao_atual.id } %>
-  	<%= ce.input :cargo_id, :collection => @eleicao_atual.cargos.uniq, :label_method => lambda { |obj| obj.nome } %>
-  	<%= ce.input :uf_id, :collection => Uf.all, :label_method => lambda { |obj| obj.nome }, :required => false, :selected => @uf.id, :include_blank => true %>
-  	<%= ce.input :municipio_id, :collection => Uf.first.municipios, :label_method => lambda { |obj| obj.nome }, :required => false, :include_blank => true, :selected => @municipio.id %>
+  <%= c.simple_fields_for :cargo_eleicao do |ce| %>
+  	<%= render "cargo_eleicaos/cargo_eleicao_fields", f: ce %>
   <% end %>
   	
-  <%= f.simple_fields_for :coligacao_partido do |cp| %>
-  	
-	  <%= cp.collection_check_boxes(:partido_ids, Partido.all, :id, :nome, {}, {:class => 'checkbox'} ) { |input| input.label(:class => 'checkbox') { input.check_box + input.text } } %>
-	  <% end %>
+  <%= c.simple_fields_for :coligacao_partido do |cp| %>  	
+    <label class="select required control-label" for="coligacao_coligacao_partido_partido_ids">
+      <abbr title="required">*</abbr>
+     Partidos <small>(selecione pelo menos 2)</small>
+      </label>
+    <%= cp.collection_check_boxes :partido_ids, Partido.all , :id, :nome, {}, {:class => 'checkbox'} { |input| input.label(class: 'checkbox') { input.check_box + input.text } } %>
+  <% end %>
 
   <div class="form-inputs">
-    <%= f.button :submit, "Salvar" %>
+    <%= c.button :submit, "Salvar" %>
   </div>
 <% end %>

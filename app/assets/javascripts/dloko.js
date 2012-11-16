@@ -68,8 +68,3 @@ function busca_secoes() {
     }
   });
 }
-
-$(function() {
-  a = $("#eleitor_data_nascimento");
-  console.log(a.val());
-});

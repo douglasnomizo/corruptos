@@ -1,0 +1,4 @@
+<%= f.input :eleicao_id, :as => :hidden, :input_html => { :value => eleicao_atual.id } %>
+<%= f.input :cargo_id, :collection => eleicao_atual.cargos.uniq, :label_method => lambda { |obj| obj.nome } %>
+<%= f.input :uf_id, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select" } %>
+<%= f.input :municipio_id, include_blank: false, collection: Uf.first.municipios, label_method: lambda { |obj| obj.nome }, input_html: {onchange:"busca_partidos_disponiveis()", class: "municipio_select municipio_coligacao"} %>

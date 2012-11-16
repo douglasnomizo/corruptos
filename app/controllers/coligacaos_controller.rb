@@ -27,19 +27,6 @@ class ColigacaosController < ApplicationController
   def new
     @coligacao = Coligacao.new
     @eleicao = Eleicao.find(:first, :conditions => "status = true")
-
-    if params[:uf_id]
-      @uf = Uf.find(params[:uf_id])
-    else
-      @uf = Uf.first
-    end
-
-    if params[:municipio_id]
-      @municipio = Municipio.find(params[:municipio_id])
-    else
-      @municipio = Municipio.new
-      @municipio.id = 0
-    end    
     
     respond_to do |format|
       format.html # new.html.erb
