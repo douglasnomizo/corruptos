@@ -8,6 +8,7 @@
   <% end %>
   	
   <div id="partidos_disponiveis">
+    <%= c.collection_check_boxes :partido_ids, Partido.all, :id, :nome, {}, {:class => 'checkbox'} { |input| input.label(class: 'checkbox') { input.check_box + input.text } } %>
   </div>
 
   <div class="form-inputs">
