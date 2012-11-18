@@ -10,6 +10,20 @@
   <%= @coligacao.nome %>
 </p>
 
+<% if  @coligacao.cargo_eleicao.municipio and @coligacao.cargo_eleicao.municipio.uf %>
+  <p>
+    <b>Estado:</b>
+    <%= @coligacao.cargo_eleicao.municipio.uf.nome %>
+  </p>
+<% end %>
+
+<% if  @coligacao.cargo_eleicao.municipio %>
+  <p>
+    <b>Municipio:</b>
+    <%= @coligacao.cargo_eleicao.municipio.nome %>
+  </p>
+<% end %>
+
 <p>
   <b>Partidos Coligados</b>
   <ul>

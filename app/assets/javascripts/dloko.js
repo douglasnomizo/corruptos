@@ -70,7 +70,7 @@ function busca_secoes() {
 }
 
 function busca_partidos_disponiveis() {
-  var input_municipio = $(".").val();
+  /*var input_municipio = $(".").val();
   $.ajax({
    type: "GET",
    url: "/partidos/busca_partidos_disponiveis/" + input_zona,
@@ -78,5 +78,43 @@ function busca_partidos_disponiveis() {
     success: function(data){
      
     }
-  }); 
+  });*/ 
 }
+
+function seleciona_cargo() {
+  cargo = $("#coligacao_cargo_eleicao_cargo_id option:selected").text();
+  switch (cargo) {
+  case "Presidente":
+    $(".uf_select").prop('disabled', true).parent("div").parent("div").hide();
+    $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
+    break;
+  case "Governador":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
+    break;
+  case "Deputado Federal":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
+    break;
+  case "Deputado Estadual":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
+    break;
+  case "Senador":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
+    break;
+  case "Vereador":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
+    break;
+  default:
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
+    break;
+  }
+}
+
+$(document).ready(function () {
+  seleciona_cargo();
+});

@@ -4,7 +4,7 @@
   <tr>
     <th>Cargo eleicao</th>
     <th>Nome</th>
-    <th>Estado</th>
+    <th>Uf</th>
     <th>Município</th>
     <th></th>
     <th></th>
@@ -15,7 +15,7 @@
   <tr>
     <td><%= coligacao.cargo_eleicao.cargo.nome %></td>
     <td><%= coligacao.nome %></td>
-    <td><%= coligacao.cargo_eleicao.municipio.uf.nome if coligacao.cargo_eleicao.municipio %></td>
+    <td><%= coligacao.cargo_eleicao.uf.sigla if coligacao.cargo_eleicao.uf %></td>
     <td><%= coligacao.cargo_eleicao.municipio.nome if coligacao.cargo_eleicao.municipio %></td>
     <td><%= link_to content_tag(:span, "Exibir"), coligacao, :class => "btn btn-small" %></td>
     <td><%= link_to content_tag(:span, "Alterar"), edit_coligacao_path(coligacao), :class => "btn btn-small" %></td>

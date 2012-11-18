@@ -4,9 +4,17 @@ class Coligacao < ActiveRecord::Base
   has_many :coligacao_partidos
   has_many :partidos, through: :coligacao_partidos
 
-  attr_accessible :nome, :cargo_eleicao_id
+  attr_accessible :nome, :cargo_eleicao_id, :partido_ids
 
-  validates_presence_of :cargo_eleicao, :nome
+  validate do |coligacao|
+    coligacao.errors[:base] << "Cargo indisponível para essa eleição!" if coligacao.cargo_eleicao.blank?
+  end
+  validates :nome, presence: true, length: {in: 5..55}
   validates_uniqueness_of :nome
   #validates_uniqueness_of :cargo_eleicao_id, scope: :partidos, message: "partido já coligado para este cargo!"
+  validate :valida_qtd_partidos
+
+  def valida_qtd_partidos
+    errors.add(:base, "Selecione 2 ou mais partidos para formar uma coligação!") if partidos.size < 2
+  end
 end

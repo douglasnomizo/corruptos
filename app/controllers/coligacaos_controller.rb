@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ColigacaosController < ApplicationController
 
   # GET /coligacaos
@@ -26,6 +27,7 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos/new.json
   def new
     @coligacao = Coligacao.new    
+    @coligacao.cargo_eleicao = CargoEleicao.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,31 +45,30 @@ class ColigacaosController < ApplicationController
   def create
     Coligacao.transaction do
       coligacao_partido = params[:coligacao].delete :coligacao_partido
+      cargo_eleicao = params[:coligacao].delete :cargo_eleicao
+      puts cargo_eleicao.inspect
+
+      if cargo_eleicao[:municipio_id]
+        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:municipio_id]])
+      elsif cargo_eleicao[:uf_id]
+        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])        
+      else
+        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao  
+      end
       
-      params[:coligacao].delete :cargo_eleicao
-
-      puts params[:coligacao]
       @coligacao = Coligacao.new(params[:coligacao])
+      puts @coligacao.partidos.size
 
+      if @cargo_eleicao
+        @coligacao.cargo_eleicao = @cargo_eleicao
+      end
 
       if @coligacao.save
-        coligacao_partido[:partido_ids].each do |id|
-          cp = ColigacaoPartido.new(partido_id: id)
-          puts cp.inspect
-          @coligacao.coligacao_partidos << cp
-        end
-
-        puts @coligacao.inspect
-        puts @coligacao.coligacao_partidos.inspect
-
-        ActiveRecord::Rollback
-        redirect_to @coligacao, notice: 'Coligacao criado com sucesso!'
+        redirect_to @coligacao, notice: 'Coligacao criada com sucesso!'
       else
         ActiveRecord::Rollback
         render action: "new"    
       end
-
-      
     end
   end
 

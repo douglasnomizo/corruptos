@@ -1,4 +1,10 @@
-<%= f.input :eleicao_id, as: :hidden, input_html: { value: eleicao_atual.id } %>
-<%= f.input :cargo_id, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome } %>
-<%= f.input :uf_id, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select" } %>
-<%= f.input :municipio_id, include_blank: false, collection: Uf.first.municipios, label_method: lambda { |obj| obj.nome }, input_html: {onchange:"busca_partidos_disponiveis()", class: "municipio_select municipio_coligacao"} %>
+<%= f.input :eleicao_id, as: :hidden, input_html: { value: eleicao_atual.id, class: "cargo_eleicao_select" } %>
+<% if @coligacao.cargo_eleicao %>
+	<%= f.input :cargo_id, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "seleciona_cargo()"}, selected: @coligacao.cargo_eleicao.cargo_id %>
+	<%= f.input :uf_id, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select" }, selected: @coligacao.cargo_eleicao.uf_id %>
+	<%= f.input :municipio_id, include_blank: false, collection: @coligacao.cargo_eleicao.uf.municipios, label_method: lambda { |obj| obj.nome }, input_html: {onchange:"busca_partidos_disponiveis()", class: "municipio_select municipio_coligacao"}, selected: @coligacao.cargo_eleicao.municipio_id %>
+<% else %>
+	<%= f.input :cargo_id, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "seleciona_cargo()"} %>
+	<%= f.input :uf_id, include_blank: false, collection: Uf.all, label_method: lambda { |obj| obj.nome }, input_html: {onchange: "busca_municipios()", class: "uf_select" } %>
+	<%= f.input :municipio_id, include_blank: false, collection: Uf.first.municipios, label_method: lambda { |obj| obj.nome }, input_html: {onchange:"busca_partidos_disponiveis()", class: "municipio_select municipio_coligacao"} %>
+<% end %>
