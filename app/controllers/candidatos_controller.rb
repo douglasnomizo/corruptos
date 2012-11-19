@@ -38,10 +38,10 @@ class CandidatosController < ApplicationController
   def new
     @candidato = Candidato.new
     @candidato.build_candidatura
+    @candidato.build_eleitor
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @candidato }
+      format.html      
     end
   end
 
@@ -52,33 +52,45 @@ class CandidatosController < ApplicationController
 
   # POST /candidatos
   # POST /candidatos.json
-  def create
-    debugger
-    respond_to do |format|
-      ActiveRecord::Base.transaction do
-        @candidato = Candidato.new
-        @candidato.eleitor_id = params[:candidato][:eleitor][:id]
-        @candidato.nome_campanha = params[:candidato][:nome_campanha]
-        if @candidato.save
-          @candidatura = Candidatura.new
-          @candidatura.cargo_eleicao_id = cargo_eleicao.id
-          @candidatura.partido_id = params[:candidato][:candidatura][:partido_id]
-          @candidatura.codigo_candidato = params[:candidato][:candidatura][:codigo_candidato]
-          @candidatura.candidato_id = @candidato.id
+  def create    
+    completed = false
+    eleitor = Eleitor.find(params[:candidato][:eleitor_id])
+    cargo = Cargo.find(params[:candidato][:candidatura_attributes].delete :cargo_eleicao_id)
+    cpf = params[:candidato].delete :cpf
 
-          if @candidatura.save
-            format.html { redirect_to @candidato, notice: 'Candidato criado com sucesso.' }
-          else
-            puts @candidatura.errors.inspect
-            raise ActiveRecord::Rollback
-            format.html { render action: "new", notice: "Erro!" }          
-          end
-        else
-            puts @candidato.errors.inspect
-            raise ActiveRecord::Rollback
-            format.html { render action: "new", notice: "Erro!" }
+    if "Presidente".eql? cargo.nome
+      @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id is null and municipio_id is null", eleicao_atual.id, cargo.id])
+    elsif ["Governador", "Deputado Federal", "Deputado Estadual", "Senador"].include? cargo.nome 
+      @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ? and municipio_id is null", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.uf.id])
+    elsif ["Vereador", "Prefeito"].include? cargo.nome
+      @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.id])
+    end
+
+    params[:candidato][:candidatura_attributes][:cargo_eleicao_id] = @cargo_eleicao.id if @cargo_eleicao
+    candidatura_attributes = params[:candidato].delete :candidatura_attributes
+
+    Candidato.transaction do
+      @candidato = Candidato.new params[:candidato]
+      if @candidato.save
+        @candidato.build_candidatura candidatura_attributes
+        if @candidato.save
+          completed = true
+        else          
+          puts @candidato.candidatura.errors.inspect
+          raise ActiveRecord::Rollback          
         end
+      else
+        puts @candidato.errors.inspect
+        raise ActiveRecord::Rollback        
       end
+    end
+
+
+    if completed
+      redirect_to @candidato, notice: 'Candidato criado com sucesso.'
+    else
+      @candidato.cpf = cpf
+      render action: "new"
     end
   end
 

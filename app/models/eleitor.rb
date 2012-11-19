@@ -17,13 +17,13 @@ class Eleitor < ActiveRecord::Base
 
 
   def as_json(options={})
-    { :cpf => self.cpf, 
-      :data_nascimento => self.data_nascimento.strftime('%d/%m/%Y'), 
-      :endereco => self.endereco.descricao,
-      :nome => self.nome,
-      :nome_mae => self.nome_mae,
-      :rg => self.rg,
-      :id => self.id }
+    { cpf: self.cpf, 
+      data_nascimento: self.data_nascimento.strftime('%d/%m/%Y'), 
+      endereco: self.endereco.descricao,
+      nome: self.nome,
+      nome_mae: self.nome_mae,
+      rg: self.rg,
+      id: self.id }
   end
 
   private 

@@ -9,9 +9,8 @@
 <table class="table table-condensed table-striped">
   <tr>
     <th><%= sort_link @q, :nome, "Nome" %></th>
-    <th><%= sort_link @q, :nome_mae, "Nome da Mãe" %></th>
     <th><%= sort_link @q, :rg, "RG" %></th>
-    <th><%= sort_link @q, :data_nascimento, "Data de Nascimento" %></th>
+    <th><%= sort_link @q, :data_nascimento, "Nascimento" %></th>
     <th><%= sort_link @q, :cpf, "CPF" %></th>
     <th>Endereco</th>
     <th></th>
@@ -22,7 +21,6 @@
 <% @eleitors.each do |eleitor| %>
   <tr>
     <td><%= eleitor.nome %></td>
-    <td><%= eleitor.nome_mae %></td>
     <td><%= eleitor.rg %></td>
     <td><%= eleitor.data_nascimento.strftime('%d/%m/%Y') %></td>
     <td><%= eleitor.cpf %></td>

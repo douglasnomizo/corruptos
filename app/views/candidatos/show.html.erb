@@ -12,7 +12,7 @@
 
 <p>
   <b>Código do Candidato:</b>
-  <%= @candidato.candidaturas.first.codigo_candidato %>
+  <%= @candidato.candidatura.codigo_candidato %>
 </p>
 
 <p>
@@ -25,15 +25,19 @@
   <%= @candidato.candidatura.cargo_eleicao.cargo.nome %>
 </p>
 
-<p>
-  <b>Município:</b>
-  <%= @candidato.eleitor.endereco.municipio.nome %>
-</p>
+<% if @candidato.candidatura.cargo_eleicao.municipio %>
+  <p>
+    <b>Município:</b>
+    <%= @candidato.candidatura.cargo_eleicao.municipio.nome %>
+  </p>
+<% end %>
 
-<p>
-  <b>UF:</b>
-  <%= @candidato.eleitor.endereco.municipio.uf.nome %>
-</p>
+<% if @candidato.candidatura.cargo_eleicao.uf %>
+  <p>
+    <b>UF:</b>
+    <%= @candidato.candidatura.cargo_eleicao.uf.nome %>
+  </p>
+<% end %>
 
 <p>
   <b>CPF:</b>

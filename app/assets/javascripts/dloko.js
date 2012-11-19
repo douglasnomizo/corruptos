@@ -1,5 +1,5 @@
 function busca_eleitor_cpf() {
-	var input_cpf = $("#candidato_eleitor_cpf").val();
+	var input_cpf = $("#candidato_cpf").val();
 	$.get("/candidatos/carrega_dados/" + input_cpf, function(data) {
 		preenche_campos_eleitor(data);
   });
@@ -10,11 +10,11 @@ function preenche_campos_eleitor(data) {
     alert('Eleitor não encontrado!');
   } else {
     $("#candidato_eleitor_id").val(data.id);
-    $("#candidato_eleitor_nome").val(data.nome);
-    $("#candidato_eleitor_nome_mae").val(data.nome_mae);
-    $("#candidato_eleitor_rg").val(data.rg);
-    $("#candidato_eleitor_data_nascimento").val(data.data_nascimento);
-    $("#candidato_eleitor_endereco").val(data.endereco);
+    $("#candidato_eleitor_attributes_nome").val(data.nome);
+    $("#candidato_eleitor_attributes_nome_mae").val(data.nome_mae);
+    $("#candidato_eleitor_attributes_rg").val(data.rg);
+    $("#candidato_eleitor_attributes_data_nascimento").val(data.data_nascimento);
+    $("#candidato_eleitor_attributes_endereco").val(data.endereco);
   }
 }
 
@@ -105,6 +105,10 @@ function seleciona_cargo() {
     $(".municipio_select").prop('disabled', true).parent("div").parent("div").hide();
     break;
   case "Vereador":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
+    break;
+  case "Prefeito":
     $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
     $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
     break;

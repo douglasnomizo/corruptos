@@ -11,7 +11,8 @@ class Candidatura < ActiveRecord::Base
 
   validates_presence_of :candidato_id, :cargo_eleicao_id, :partido_id, :codigo_candidato
   validates_uniqueness_of :codigo_candidato, scope: :cargo_eleicao_id
-  
+  validates :codigo_candidato, numericality: { greater_than_or_equal_to: 0 }  
+  validates :codigo_candidato, length: {in: 3..7}
   validate :candidato_unico?
   validate :cargo_existe?
 
@@ -24,7 +25,7 @@ class Candidatura < ActiveRecord::Base
   end
 
   def cargo_existe?
-    cargo_existe = CargoEleicao.find(:first, conditions: ["cargo_eleicao_id = ?", self.cargo_eleicao_id])
-    errors.add(:cargo_eleicao_id, "Cargo inexistente para esta eleição em seu endereço")
+    cargo_existe = CargoEleicao.find(self.cargo_eleicao_id) if self.cargo_eleicao_id
+    errors.add(:cargo_eleicao_id, "Cargo inexistente para esta eleição em seu endereço") unless cargo_existe
   end
 end

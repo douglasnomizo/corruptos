@@ -1,9 +1,10 @@
 # encoding: utf-8
 class Candidato < ActiveRecord::Base
-  attr_accessible :nome_campanha, :eleitor, :partido, :candidatura
+  attr_accessible :nome_campanha, :eleitor_id, :partido, :candidatura_attributes
   belongs_to :eleitor
   has_one :candidatura
   has_one :partido, :through => :candidatura
+  attr_accessor :cpf, :eleitors
 
   accepts_nested_attributes_for :candidatura
   accepts_nested_attributes_for :eleitor

@@ -1,10 +1,10 @@
 <div class="form-inputs">	
 	<%= simple_form_for @candidato, url: :candidatos, html: {class: 'form-horizontal'}  do |c| %>
-		<% unless @candidato.errors[:base].empty? %>
-	    <div class="alert alert-error">
-	      <%= c.error :base %>
-	    </div>
-	  <% end %>
+	<% unless @candidato.errors[:base].empty? %>
+    <div class="alert alert-error">
+      <%= c.error :base %>
+    </div>
+  <% end %>
 
 
 		<%= c.simple_fields_for :eleitor do |ele| %>  
@@ -23,6 +23,12 @@
 	    <%= c.input :nome_campanha, label: "Nome de Campanha" %>
 	    
 	    <%= c.simple_fields_for :candidatura do |can| %>
+	    		<% unless can.errors[:base].empty? %>
+				    <div class="alert alert-error">
+				      <%= can.error :base %>
+				    </div>
+				  <% end %>
+
 	    	<%= can.input :partido_id, include_blank: false, collection: Partido.all, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.partido.id %>
 				<%= can.input :cargo_id, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.cargo_eleicao.cargo.id %>
 				<%= can.input :codigo_candidato, input_html: { value: @candidato.candidatura.codigo_candidato } %>
