@@ -8,7 +8,6 @@ class ColigacaosController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @coligacaos }
     end
   end
 
@@ -19,7 +18,6 @@ class ColigacaosController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @coligacao }
     end
   end
 
@@ -31,7 +29,6 @@ class ColigacaosController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @coligacao }
     end
   end
 
@@ -46,8 +43,7 @@ class ColigacaosController < ApplicationController
     Coligacao.transaction do
       coligacao_partido = params[:coligacao].delete :coligacao_partido
       cargo_eleicao = params[:coligacao].delete :cargo_eleicao
-      puts cargo_eleicao.inspect
-
+      
       if cargo_eleicao[:municipio_id]
         @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:municipio_id]])
       elsif cargo_eleicao[:uf_id]
@@ -57,8 +53,7 @@ class ColigacaosController < ApplicationController
       end
       
       @coligacao = Coligacao.new(params[:coligacao])
-      puts @coligacao.partidos.size
-
+      
       if @cargo_eleicao
         @coligacao.cargo_eleicao = @cargo_eleicao
       end
@@ -75,15 +70,29 @@ class ColigacaosController < ApplicationController
   # PUT /coligacaos/1
   # PUT /coligacaos/1.json
   def update
+    coligacao_partido = params[:coligacao].delete :coligacao_partido
+    cargo_eleicao = params[:coligacao].delete :cargo_eleicao
+    
+    if cargo_eleicao[:municipio_id]
+      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:municipio_id]])
+    elsif cargo_eleicao[:uf_id]
+      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])        
+    else
+      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao  
+    end
+
     @coligacao = Coligacao.find(params[:id])
 
-    respond_to do |format|
+    if @cargo_eleicao
+      @coligacao.cargo_eleicao = @cargo_eleicao
+    end
+
+    Coligacao.transaction do
       if @coligacao.update_attributes(params[:coligacao])
-        format.html { redirect_to @coligacao, notice: 'Coligacao was successfully updated.' }
-        format.json { head :no_content }
+        redirect_to @coligacao, notice: 'Coligção atualizada com sucesso!'
       else
-        format.html { render action: "edit" }
-        format.json { render json: @coligacao.errors, status: :unprocessable_entity }
+        ActiveRecord::Rollback
+        render action: "edit"
       end
     end
   end
@@ -94,9 +103,6 @@ class ColigacaosController < ApplicationController
     @coligacao = Coligacao.find(params[:id])
     @coligacao.destroy
 
-    respond_to do |format|
-      format.html { redirect_to coligacaos_url }
-      format.json { head :no_content }
-    end
+    redirect_to coligacaos_url    
   end
 end
