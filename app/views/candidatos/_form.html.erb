@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <h4>Dados do Eleitor</h4>		    
+  <h4>Dados do Eleitor</h4>
   <br />
 	<%= c.simple_fields_for :eleitor do |ele| %>
 		<%= c.input :cpf, label: "CPF", wrapper: :append do %>
 			<%= c.input_field :cpf, value: @candidato.eleitor.cpf %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></span>
-		<% end %>	
+		<% end %>
 	  <%= c.input :eleitor_id, as: :hidden %>
 		<%= ele.input :nome, required: false, disabled: true %>
 		<%= ele.input :nome_mae, required: false, disabled: true %>
@@ -27,10 +27,10 @@
 		<h4>Dados do Candidato</h4>
 		<br />
     <%= c.input :nome_campanha, label: "Nome de Campanha", input_html: {style: 'width: 335px'} %>
-    
-    <%= c.simple_fields_for :candidatura do |can| %>    	
-    	<%= can.input :partido_id, include_blank: false, collection: Partido.all, label_method: lambda { |obj| obj.nome }, input_html: {style: 'width: 350px'} %>    	
-  		
+
+    <%= c.simple_fields_for :candidatura do |can| %>
+    	<%= can.input :partido_id, include_blank: false, collection: Partido.all, label_method: lambda { |obj| obj.nome }, input_html: {style: 'width: 350px'} %>
+
   		<% if @candidato.candidatura.cargo_eleicao %>
   			<%= can.association :cargo_eleicao, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.cargo_eleicao.cargo.id %>
 			<% else %>
@@ -48,4 +48,4 @@
   $(document).ready(function() {
     busca_eleitor_cpf();
   });
-<% end %> 
+<% end %>

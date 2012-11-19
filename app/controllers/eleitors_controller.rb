@@ -1,5 +1,5 @@
 class EleitorsController < ApplicationController
-  
+
   # GET /eleitors
   # GET /eleitors.json
   def index
@@ -46,9 +46,9 @@ class EleitorsController < ApplicationController
     endereco_attributes = params[:eleitor][:endereco_attributes]
     Eleitor.transaction do
       @endereco = Endereco.new endereco_attributes
-      params[:eleitor].delete :endereco      
+      params[:eleitor].delete :endereco
 
-      if @endereco.save        
+      if @endereco.save
         @eleitor = Eleitor.new params[:eleitor]
         @eleitor.endereco_id = @endereco.id
 
@@ -72,11 +72,11 @@ class EleitorsController < ApplicationController
       titulo_errors = @eleitor.titulo.errors if @eleitor.titulo
       endereco_errors = @endereco.errors
       eleitor_errors = @eleitor.errors
-      
+
       @eleitor = Eleitor.new(params[:eleitor])
-      
+
       if titulo_errors
-        @eleitor.build_titulo titulo_attributes        
+        @eleitor.build_titulo titulo_attributes
         if titulo_errors
           titulo_errors.messages.each do |k,v|
             @eleitor.titulo.errors.add(k, v.first)
@@ -87,7 +87,7 @@ class EleitorsController < ApplicationController
       end
 
       if endereco_errors
-        @eleitor.build_endereco endereco_attributes        
+        @eleitor.build_endereco endereco_attributes
         if endereco_errors
           endereco_errors.messages.each do |k,v|
             @eleitor.endereco.errors.add(k, v.first)
@@ -103,9 +103,9 @@ class EleitorsController < ApplicationController
         end
       end
 
-      render action: "new"        
-    end  
-    
+      render action: "new"
+    end
+
   end
 
   # PUT /eleitors/1
@@ -114,12 +114,11 @@ class EleitorsController < ApplicationController
     completed = false
     params[:eleitor][:endereco_attributes].delete :municipio
     params[:eleitor][:titulo_attributes].delete :secao
+    @eleitor = Eleitor.find(params[:id])
 
     Eleitor.transaction do
-      @eleitor = Eleitor.find(params[:id])
-      
       if @eleitor.endereco.update_attributes(params[:eleitor][:endereco_attributes])
-        params[:eleitor].delete :endereco_attributes              
+        params[:eleitor].delete :endereco_attributes
         titulo = params[:eleitor].delete :titulo_attributes
         if @eleitor.build_titulo titulo
           if @eleitor.update_attributes params[:eleitor]
@@ -140,7 +139,7 @@ class EleitorsController < ApplicationController
         end
         render action: "edit"
         raise ActiveRecord::Rollback
-      end  
+      end
     end
   end
 

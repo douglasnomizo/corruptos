@@ -11,16 +11,16 @@ class Candidatura < ActiveRecord::Base
 
   validates_presence_of :candidato_id, :cargo_eleicao_id, :partido_id, :codigo_candidato
   validates_uniqueness_of :codigo_candidato, scope: :cargo_eleicao_id
-  validates :codigo_candidato, numericality: { greater_than_or_equal_to: 0 }  
+  validates :codigo_candidato, numericality: { greater_than_or_equal_to: 0 }
   validates :codigo_candidato, length: {in: 3..7}
   validate :candidato_unico?
-  validate :cargo_existe?
+  #validate :cargo_existe?
 
   private
 
   def candidato_unico?
     cargos_ids = Eleicao.find(:first, conditions: "status = true").cargo_eleicaos.map(&:id)
-   	candidatura = Candidatura.find(:first, conditions: ["candidato_id = ? and cargo_eleicao_id in (?)", self.candidato_id, cargos_ids])
+   	candidatura = Candidatura.find(:first, conditions: ["candidato_id = ? and cargo_eleicao_id in (?) and id <> ?", self.candidato_id, cargos_ids, self.id])
    	errors.add(:candidato_id, "Candidato já cadastrado para esta eleição!") if candidatura
   end
 
