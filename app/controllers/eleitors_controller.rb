@@ -73,7 +73,7 @@ class EleitorsController < ApplicationController
       endereco_errors = @endereco.errors
       eleitor_errors = @eleitor.errors
 
-      @eleitor = Eleitor.new(params[:eleitor])
+      @eleitor = Eleitor.new params[:eleitor]
 
       if titulo_errors
         @eleitor.build_titulo titulo_attributes

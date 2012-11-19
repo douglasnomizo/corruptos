@@ -57,6 +57,7 @@ class CandidatosController < ApplicationController
     eleitor = Eleitor.find(params[:candidato][:eleitor_id])
     cargo = Cargo.find(params[:candidato][:candidatura_attributes].delete :cargo_eleicao_id)
     cpf = params[:candidato].delete :cpf
+    params[:candidato].delete :eleitor_attributes
 
     if "Presidente".eql? cargo.nome
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id is null and municipio_id is null", eleicao_atual.id, cargo.id])
@@ -89,7 +90,25 @@ class CandidatosController < ApplicationController
     if completed
       redirect_to @candidato, notice: 'Candidato criado com sucesso.'
     else
+      candidato_errors = @candidato.errors
+      candidatura_errors = @candidato.candidatura.errors if @candidato.candidatura
+
+      @candidato = Candidato.new params[:candidato]
+      @candidato.build_candidatura candidatura_attributes
       @candidato.cpf = cpf
+
+      if candidato_errors
+        candidato_errors.messages.each do |k,v|
+          @candidato.errors.add(k, v.first)
+        end
+      end
+
+      if candidatura_errors
+        candidatura_errors.messages.each do |k,v|
+          @candidato.candidatura.errors.add(k, v.first)
+        end
+      end
+
       render action: "new"
     end
   end

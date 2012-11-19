@@ -2,7 +2,7 @@
 
 <%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
   <%= f.text_field :eleitor_nome_cont, :placeholder => "Nome do Eleitor" %> <strong>ou</strong>
-  <%= f.text_field :cpf_eq, :placeholder => "Número do CPF" %>
+  <%= f.text_field :eleitor_cpf_eq, :placeholder => "Número do CPF" %>
   <%= f.submit "Buscar", :class => "btn btn-success" %>
 <% end %>
 
