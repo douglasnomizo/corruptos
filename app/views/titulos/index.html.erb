@@ -1,5 +1,11 @@
 <div class="page-header"><h1>Títulos</h1></div>
 
+<%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
+  <%= f.text_field :eleitor_nome_cont, :placeholder => "Nome do Eleitor" %> <strong>ou</strong>
+  <%= f.text_field :cpf_eq, :placeholder => "Número do CPF" %>
+  <%= f.submit "Buscar", :class => "btn btn-success" %>
+<% end %>
+
 <table class="table table-condensed table-striped">
   <tr>
     <th>Eleitor</th>
@@ -25,6 +31,8 @@
 <% end %>
 </table>
 
-<br />
+<%= will_paginate @titulos %>
+
+<br /><br />
 
 <%= link_to 'Novo Titulo', new_titulo_path, :class => "btn btn-info btn-small" %>

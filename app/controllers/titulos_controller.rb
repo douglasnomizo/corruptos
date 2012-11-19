@@ -2,7 +2,8 @@ class TitulosController < ApplicationController
   # GET /titulos
   # GET /titulos.json
   def index
-    @titulos = Titulo.find(:all, conditions: "status is true")
+    @q = Titulo.paginate(page: params[:page]).search(params[:q])
+    @titulos = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

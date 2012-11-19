@@ -8,10 +8,10 @@
 
 <table class="table table-condensed table-striped">
   <tr>
-    <th><%= sort_link @q, :nome, "Nome" %></th>
-    <th><%= sort_link @q, :rg, "RG" %></th>
-    <th><%= sort_link @q, :data_nascimento, "Nascimento" %></th>
-    <th><%= sort_link @q, :cpf, "CPF" %></th>
+    <th>Nome</th>
+    <th>RG</th>
+    <th>Nascimento</th>
+    <th>CPF</th>
     <th>Endereco</th>
     <th></th>
     <th></th>
@@ -31,6 +31,8 @@
 <% end %>
 </table>
 
-<br />
+<%= will_paginate @eleitors %>
+
+<br /><br />
 
 <%= link_to 'Novo Eleitor', new_eleitor_path, :class => "btn btn-info btn-small" %>

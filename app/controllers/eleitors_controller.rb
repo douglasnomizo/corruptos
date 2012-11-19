@@ -3,7 +3,7 @@ class EleitorsController < ApplicationController
   # GET /eleitors
   # GET /eleitors.json
   def index
-    @q = Eleitor.search(params[:q])
+    @q = Eleitor.paginate(page: params[:page]).search(params[:q])
     @eleitors = @q.result(:distinct => true)
 
     respond_to do |format|

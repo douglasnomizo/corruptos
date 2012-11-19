@@ -1,4 +1,5 @@
 class Secao < ActiveRecord::Base
+  has_many :votos_urnas
   belongs_to :zona
   attr_accessible :limite_eleitores, :zona_id, :codigo
 

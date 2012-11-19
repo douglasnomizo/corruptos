@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119123230) do
+ActiveRecord::Schema.define(:version => 20121119195257) do
 
   create_table "candidatos", :force => true do |t|
     t.datetime "created_at",    :null => false
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20121119123230) do
     t.integer  "secao_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "codigo"
   end
 
   add_index "titulos", ["eleitor_id"], :name => "index_titulos_on_eleitor_id"

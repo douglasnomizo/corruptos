@@ -1,5 +1,5 @@
 class Titulo < ActiveRecord::Base
-  attr_accessible :data_emissao, :juiz_eleitoral, :eleitor_id, :secao_id, :status
+  attr_accessible :data_emissao, :juiz_eleitoral, :eleitor_id, :secao_id, :status, :codigo
 
   belongs_to :eleitor
   belongs_to :secao

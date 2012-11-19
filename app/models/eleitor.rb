@@ -1,16 +1,16 @@
 # encoding: utf-8
 class Eleitor < ActiveRecord::Base
-  attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_mae, :titulo_attributes
+attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_mae, :titulo_attributes, :endereco_id
   has_one :titulo
   has_one :candidato
   belongs_to :endereco
 
   accepts_nested_attributes_for :titulo, :endereco
-  
+
   validates_presence_of :data_nascimento, :nome, :nome_mae, :rg, :endereco_id, message: "Campo não pode ser em branco"
   validates_uniqueness_of :cpf, :rg
   validates :rg, length: {in: 5..20}
-  validates :cpf, cpf: true
+  #validates :cpf, cpf: true
   validate :cpf, numericality: true
   validate :valid_date?
   before_save :limpa_cpf
