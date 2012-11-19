@@ -4,7 +4,8 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos
   # GET /coligacaos.json
   def index
-    @coligacoes = Coligacao.all
+    @q = Coligacao.search(params[:q])
+    @coligacaos = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

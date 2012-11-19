@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102132928) do
+ActiveRecord::Schema.define(:version => 20121119123230) do
 
   create_table "candidatos", :force => true do |t|
     t.datetime "created_at",    :null => false
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20121102132928) do
     t.boolean  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.date     "data"
   end
 
   create_table "eleitors", :force => true do |t|

@@ -1,9 +1,14 @@
 <div class="page-header"><h1>Coligações</h1></div>
 
+<%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
+  <%= f.text_field :nome_cont, :placeholder => "Nome da Coligação" %>
+  <%= f.submit "Buscar", :class => "btn btn-success" %>
+<% end %>
+
 <table class="table table-condensed table-striped">
   <tr>
-    <th>Cargo eleicao</th>
-    <th>Nome</th>
+    <th>Cargo</th>
+    <th><%= sort_link @q, :nome, "Nome" %></th>
     <th>Uf</th>
     <th>Município</th>
     <th></th>
@@ -25,4 +30,4 @@
 
 <br />
 
-<%= link_to 'Nova Coligacao', new_coligacao_path, :class => "btn btn-small btn-info" %>
+<%= link_to 'Nova Coligação', new_coligacao_path, :class => "btn btn-small btn-info" %>

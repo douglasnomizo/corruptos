@@ -122,7 +122,7 @@ class EleitorsController < ApplicationController
         params[:eleitor].delete :endereco_attributes              
         titulo = params[:eleitor].delete :titulo_attributes
         if @eleitor.build_titulo titulo
-          if @eleitor.save
+          if @eleitor.update_attributes params[:eleitor]
             completed = true
           end
         end
