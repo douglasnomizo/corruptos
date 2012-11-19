@@ -82,6 +82,7 @@ class ColigacaosController < ApplicationController
     end
 
     @coligacao = Coligacao.find(params[:id])
+    @coligacao.cargo_eleicao = nil
 
     if @cargo_eleicao
       @coligacao.cargo_eleicao = @cargo_eleicao
