@@ -11,7 +11,6 @@ class Coligacao < ActiveRecord::Base
   end
   validates :nome, presence: true, length: {in: 5..55}
   validates_uniqueness_of :nome
-  #validates_uniqueness_of :cargo_eleicao_id, scope: :partidos, message: "partido já coligado para este cargo!"
   validate :valida_qtd_partidos
 
   def valida_qtd_partidos

@@ -9,6 +9,7 @@
 <table class="table table-condensed table-striped">
   <tr>
     <th>Nome</th>
+    <th>Mãe</th>
     <th>RG</th>
     <th>Nascimento</th>
     <th>CPF</th>
@@ -21,6 +22,7 @@
 <% @eleitors.each do |eleitor| %>
   <tr>
     <td><%= eleitor.nome %></td>
+    <td><%= eleitor.nome_mae %></td>
     <td><%= eleitor.rg %></td>
     <td><%= eleitor.data_nascimento.strftime('%d/%m/%Y') %></td>
     <td><%= eleitor.cpf %></td>

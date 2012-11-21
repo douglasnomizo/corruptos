@@ -30,6 +30,31 @@
   <%= @eleitor.endereco.descricao %>
 </p>
 
+<p>
+  <b>Número do Título:</b>
+  <%= @eleitor.titulo.codigo %>
+</p>
+
+<p>
+  <b>Zona:</b>
+  <%= @eleitor.titulo.secao.zona.descricao %>
+</p>
+
+<p>
+  <b>Seção:</b>
+  <%= @eleitor.titulo.secao.codigo %>
+</p>
+
+<p>
+  <b>Data de Emissão:</b>
+  <%= @eleitor.titulo.data_emissao.strftime('%d/%m/%Y') %>
+</p>
+
+<p>
+  <b>Juiz Eleitoral:</b>
+  <%= @eleitor.titulo.juiz_eleitoral %>
+</p>
+
 
 <%= link_to content_tag(:span, "Alterar"), edit_eleitor_path(@eleitor) %> |
 <%= link_to content_tag(:span, "Voltar"), eleitors_path %>
