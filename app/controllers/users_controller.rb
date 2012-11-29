@@ -10,17 +10,17 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-  
+
   def update
     #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user], :as => :admin)
       redirect_to users_path, :notice => "Usuário Atualizado."
     else
-      redirect_to users_path, :alert => "Não conseguiu atualizar usuário."
+      redirect_zto users_path, :alert => "Não conseguiu atualizar usuário."
     end
   end
-    
+
   def destroy
     #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     user = User.find(params[:id])

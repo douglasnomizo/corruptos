@@ -63,7 +63,7 @@ class CandidatosController < ApplicationController
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id is null and municipio_id is null", eleicao_atual.id, cargo.id])
     elsif ["Governador", "Deputado Federal", "Deputado Estadual", "Senador"].include? cargo.nome
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ? and municipio_id is null", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.uf.id])
-    elsif ["Vereador", "Prefeito"].include? cargo.nome
+    elsif ["Vereador", "Prefeito", "Vice-Prefeito"].include? cargo.nome
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.id])
     end
 
@@ -127,7 +127,7 @@ class CandidatosController < ApplicationController
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id is null and municipio_id is null", eleicao_atual.id, cargo.id])
     elsif ["Governador", "Deputado Federal", "Deputado Estadual", "Senador"].include? cargo.nome
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ? and municipio_id is null", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.uf.id])
-    elsif ["Vereador", "Prefeito"].include? cargo.nome
+    elsif ["Vereador", "Prefeito", "Vice-Prefeito"].include? cargo.nome
       @cargo_eleicao = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", eleicao_atual.id, cargo.id, eleitor.endereco.municipio.id])
     end
 

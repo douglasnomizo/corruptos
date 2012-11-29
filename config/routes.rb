@@ -1,4 +1,13 @@
 Corruptos::Application.routes.draw do
+  get "relatorios/candidato"
+
+  get "relatorios/zona_secao"
+
+  get "relatorios/uf_municipio"
+
+  get "relatorios/index"
+  match 'relatorios', to: 'relatorios#index'
+
   resources :votos_urnas
 
   resources :candidaturas
@@ -10,14 +19,14 @@ Corruptos::Application.routes.draw do
   resources :cargo_eleicaos
 
   resources :partidos
-  match 'partidos/busca_partidos/', :to => 'partidos#busca_partidos'
+  match 'partidos/busca_partidos/', to: 'partidos#busca_partidos'
 
   resources :partidos do
     collection { post :search, to: 'partidos#index' }
   end
 
   resources :candidatos
-  match 'candidatos/carrega_dados/:cpf', :to => 'candidatos#carrega_dados'
+  match 'candidatos/carrega_dados/:cpf', to: 'candidatos#carrega_dados'
 
   resources :cargos
 
@@ -26,24 +35,24 @@ Corruptos::Application.routes.draw do
   resources :secaos
 
   resources :zonas
-  match 'zonas/busca_secoes/:id', :to => 'zonas#busca_secoes'
+  match 'zonas/busca_secoes/:id', to: 'zonas#busca_secoes'
 
   resources :titulos
 
   resources :eleitors
 
   resources :enderecos
-  match 'enderecos/busca_cep/:cep', :to => 'enderecos#busca_cep'
+  match 'enderecos/busca_cep/:cep', to: 'enderecos#busca_cep'
 
   resources :municipios
 
   resources :ufs
-  match 'ufs/busca_municipios/:uf', :to => 'ufs#busca_municipios'
+  match 'ufs/busca_municipios/:uf', to: 'ufs#busca_municipios'
 
   authenticated :user do
-    root :to => 'home#index'
+    root to: 'home#index'
   end
-  root :to => "home#index"
+  root to: "home#index"
   devise_for :users
   resources :users
 end

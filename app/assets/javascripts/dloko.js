@@ -112,6 +112,10 @@ function seleciona_cargo() {
     $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
     $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
     break;
+  case "Vice-Prefeito":
+    $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
+    $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();
+    break;
   default:
     $(".uf_select").prop('disabled', false).parent("div").parent("div").show();
     $(".municipio_select").prop('disabled', false).parent("div").parent("div").show();

@@ -6,6 +6,7 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Corruptos" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %> 
+    <%= javascript_include_tag 'highcharts' %> <!--[if IE]> <%= javascript_include_tag 'excanvas.compiled' %> <![endif]-->
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
