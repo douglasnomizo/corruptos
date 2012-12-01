@@ -5731,7 +5731,7 @@ puts 'CRIANDO ELEICAO E CARGOS DA ELEICAO ATUAL'
 	Eleicao.create(ano: 2012, status: true)
 	cargos = Cargo.all
 	eleicao = Eleicao.find(:first, conditions: "status = true")
-	ufs = Uf.all
+	ufs = Uf.where(sigla: 'GO')
 
 	cargos.each do |cargo|
 		if cargo.nome.eql? "Prefeito"
@@ -5782,51 +5782,52 @@ puts 'CRIANDO ZONAS E SEÇÕES'
 		end
 	end
 
+puts "CRIANDO ELEITORES CANDIDATOS"
 
-puts "CRIANDO ELEITORES E TITULOS ESPECIFICOS"
+	n = 1
+	qtd_candidatos = ["Prefeito", "Prefeito", "Prefeito", "Vice-Prefeito", "Vice-Prefeito", "Vereador", "Vereador", "Vereador"]
+	ufs.each do |uf|
+		uf.municipios.each do |m|
+			qtd_candidatos.each do |cargo|
+				nome = "Eleitor Candidato " + n.to_s
+				mae = "Mamae " + n.to_s
+				cpf = 10_000_000_000 + rand(100_000_000_000)
+				nascimento = rand(Date.new(1930)..Date.new(1995))
+				rg = 10_000 + rand(100_000_000)
 
-	["Cicely Calhoon", "Kathern Thurlow", "Jona Gelinas", "Emilee Phillippe", "Emmie Kershaw", "Christa Starkey", "Charley Broaden", "Ida Malec", "Karon Bartelt", "Clarisa Faria", "Angelina Canada", "Monique Enoch", "Easter Kimberlin", "Karole Furby", "Rosie Lesh", "Boyce Markovich", "Hedy Lamore", "Theron Bakos", "Nia Greenough", "Carita Hosack", "Mao Juarez", "Carley Resnick", "Mercedes Bulter", "Pierre Mudd", "Neville Zeiger", "Leda Marinello", "Launa Maravilla", "Ed Urias", "Edris Imes", "Faith Vines", "Kira Lopinto", "Alda Lemoine", "Randy Friesen", "Georgeanna Muntz", "Nam Sleeper", "Alysa Prasad", "Fermin Pires", "Gabriela Condello", "Claudia Steidl", "Lauretta Parrett", "Clemencia Stradley", "Latanya Petrick", "Gertude Kirsch", "Dawn Kolesar", "Elliott Tea", "Lizzette Dodson", "Billie Cottrill", "Debera Pontious", "Marquitta Bergey", "Owen Platero", "Jarrod Kirch", "Danika Jarnagin", "Josefa Maize", "Milan Guay", "Albertine Duren", "Mitchell Holley", "Milford Abasta", "Raphael Dillow", "Candance Gannaway", "Mamie Mcclay", "Gilda Jarosz", "Kenyatta Ellis", "Vaughn Hovey", "Shara Blahnik", "Idella Napoli", "Starla Mortimer", "Brooke Ranck", "Catherina Steward", "Indira Cudd", "Krishna Glenn", "Ashanti Mcgough", "Lecia Hatter", "Thalia Aziz", "Huey Paula", "Merrilee Rosso", "Teresita Depuy", "Sylvester Reuben", "Tisha Pursley", "Kent Schneiderman", "Marlene Mclauchlin", "Lessie Hollins", "Classie Winkle", "Kennith Westfall", "Hertha Bartle", "Michal Currie", "Tiffanie Hardee", "Del Moring", "Mardell Bevilacqua", "Misti Bartlow", "Georgianne Strouse", "Billy Alanis", "Claretha Mccaslin", "Mindy Bardsley", "Yessenia Gallogly", "Collin Cree", "Jesus Harrow", "Gricelda Beiler", "Alphonso Abdulla", "Norine Joynes", "Althea Stangle", "Ahmad Cascio", "Janene Gamon", "Rodrick Falgoust", "Alma Slama", "Gabriele Clark", "Veronica Lathem", "Jim Geib", "Lucius Mota", "Alla Burkart", "Ngoc Varnado", "Cyndy Aiken", "Daphine Goudeau", "Gertha Eatman", "Aja Heinecke", "Romaine Feltner", "Elza Polzin", "Shasta Duhn", "Carleen Honeycutt", "Maude Ohalloran", "Tajuana Craney", "Emmaline Streiff", "Maryam Word", "Opal Dalpiaz", "Irma Prettyman", "Julene Dunkelberger", "Manuela Snoddy", "Mirta Stephan", "Tyrone Cavanaugh", "Magda Flora", "Yasuko Stauber", "Penelope Hansel", "Clifford Schranz", "Latrina Feldt", "Fiona Krach", "Shanell Pesce", "Kyla Britain", "Shizue Lafontant", "Madge Heitman", "Catarina Brugnoli", "Kaitlyn Brite", "Marsha Tatman", "Porsha Archambeault", "Terrence Dillow", "Leonida Hori", "Jeanine Bufkin", "Velva Rocker", "Rhea Chappel", "Nelly Withers", "Reggie Kahler", "Lashawna Henriksen", "Trinidad Palmore", "Brendon Dumlao", "Emerson Mehl", "Rueben Welker", "Roscoe Chess", "Maximo Antos", "Desmond Reagle", "Roy Vital", "Marco Defelice", "Eloy Spitz", "Carlos Morrison", "Rich Sechrest", "Darrell Mcgrath", "Mary Mastro", "Malcom Garris", "Bernie Lebron", "Faustino Hardwick", "Roosevelt Franceschini", "Monty Pettus", "Mack Wada", "Garfield Dalby", "Tanner Fogel", "Hans Brockwell", "Ted Gregori", "Howard Porcelli", "Garrett Neuberger", "Felipe Hoyos", "Wilbert Ferrin", "Benedict Neira", "Major Bregman", "Mitchel Zahradnik", "Wes Prange", "Clyde Schrum", "Elden Leister", "Cole Rhem", "Sanford Vetter", "Renato Dankert", "Ismael Villa", "Rodger Weinberg", "Broderick Weldy", "Joel Roderick", "Columbus Klenk", "Nathan Westhoff", "Quincy Propes", "Jeremy Hatfield", "Albert Schmidt", "Luigi Poppell", "Sang Romero", "Berry Capel", "Randy Badeaux", "Josphine Welty", "Marisol Mcphillips", "Corey Tom", "Elizabet Cerna", "Belkis Reveles", "Liana Bahe", "Kennith Linney", "Versie Sakata", "Krystyna Dall", "Efren Fillman", "Velva Montenegro", "Deon Seabaugh", "Joel Cote", "Felipe Beck", "Dario Sprankle", "Ira Lanza", "Corinne Chipman", "Latoya Farver", "Retha Lamarr", "Cleta Abrego", "Virgie Vanhook", "Santiago Bly", "Felica Engstrom", "Kitty Kays", "Rick Ary", "Geri Peach", "Kandis Isabel", "Danette Kite", "Ina Beltran", "Zane Mcnabb", "Tonita Poblete", "Charita Mascarenas", "Misti Sebring", "Shizue Burnes", "Kathy Kenny", "Camelia Brindle", "Margarette Kulig", "Gaston Sipes", "Claudio Bardin", "Delmer Manfre", "Millard Isom", "Thora Kaczynski", "Dorine Curro", "Ashely Nish", "Oralia Vella", "Kalyn Jan", "Sanjuanita Viloria", "Alisia Newport", "Blossom Soo", "Cyril Liedtke", "Emmanuel Tauber", "Zack Creed", "Mitchel Fausto", "Lisette Couts", "Hortense Bumpers", "Margarito Hardegree", "Magan Degregorio", "Armida Hwang", "Shelia Barbeau", "Kyle Trawick", "Rikki Alpaugh", "Taneka Raso", "Hettie Sauls", "Mario Beres", "Broderick Julio", "Cristine Wolverton", "Jinny Sinha", "Jillian Setton", "Ernie Agbayani", "Briana Giron", "Noah Feemster", "Liliana Mitra", "Jamar Mcelveen", "Danny Eynon", "Kasha Delosantos", "Logan Merrigan", "Easter Blewett", "Vikki Ayars", "Jeri Adame", "Ping Weinstock", "Miranda Boner", "Daryl Dines", "Ella Vert", "Shirlee Bjorklund", "Glenda Beatrice", "Lai Towne", "Mittie Gilder", "Marlyn Anders", "Sarina Blystone", "Mariko Poland", "Alana Blakley", "Rupert Beland", "William Tsui", "Romana Addis", "Colin Tague", "Cyndy Jaffee", "Regine Winchenbach", "Latashia Sheedy", "Shakira Calabrese", "Irwin Swim", "Angelika Lachowicz", "Keneth Fehrenbach", "Lavonia Colclough", "Julissa Chaput", "Lanita Jesse", "Wilson Wishon", "Georgine Roper", "Cortez Dunbar", "Marylin Boomhower", "Clifford Dozal", "Leeanne Harlow", "Daisy Courtois", "Adella Mannings", "Creola Bentley", "Wendell Reisner", "Chong Son", "Gisele Foshee", "Moises Nelms", "Eladia Isaacson", "Deloris Haden", "Bethanie Gowdy", "India Edgecomb", "Benjamin Hamiter", "Miranda Cora", "Krissy Turck", "Marisela Cosme", "Myrtis Xu", "Carlo Fahie", "Joni Brimmer", "Annie Yarrington", "Gail Wilken", "Maya Coate", "Lakia Turcios", "Audrea Leer", "Evelina Averitt", "Chase Mcsween", "Kyong Kellog", "Stefan Viau", "Tran Lebron", "Shenita Clingman", "Josefa Uplinger", "Dinah Thorton", "Enedina Kroenke", "Kena Big", "Joycelyn Corker", "Hosea Bayne", "Emely Jennison", "Lezlie Lamer", "Patrice Stacy", "Yuri Shanley", "Adriana Lima", "Alessandra Ambrosio", "Ana Beatriz Barros", "Ana Carolina Reston", "Ana Claudia Michels", "Ana Hickmann", "Bruna Erhardt", "Bruna Tenório", "Camilla Finn", "Caroline Ribeiro", "Caroline Trentini", "Cintia Dicker", "Daniella Cicarelli", "Daniella Sarahyba", "Emanuela de Paula", "Fabiana Semprebom", "Fernanda Lessa", "Fernanda Motta", "Fernanda Tavares", "Flavia de Oliveira", "Gianne Albertoni", "Gisele Bündchen", "Isabeli Fontana", "Izabel Goulart", "Jeisa Chiminazzo", "Jéssica Pauletto", "Juliana Imai", "Juliana Martins", "Livia Figueiredo", "Letícia Birkheuer", "Luciana Curtis", "Luciana Gimenez", "Luíza Brunet", "Marcelle Bittar", "Mariana Weickert", "Michelle Alves", "Raica Oliveira", "Raquel Zimmermann", "Shirley Mallmann", "Yasmin Brunet", "Anderson Silva", "Bruno Santos", "Evandro Soldati", "Miro Moreira", "Rafael Verga", "Romulo Pires", "Abílio Diniz", "Aloysio de Andrade Faria", "Andre Medici", "Antônio Ermírio de Moraes", "Armínio Fraga", "Assis Chateaubriand", "Bob Falkenburg", "Carlos Ghosn", "Daniel Dantas", "Edmond Safra", "Eike Batista", "Francesco Matarazzo", "Germán Efromovich", "Gustavo Franco", "Henrique Meirelles", "João Carlos di Genio", "Jorge Paulo Lemann", "José Alencar", "José Mentor Guilherme de Mello", "Julio Bozano", "Norberto Odebrecht", "Pedro Moreira Salles", "Ricardo Semler", "Roberto Marinho", "Samuel Klein", "Victor Civita", "Walter Moreira Salles"].each do |nome|
-		mae = "Mamae do(a) " + nome
-		cpf = 10_000_000_000 + rand(100_000_000_000)
-		nascimento = rand(Date.new(1930)..Date.new(1995))
-		rg = 10_000 + rand(100_000_000)
+				endereco = Endereco.offset(rand(Endereco.count)).first
+				e = Eleitor.new(nome: nome, nome_mae: mae, rg: rg, data_nascimento: nascimento, cpf: cpf.to_s, endereco_id: endereco.id)
+				s = Secao.offset(rand(Secao.count)).first
 
-		endereco = Endereco.offset(rand(Endereco.count)).first
-		e = Eleitor.new(nome: nome, nome_mae: mae, rg: rg, data_nascimento: nascimento, cpf: cpf.to_s, endereco_id: endereco.id)
-		s = Secao.offset(rand(Secao.count)).first
+				juiz = "Juiz " + (1+rand(100)).to_s
+				emissao = rand(Date.new(1995)..Date.new(2011))
+				cod = 100_000_000_000 + rand(1_000_000_000_000)
 
-		juiz = "Juiz " + (1+rand(100)).to_s
-		emissao = rand(Date.new(1995)..Date.new(2011))
-		cod = 100_000_000_000 + rand(1_000_000_000_000)
+				Eleitor.transaction do
+					if e.save
+						t = Titulo.new(data_emissao: emissao, juiz_eleitoral: juiz, status: true, eleitor_id: e.id, secao_id: s.id, codigo: cod)
+						if t.save
+							c = Candidato.new(nome_campanha: e.nome, eleitor_id: e.id)
 
-		Eleitor.transaction do
-			if e.save
-				t = Titulo.new(data_emissao: emissao, juiz_eleitoral: juiz, status: true, eleitor_id: e.id, secao_id: s.id, codigo: cod)
-				if t.save
-				else
-					ActiveRecord::Rollback
+							if c.save
+								cargo_id = Cargo.find(:first, conditions: ["nome = ?", cargo]).id
+								ce = CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", eleicao.id, cargo_id, m.id])
+								par = Partido.offset(rand(Partido.count)).first
+								cod_can = 10_000 + rand(10_000_000)
+
+								can = Candidatura.new(candidato_id: c.id, cargo_eleicao_id: ce.id, partido_id: par, codigo_candidato: cod_can)
+								if can.save
+								else
+									ActiveRecord::Rollback
+								end
+							end
+						else
+							ActiveRecord::Rollback
+						end
+					end
 				end
-			end
-		end
-	end
 
-puts "CRIANDO CANDIDATOS E CANDIDATURAS"
-
-	Eleitor.all.each do |eleitor|
-
-		c = Candidato.new(nome_campanha: eleitor.nome, eleitor_id: eleitor.id)
-
-		Candidato.transaction do
-			if c.save
-				ce = CargoEleicao.offset(rand(CargoEleicao.count)).first
-				par = Partido.offset(rand(Partido.count)).first
-				cod_can = 10_000 + rand(10_000_000)
-
-				can = Candidatura.new(candidato_id: c.id, cargo_eleicao_id: ce.id, partido_id: par, codigo_candidato: cod_can)
-				if can.save
-				else
-					ActiveRecord::Rollback
-				end
+				n += 1
 			end
 		end
 	end
@@ -5862,3 +5863,21 @@ puts "CRIANDO ELEITORES E TITULOS GENERICOS"
 	end
 
 puts "CRIANDO VOTOS"
+
+ufs.each do |uf|
+	uf.municipios.each do |m|
+		cargo_eleicaos = CargoEleicao.where(municipio_id: m.id)
+		cargo_eleicaos.each do |ce|
+			ce.candidaturas.each do |can|
+				endereco = Endereco.find(:first, conditions: ["municipio_id = ? ", m.id])
+				zona = Zona.where(endereco_id: endereco.id)
+				zona.each do |zon|
+					zon.secaos.each do |s|
+						qtd_votos = rand(100)
+						VotosUrna.create(secao_id: s.id, candidatura_id: can.id, qtd_votos: qtd_votos)
+					end
+				end
+			end
+		end
+	end
+end

@@ -1,18 +1,26 @@
 puts "Gerando Votos"
 
-eleicao = Eleicao.where(status: true).first
+eleicao = Eleicao.first
 cargos_eleicao = CargoEleicao.where(eleicao_id: eleicao.id)
-cargos_eleicao.each do |ce|
-	candidaturas = Candidatura.find(:all, conditions: ["cargo_eleicao_id = ?", ce.id])
-	secoes.each do |s|
-		limite = 200
-		candidaturas.each do |c|
-			votos = rand(limite)
-			vu = VotosUrna.create(secao_id: s.id, candidatura_id: c.id, qtd_votos: votos)
-			limite -= votos
-		end
-	end
+
+Secao.all.each do |s|
+	c = Candidatura.offset(rand(Candidatura.count)).first
+	qtd_votos = rand(100)
+	VotosUrna.create(secao_id: s.id, candidatura_id: c.id, qtd_votos: qtd_votos)
 end
+
+# cargos_eleicao.each do |ce|
+# 	candidaturas = Candidatura.where(cargo_eleicao_id: ce.id])
+# 	candidaturas.each do |can|
+# 		zonas = Zona.where(endereco_id: can.cargo_eleicao.endereco.id)
+# 		zonas.each do |z|
+# 			z.secaos.each do |s|
+# 				qtd_votos = rand(100)
+# 				VotosUrna.create(secao_id: s.id, candidatura_id: can.id, qtd_votos: qtd_votos)
+# 			end
+# 		end
+# 	end
+# end
 
 
 # if cargo.nome.eql? "Presidente"

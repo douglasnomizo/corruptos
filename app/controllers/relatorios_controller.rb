@@ -5,18 +5,15 @@ class RelatoriosController < ApplicationController
 
   def uf_municipio
   	if params[:municipio]
-  		ce = CargoEleicao.where(municipio_id: params[:municipio])
-  		ca = Candidatura.where(cargo_eleicao_id: ce)
-  		vu = VotosUrna.where()
-  	else
   	end
+  	render layout: false
   end
 
   def zona_secao
-
+  	render layout: false
   end
 
   def candidato
-
+  	render layout: false
   end
 end
