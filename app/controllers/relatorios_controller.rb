@@ -3,6 +3,10 @@ class RelatoriosController < ApplicationController
   def index
   end
 
+  def gerar
+
+  end
+
   def uf_municipio
   	if params[:municipio]
   	end
