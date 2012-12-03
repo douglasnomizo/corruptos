@@ -1,12 +1,10 @@
 Corruptos::Application.routes.draw do
-  get "relatorios/candidato"
-
-  get "relatorios/zona_secao"
-
-  get "relatorios/uf_municipio"
-
   get "relatorios/index"
-  match 'relatorios', to: 'relatorios#index'
+  match 'relatorios/candidato', to: 'relatorios#candidato'
+  match 'relatorios/zona', to: 'relatorios#zona'
+  match 'relatorios/secao', to: 'relatorios#secao'
+  match 'relatorios/municipio', to: 'relatorios#municipio'
+  match 'relatorios' => 'relatorios#index'
 
   resources :votos_urnas
 
@@ -45,6 +43,7 @@ Corruptos::Application.routes.draw do
   match 'enderecos/busca_cep/:cep', to: 'enderecos#busca_cep'
 
   resources :municipios
+  match 'municipios/busca_zonas/:municipio', to: 'municipios#busca_zonas'
 
   resources :ufs
   match 'ufs/busca_municipios/:uf', to: 'ufs#busca_municipios'

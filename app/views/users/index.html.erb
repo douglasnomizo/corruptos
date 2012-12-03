@@ -1,21 +1,20 @@
-<h3>Usuários</h3>
-<div class="span8">
+<div class="page-header"><h1>Usuários</h1></div>
+
 <table class="table table-condensed table-striped">
 	  <thead>
       <tr>
           <th>Usuário</th>
           <th>Email</th>
-          <th>Data de Registro</th>          
+          <th>Data de Registro</th>
       </tr>
-  </thead>   
+  </thead>
   <tbody>
   <% @users.each do |user| %>
     <tr>
         <td><%= link_to user.name, user %></td>
         <td><%= user.email %></td>
-        <td><%= user.created_at.to_date %></td>
+        <td><%= user.created_at.to_date.strftime('%d/%m/%Y') %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-</div>

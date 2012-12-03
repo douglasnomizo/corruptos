@@ -1,15 +1,15 @@
 class UfsController < ApplicationController
-  
+
   def busca_municipios
     options = Uf.find(params[:uf]).municipios
-    
     render :json => options
   end
 
   # GET /ufs
   # GET /ufs.json
   def index
-    @ufs = Uf.all
+    @q = Uf.search(params[:q])
+    @ufs = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Data emissao:</b>
-  <%= @titulo.data_emissao %>
+  <b>Data de Emissão:</b>
+  <%= @titulo.data_emissao.strftime('%d/%m/%Y') %>
 </p>
 
 <p>
@@ -12,17 +12,17 @@
 
 <p>
   <b>Status:</b>
-  <%= @titulo.status %>
+  <%= @titulo.status ? "Ativo" : "Bloqueado" %>
 </p>
 
 <p>
   <b>Eleitor:</b>
-  <%= @titulo.eleitor %>
+  <%= @titulo.eleitor.nome %>
 </p>
 
 <p>
-  <b>Secao:</b>
-  <%= @titulo.secao %>
+  <b>Seção:</b>
+  <%= @titulo.secao.codigo %>
 </p>
 
 

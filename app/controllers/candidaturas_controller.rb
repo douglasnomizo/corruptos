@@ -2,7 +2,8 @@ class CandidaturasController < ApplicationController
   # GET /candidaturas
   # GET /candidaturas.json
   def index
-    @candidaturas = Candidatura.all
+    @q = Candidatura.paginate(page: params[:page]).search(params[:q])
+    @candidaturas = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

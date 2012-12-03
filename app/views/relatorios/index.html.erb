@@ -1,3 +1,58 @@
 <div class="page-header"><h1>Relatórios</h1></div>
 
-<%= link_to 'Gerar Relatório', controller: 'relatorios', action: 'gerar', class: "btn btn-info btn-small" %>
+<div class="container-fluid">
+	<div class="row-fluid">
+  	<div class="span5">
+  		<form class="form-horizontal">
+
+	      <div class="control-group sl_uf">
+					<%= label_tag 'Estado', nil, class: "control-label" %>
+					<div class="controls">
+				  	<%= select_tag :rel_uf_id, options_from_collection_for_select(Uf.all, :id, :nome), include_blank: true %>
+				  </div>
+				</div>
+
+				<div class="control-group sl_municipio" style="display:none">
+					<%= label_tag 'Município', nil, class: "control-label" %>
+			  	<div class="controls">
+			  		<%= select_tag :rel_municipio_id, options_from_collection_for_select(Uf.first.municipios, :id, :nome), include_blank: true %>
+			  	</div>
+				</div>
+
+				<div class="control-group sl_zona" style="display:none">
+					<%= label_tag 'Zona', nil, class: "control-label" %>
+					<div class="controls">
+				  	<%= select_tag :rel_zona_id, include_blank: true %>
+				  </div>
+				</div>
+
+				<div class="control-group sl_secao" style="display:none">
+					<%= label_tag 'Seção', nil, class: "control-label" %>
+					<div class="controls">
+				  	<%= select_tag :rel_secao_id, include_blank: true %>
+				  </div>
+				</div>
+			</form>
+		</div>
+		<div class="span5">
+			<form class="form-horizontal">
+    		<div class="control-group">
+	      	<%= label_tag 'CPF do Candidato', nil, class: "control-label" %>
+	      	<div class="controls">
+	      		<%= text_field 'candidato', 'cpf' %>
+	    		</div>
+    		</div>
+	    </form>
+
+	  </div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+  	<div class="span8">
+  	</div>
+  	<div class="span2">
+  		<%= link_to 'Gerar Relatório', {}, id: "btn_gerar_relatorio", class: "btn btn-success btn-small" %>
+  	</div>
+  </div>
+</div>

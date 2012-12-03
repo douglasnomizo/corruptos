@@ -8,7 +8,8 @@ class ZonasController < ApplicationController
   # GET /zonas
   # GET /zonas.json
   def index
-    @zonas = Zona.all
+    @q = Zona.paginate(page: params[:page]).search(params[:q])
+    @zonas = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

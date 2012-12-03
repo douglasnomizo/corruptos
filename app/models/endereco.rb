@@ -5,6 +5,7 @@ class Endereco < ActiveRecord::Base
   belongs_to :municipio
   has_one :eleitor
   has_one :uf, :through => :municipio
+  has_many :zonas
 
   validates_presence_of :municipio, :logradouro, :tipo_logradouro, :bairro
   validates :cep, :numericality => true

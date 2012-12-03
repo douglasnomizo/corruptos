@@ -8,7 +8,7 @@
 
 <table class="table table-condensed table-striped">
   <tr>
-    <th><%= sort_link @q, :nome_campanha, "Nome de Campanha" %></th>
+    <th>Nome de Campanha</th>
     <th>Partido</th>
     <th>Cargo</th>
     <th>UF</th>
@@ -30,6 +30,8 @@
 <% end %>
 </table>
 
-<br />
+<%= will_paginate @candidatos %>
+
+<br /><br />
 
 <%= link_to 'Novo Candidato', new_candidato_path, :class => "btn btn-info btn-small" %>

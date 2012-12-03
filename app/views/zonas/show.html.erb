@@ -1,8 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Descrição:</b>
+  <%= @zona.descricao %>
+</p>
+
+<p>
   <b>Endereco:</b>
   <%= @zona.endereco %>
+</p>
+
+<p>
+  <b>Códigos das Seções:</b>
+  <%= @zona.secaos.map { |e| e.codigo } %>
 </p>
 
 

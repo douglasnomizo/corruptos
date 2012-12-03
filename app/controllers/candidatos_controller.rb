@@ -13,7 +13,7 @@ class CandidatosController < ApplicationController
   # GET /candidatos
   # GET /candidatos.json
   def index
-    @q = Candidato.search(params[:q])
+    @q = Candidato.paginate(page: params[:page]).search(params[:q])
     @candidatos = @q.result(:distinct => true)
 
     respond_to do |format|

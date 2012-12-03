@@ -5,8 +5,8 @@
     <%= f.input :data_emissao %>
     <%= f.input :juiz_eleitoral %>
     <%= f.input :status %>
-    <%= f.association :eleitor %>
-    <%= f.association :secao %>
+    <%= f.association :eleitor, label_method: lambda { |obj| obj.nome } %>
+    <%= f.association :secao, label_method: lambda { |obj| obj.codigo } %>
   </div>
 
   <div class="form-inputs">

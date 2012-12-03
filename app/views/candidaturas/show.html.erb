@@ -2,21 +2,21 @@
 
 <p>
   <b>Candidato:</b>
-  <%= @candidatura.candidato %>
+  <%= @candidatura.candidato.nome_campanha %>
 </p>
 
 <p>
-  <b>Cargo eleicao:</b>
-  <%= @candidatura.cargo_eleicao %>
+  <b>Cargo:</b>
+  <%= @candidatura.cargo_eleicao.cargo.nome %>
 </p>
 
 <p>
   <b>Partido:</b>
-  <%= @candidatura.partido %>
+  <%= @candidatura.partido.nome %>
 </p>
 
 <p>
-  <b>Codigo candidato:</b>
+  <b>Código do candidato:</b>
   <%= @candidatura.codigo_candidato %>
 </p>
 

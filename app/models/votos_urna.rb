@@ -3,6 +3,6 @@ class VotosUrna < ActiveRecord::Base
 	belongs_to :secao
   belongs_to :candidatura
 
-  validates_presence_of :secao_id, :candidatura_id, :qtd_votos
+  validates_presence_of :secao_id, :qtd_votos
   validates_numericality_of :qtd_votos
 end

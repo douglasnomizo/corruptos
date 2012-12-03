@@ -26,11 +26,11 @@ module Corruptos
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl
-      
-      
+
+
       g.view_specs false
       g.helper_specs false
     end
@@ -84,5 +84,7 @@ module Corruptos
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.middleware.use "PDFKit::Middleware", :print_media_type => true
   end
 end

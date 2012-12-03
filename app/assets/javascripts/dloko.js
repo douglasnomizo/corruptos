@@ -69,18 +69,6 @@ function busca_secoes() {
   });
 }
 
-function busca_partidos_disponiveis() {
-  /*var input_municipio = $(".").val();
-  $.ajax({
-   type: "GET",
-   url: "/partidos/busca_partidos_disponiveis/" + input_zona,
-   async : false,
-    success: function(data){
-     
-    }
-  });*/ 
-}
-
 function seleciona_cargo() {
   cargo = $("#coligacao_cargo_eleicao_cargo_id option:selected").text();
   switch (cargo) {
@@ -126,3 +114,94 @@ function seleciona_cargo() {
 $(document).ready(function () {
   seleciona_cargo();
 });
+
+$("#rel_uf_id").change(function() {
+  var uf_id = $("#rel_uf_id").val();
+  $.ajax({
+   type: "GET",
+   url: "/ufs/busca_municipios/" + uf_id,
+   async : false,
+    success: function(data){
+      var items="";
+      $.each(data, function() {
+        items+="<option value='"+this.id+"'>"+this.nome+"</option>";
+       });
+      $("#rel_municipio_id").html(items);
+      $(".sl_municipio").show();
+    }
+  });
+});
+
+$("#rel_municipio_id").change(function() {
+  var municipio_id = $("#rel_municipio_id").val();
+  $.ajax({
+   type: "GET",
+   url: "/municipios/busca_zonas/" + municipio_id,
+   async : false,
+    success: function(data){
+      var items="<option></option>";
+      $.each(data, function() {
+        items+="<option value='"+this.id+"'>"+this.descricao+"</option>";
+       });
+      $("#rel_zona_id").html(items);
+      $(".sl_zona").show();
+    }
+  });
+});
+
+$("#rel_zona_id").change(function() {
+  var input_zona = $("#rel_zona_id").val();
+  if (input_zona == '') {
+    $("#rel_secao_id").html("");
+    $(".sl_secao").hide();
+  } else {
+    $.ajax({
+     type: "GET",
+     url: "/zonas/busca_secoes/" + input_zona,
+     async : false,
+      success: function(data){
+        var items="<option></option>";
+        $.each(data, function() {
+          items+="<option value='"+this.id+"'>"+this.codigo+"</option>";
+         });
+        $("#rel_secao_id").html(items);
+        $(".sl_secao").show();
+      }
+    });
+  }
+});
+
+$("#btn_gerar_relatorio").click(function() {
+  var secao_id = $("#rel_secao_id").val();
+  var zona_id = $("#rel_zona_id").val();
+  var municipio_id = $("#rel_municipio_id").val();
+  var candidato_cpf = $("#candidato_cpf").val();
+
+  if (candidato_cpf) {
+    window.open("candidato.pdf?cpf=" + candidato_cpf,'_blank');
+  } else if (secao_id != null && secao_id != '') {
+    window.open("secao.pdf?id=" + secao_id,'_blank');
+  } else if (zona_id != null && zona_id != '') {
+    window.open("zona.pdf?id=" + zona_id,'_blank');
+  } else if (municipio_id != null && municipio_id != '') {
+    window.open("municipio.pdf?id=" + municipio_id,'_blank');
+  } else {
+    alert('Selecione um município ou informe um candidato!');
+  }
+  return false;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

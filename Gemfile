@@ -36,6 +36,8 @@ gem "simple_form", ">= 2.0.4"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'lazy_high_charts'
+gem 'wicked_pdf'
+gem 'pdfkit'
 
 group :production do
 	gem 'pg'

@@ -6,21 +6,21 @@
 
 	<% if @votos.size > 0 %>
 	  <tr>
-	  	<th>Votos</th>
-	    <th>Zona</th>
+	  	<th>Zona</th>
 	    <th>Seção</th>
-			<th>Município</th>
-	    <th>Estado</th>
+	    <th>Candidato</th>
+	    <th>Partido</th>
+	    <th>Votos</th>
 	  </tr>
   <% end %>
 
 	<% @votos.each do |votos_urna| %>
 	  <tr>
-			<td><%= votos_urna.qtd_votos %></td>
 			<td><%= votos_urna.secao.zona.descricao %></td>
 	    <td><%= votos_urna.secao.codigo %></td>
-	    <td><%= votos_urna.secao.zona.endereco.municipio.nome %></td>
-	    <td><%= votos_urna.secao.zona.endereco.municipio.uf.nome %></td>
+	    <td><%= votos_urna.candidatura.candidato.nome_campanha %></td>
+	    <td><%= votos_urna.candidatura.partido.nome %></td>
+	    <td><%= votos_urna.qtd_votos %></td>
 	  </tr>
 	<% end %>
 </table>

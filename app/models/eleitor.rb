@@ -17,8 +17,8 @@ attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_
 
 
   def as_json(options={})
-    { cpf: self.cpf, 
-      data_nascimento: self.data_nascimento.strftime('%d/%m/%Y'), 
+    { cpf: self.cpf,
+      data_nascimento: self.data_nascimento.strftime('%d/%m/%Y'),
       endereco: self.endereco.descricao,
       nome: self.nome,
       nome_mae: self.nome_mae,
@@ -26,7 +26,7 @@ attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_
       id: self.id }
   end
 
-  private 
+  private
 
 	def valid_date?
     if self.data_nascimento
@@ -36,9 +36,9 @@ attr_accessible :nome, :rg, :cpf, :data_nascimento, :endereco_attributes, :nome_
   			errors.add(:data_nascimento, "Eleitor deve possuir no mínimo 16 anos!")
   		end
     end
-  end  
+  end
 
   def limpa_cpf
-    self.cpf = self.cpf.gsub(/\D/, '') 
+    self.cpf = self.cpf.gsub(/\D/, '')
   end
 end

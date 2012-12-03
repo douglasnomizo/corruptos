@@ -2,15 +2,8 @@ class SecaosController < ApplicationController
   # GET /secaos
   # GET /secaos.json
   def index
-    if params[:zona]
-      @secaos = Zona.find(params[:zona]).secaos
-    else
-      if Zona.first
-        @secaos = Zona.first.secaos
-      else
-        @secaos = []
-      end
-    end
+    @q = Secao.paginate(page: params[:page]).search(params[:q])
+    @secaos = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # index.html.erb

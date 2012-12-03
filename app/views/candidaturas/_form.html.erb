@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :candidato %>
-    <%= f.association :cargo_eleicao %>
-    <%= f.association :partido %>
+    <%= f.association :candidato, label_method: lambda { |obj| obj.nome_campanha } %>
+    <%= f.association :cargo_eleicao, label_method: lambda { |obj| obj.cargo.nome } %>
+    <%= f.association :partido, label_method: lambda { |obj| obj.nome } %>
     <%= f.input :codigo_candidato %>
   </div>
 

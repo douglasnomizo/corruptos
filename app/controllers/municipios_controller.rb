@@ -1,4 +1,15 @@
 class MunicipiosController < ApplicationController
+
+  def busca_zonas
+    enderecos = Municipio.find(params[:municipio]).enderecos
+    zonas = []
+    enderecos.each do |e|
+      zonas << e.zonas
+    end
+    zonas.flatten!
+    render :json => zonas
+  end
+
   # GET /municipios
   # GET /municipios.json
   def index
@@ -7,6 +18,7 @@ class MunicipiosController < ApplicationController
     else
       @municipios = Uf.first.municipios
     end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @municipios }
@@ -15,7 +27,7 @@ class MunicipiosController < ApplicationController
 
   # GET /municipios/1
   # GET /municipios/1.json
-  def show  
+  def show
     @municipio = Municipio.find(params[:id])
 
     respond_to do |format|

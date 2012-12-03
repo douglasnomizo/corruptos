@@ -5772,11 +5772,13 @@ puts 'CRIANDO ZONAS E SEÇÕES'
 			qtd_zonas = 2
 			endereco = m.enderecos.first
 			qtd_zonas.times do |qz|
-				z = Zona.create(descricao: "Zona " + qz.to_s + " de " + m.nome, endereco: endereco)
+				zona_descricao = "Zona " + (qz + 1).to_s + zona_descricao + " de " + m.nome
+				z = Zona.create(descricao: zona_descricao, endereco: endereco)
 				qtd_secoes = 2 + rand(3)
 				qtd_secoes.times do |qs|
 					limite_eleitores = 50 + rand(300)
-					Secao.create(codigo: qs, zona_id: z.id, limite_eleitores: limite_eleitores)
+					secao_codigo = (qs + 1).to_s
+					Secao.create(codigo: secao_codigo, zona_id: z.id, limite_eleitores: limite_eleitores)
 				end
 			end
 		end

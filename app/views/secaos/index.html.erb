@@ -1,18 +1,15 @@
 <div class="page-header"><h1>Seções</h1></div>
 
-<div class="btn-group">
-  <% Zona.all.each do |zo| %>
-    <%= link_to zo.descricao, secaos_path(:zona => zo.id), :class => "btn btn-small" %>
-  <% end %>
-</div>
-<br>
-<br>
-
+<%= search_form_for @q, :html => {:class => "form-horizontal form-search"} do |f| %>
+  <%= f.text_field :zona_endereco_municipio_uf_sigla_eq, :placeholder => "Sigla do Estado" %> <strong>ou</strong>
+  <%= f.text_field :zona_endereco_municipio_nome_cont, :placeholder => "Nome do Município" %>
+  <%= f.submit "Buscar", :class => "btn btn-success" %>
+<% end %>
 
 <table class="table table-condensed table-striped">
   <tr>
     <th>Estado</th>
-    <th>Municipio</th>
+    <th>Município</th>
     <th>Zona</th>
     <th>Seção</th>
     <th>Limite de eleitores</th>
@@ -34,6 +31,9 @@
 <% end %>
 </table>
 
+<%= will_paginate @secaos %>
+
+<br />
 <br />
 
 <%= link_to 'Nova Secao', new_secao_path, :class => "btn btn-small btn-info" %>
