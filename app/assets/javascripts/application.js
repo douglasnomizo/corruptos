@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require bootstrap
+//= require highcharts
+//= require exporting
 //= require_tree .
