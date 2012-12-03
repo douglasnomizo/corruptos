@@ -53,5 +53,6 @@ class RelatoriosController < ApplicationController
     else
       @header = "Candidato não encontrado!"
     end
+    @total_votos = ''
   end
 end

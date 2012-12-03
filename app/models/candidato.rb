@@ -13,5 +13,5 @@ class Candidato < ActiveRecord::Base
   validates :eleitor, :presence => { :message => "O candidato deve ser um eleitor válido" }
   validates :nome_campanha, :presence => { :message => "Informe o nome de campanha" }
 	validates_uniqueness_of :nome_campanha
-	validates_length_of :nome_campanha, :in => 5..150
+	validates_length_of :nome_campanha, :in => 4..150
 end

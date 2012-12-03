@@ -5817,7 +5817,7 @@ puts "CRIANDO ELEITORES CANDIDATOS"
 								par = Partido.offset(rand(Partido.count)).first
 								cod_can = 10_000 + rand(10_000_000)
 
-								can = Candidatura.new(candidato_id: c.id, cargo_eleicao_id: ce.id, partido_id: par, codigo_candidato: cod_can)
+								can = Candidatura.new(candidato_id: c.id, cargo_eleicao_id: ce.id, partido_id: par.id, codigo_candidato: cod_can)
 								if can.save
 								else
 									ActiveRecord::Rollback
