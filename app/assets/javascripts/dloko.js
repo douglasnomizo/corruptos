@@ -176,6 +176,7 @@ $("#btn_gerar_relatorio").click(function() {
   var zona_id = $("#rel_zona_id").val();
   var municipio_id = $("#rel_municipio_id").val();
   var candidato_cpf = $("#candidato_cpf").val();
+  $("#candidato_cpf").val('');
 
   if (candidato_cpf) {
     window.open("candidato.pdf?cpf=" + candidato_cpf,'_blank');
@@ -190,18 +191,3 @@ $("#btn_gerar_relatorio").click(function() {
   }
   return false;
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

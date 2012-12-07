@@ -2,18 +2,21 @@
 	<div class="page-header"><h1><small><%= @header %></small></h1></div>
 <% end %>
 
-<table class="table table-condensed table-striped">
+<table class="table table-condensed table-bordered table-striped">
 
 	<% if @votos.size > 0 %>
 	  <tr>
 	  	<th>Candidato</th>
-	    <th>Votos</th>
+	  	<th>Cargo</th>
+	  	<th>Partido</th>
+	  	<th>Votos</th>
 	  </tr>
   <% end %>
 
 	<% @votos.each do |votos_urna| %>
 	  <tr>
 			<td><%= votos_urna.candidatura.candidato.nome_campanha %></td>
+			<td><%= votos_urna.candidatura.cargo_eleicao.cargo.nome %></td>
 			<td><%= votos_urna.candidatura.partido.nome %></td>
 			<td><%= votos_urna.qtd_votos %></td>
 	  </tr>

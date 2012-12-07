@@ -9,7 +9,7 @@
   <%= ele.input :nome_mae, label: "Mãe" %>
   <%= ele.input :rg, input_html: {maxlength: 11} %>
   <%= ele.input :cpf, input_html: {maxlength: 14, class: "cpf", pattern: "^(\d{3}\.\d{3}\.\d{3}-\d{2})|(\d{11})$", placeholder: "888.888.888-88"} %>
-  <%= ele.input :data_nascimento, start_year: 1900, end_year: Date.today.year %>
+  <%= ele.input :data_nascimento, start_year: 1900, end_year: Date.today.year - 15 %>
 
   <%= ele.simple_fields_for :endereco do |endereco_builder| %>
     <% render 'enderecos/endereco_fields', f: endereco_builder %>

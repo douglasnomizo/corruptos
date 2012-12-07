@@ -11,10 +11,12 @@ class RelatoriosController < ApplicationController
     @votos = []
     if secao
       @header = "Seção " + secao.codigo.to_s + " da Zona " + secao.zona.descricao + " de " + secao.zona.endereco.municipio.nome
-      @votos = VotosUrna.find(:all, conditions: ["secao_id = ?", secao.id])
+      @votos = VotosUrna.find(:all, conditions: ["secao_id = ?", secao.id], order: "candidatura_id ASC")
     else
       @header = "Seção não recebeu nenhum voto!"
     end
+
+    @votos = @votos.sort_by {|v| v.qtd_votos}.reverse
   end
 
   def municipio
@@ -31,6 +33,16 @@ class RelatoriosController < ApplicationController
       @header = "O município de " + endereco.municipio.nome + " não participou da eleição!"
     end
     @votos.flatten!
+
+    @candidatos = {}
+    @votos.each do |v|
+      if @candidatos[v.candidatura.id]
+        @candidatos[v.candidatura.id]["qtd_votos"] += v.qtd_votos
+      else
+        @candidatos[v.candidatura.id] = v
+      end
+    end
+    @candidatos = @candidatos.sort_by {|k,v| v.qtd_votos}.reverse
   end
 
   def zona
@@ -41,6 +53,19 @@ class RelatoriosController < ApplicationController
       @votos = VotosUrna.find(:all, conditions: ["secao_id in (?)", zona.secaos.map { |s| s.id }])
     else
       @header = "Zona não recebeu nenhum voto!"
+    end
+
+    @secoes = {}
+    @votos.each do |v|
+      if @secoes[v.secao_id]
+        @secoes[v.secao_id] << v
+      else
+        @secoes[v.secao_id] = [v]
+      end
+    end
+
+    @secoes.each do |k,v|
+      @secoes[k] = v.sort { |x, y| x.qtd_votos <=> y.qtd_votos }.reverse
     end
   end
 
@@ -53,6 +78,9 @@ class RelatoriosController < ApplicationController
     else
       @header = "Candidato não encontrado!"
     end
-    @total_votos = ''
+    @total_votos = 0
+    @votos.each do |v|
+      @total_votos += v.qtd_votos
+    end
   end
 end

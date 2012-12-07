@@ -2,25 +2,24 @@
 	<div class="page-header"><h1><small><%= @header %></small></h1></div>
 <% end %>
 
-<table class="table table-condensed table-striped">
+<table class="table table-condensed table-bordered table-striped">
 
-	<% if @votos.size > 0 %>
-	  <tr>
-	  	<th>Zona</th>
-	    <th>Seção</th>
-	    <th>Candidato</th>
-	    <th>Partido</th>
-	    <th>Votos</th>
-	  </tr>
-  <% end %>
+	<% if @candidatos.size > 0 %>
 
-	<% @votos.each do |votos_urna| %>
-	  <tr>
-			<td><%= votos_urna.secao.zona.descricao %></td>
-	    <td><%= votos_urna.secao.codigo %></td>
-	    <td><%= votos_urna.candidatura.candidato.nome_campanha %></td>
-	    <td><%= votos_urna.candidatura.partido.nome %></td>
-	    <td><%= votos_urna.qtd_votos %></td>
-	  </tr>
+		<tr>
+			<th>Candidato</th>
+			<th>Cargo</th>
+		  <th>Partido</th>
+		  <th>Total de Votos</th>
+		</tr>
+
+		<% @candidatos.each do |k,v| %>
+			  <tr>
+					<td><%= v.candidatura.candidato.nome_campanha %></td>
+					<td><%= v.candidatura.cargo_eleicao.cargo.nome %></td>
+			    <td><%= v.candidatura.partido.nome %></td>
+			    <td><%= v.qtd_votos %></td>
+			  </tr>
+		<% end %>
 	<% end %>
 </table>

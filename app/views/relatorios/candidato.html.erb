@@ -2,28 +2,54 @@
 	<div class="page-header"><h1><small><%= @header %></small></h1></div>
 <% end %>
 
-<table class="table table-condensed table-striped">
+<% if @votos.size > 0 %>
 
-	<% if @votos.size > 0 %>
+	<% if @votos.first.candidatura.cargo_eleicao.uf %>
+		<p>
+			<b>Estado:</b> <%= @votos.first.candidatura.cargo_eleicao.uf.nome %>
+		</p>
+	<% elsif @votos.first.candidatura.cargo_eleicao.municipio %>
+		<p>
+			<b>Estado:</b> <%= @votos.first.candidatura.cargo_eleicao.municipio.uf.nome %>
+		</p>
+	<% end %>
+
+	<% if @votos.first.candidatura.cargo_eleicao.municipio %>
+		<p>
+			<b>Município:</b> <%= @votos.first.candidatura.cargo_eleicao.municipio.nome %>
+		</p>
+	<% end %>
+
+	<% if @votos.first.candidatura.cargo_eleicao.cargo %>
+		<p>
+			<b>Cargo:</b> <%= @votos.first.candidatura.cargo_eleicao.cargo.nome %>
+		</p>
+	<% end %>
+
+	<% if @votos.first.candidatura.candidato %>
+		<p>
+			<b>Partido:</b> <%= @votos.first.candidatura.candidato.partido.nome %>
+		</p>
+	<% end %>
+
+	<br />
+
+	<table class="table table-condensed table-bordered table-striped">
+
 	  <tr>
-	  	<th>Votos</th>
 	    <th>Zona</th>
 	    <th>Seção</th>
-			<th>Município</th>
-	    <th>Estado</th>
+	  	<th>Total de Votos</th>
 	  </tr>
-  <% end %>
 
-	<% @votos.each do |votos_urna| %>
-	  <tr>
-			<td><%= votos_urna.qtd_votos %></td>
-			<td><%= votos_urna.secao.zona.descricao %></td>
-	    <td><%= votos_urna.secao.codigo %></td>
-	    <td><%= votos_urna.secao.zona.endereco.municipio.nome %></td>
-	    <td><%= votos_urna.secao.zona.endereco.municipio.uf.nome %></td>
-	  </tr>
-	<% end %>
-</table>
-
+		<% @votos.each do |votos_urna| %>
+		  <tr>
+				<td><%= votos_urna.secao.zona.descricao %></td>
+		    <td><%= votos_urna.secao.codigo %></td>
+		    <td><%= votos_urna.qtd_votos %></td>
+		  </tr>
+		<% end %>
+	</table>
+<% end %>
 <br />
-Total de Votos: <%= @total_votos %>
+Total de Votos: <%= @total_votos if @total_votos %>
