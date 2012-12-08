@@ -1,6 +1,6 @@
 # encoding: utf-8
 class EnderecosController < ApplicationController
-  
+
   def busca_cep
     require 'net/http'
     require 'cgi'
@@ -9,7 +9,7 @@ class EnderecosController < ApplicationController
     consulta = Net::HTTP.get_response(url)
     pesquisa = CGI::parse(consulta.body)
     pesquisa = Hash[*pesquisa.map { |k, v| [k, v[0]] }.flatten]
-    
+
     pesquisa['bairro'] = pesquisa['bairro'].force_encoding("ISO-8859-1").encode("UTF-8")
     pesquisa['cidade'] = pesquisa['cidade'].force_encoding("ISO-8859-1").encode("UTF-8")
     pesquisa['resultado_txt'] = pesquisa['resultado_txt'].force_encoding("ISO-8859-1").encode("UTF-8")
