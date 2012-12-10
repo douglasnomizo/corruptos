@@ -55,6 +55,38 @@ function busca_municipios() {
   });
 }
 
+function busca_zonas() {
+  var municipio_id = $("#eleitor_endereco_attributes_municipio_id").val();
+  $.ajax({
+   type: "GET",
+   url: "/municipios/busca_zonas/" + municipio_id,
+   async : false,
+    success: function(data){
+      var items="";
+      $.each(data, function() {
+        items+="<option value='"+this.id+"'>"+this.descricao+"</option>";
+       });
+      $("#eleitor_titulo_attributes_secao_zona_id").html(items);
+    }
+  });
+}
+
+function busca_secoes_eleitor() {
+  var input_zona = $("#eleitor_titulo_attributes_secao_zona_id").val();
+  $.ajax({
+   type: "GET",
+   url: "/zonas/busca_secoes/" + input_zona,
+   async : false,
+    success: function(data){
+      var items="";
+      $.each(data, function() {
+        items+="<option value='"+this.id+"'>"+this.codigo+"</option>";
+       });
+      $("#eleitor_titulo_attributes_secao_id").html(items);
+    }
+  });
+}
+
 function busca_secoes() {
   var input_zona = $(".zona_select").val();
   $.ajax({
@@ -113,10 +145,6 @@ function seleciona_cargo() {
   }
 }
 
-$(document).ready(function () {
-  seleciona_cargo();
-});
-
 $("#rel_uf_id").change(function() {
   var uf_id = $("#rel_uf_id").val();
   $.ajax({
@@ -130,6 +158,22 @@ $("#rel_uf_id").change(function() {
        });
       $("#rel_municipio_id").html(items);
       $(".sl_municipio").show();
+    }
+  });
+});
+
+$("#eleitor_endereco_attributes_municipio_id").change(function() {
+  var municipio_id = $("#eleitor_endereco_attributes_municipio_id").val();
+  $.ajax({
+   type: "GET",
+   url: "/municipios/busca_zonas/" + municipio_id,
+   async : false,
+    success: function(data){
+      var items="";
+      $.each(data, function() {
+        items+="<option value='"+this.id+"'>"+this.descricao+"</option>";
+       });
+      $("#eleitor_titulo_attributes_secao_zona_id").html(items);
     }
   });
 });
@@ -193,3 +237,7 @@ $("#btn_gerar_relatorio").click(function() {
   }
   return false;
 });
+
+seleciona_cargo();
+busca_zonas();
+busca_secoes_eleitor();
