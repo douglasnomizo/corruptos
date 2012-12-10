@@ -16,6 +16,10 @@ class RelatoriosController < ApplicationController
       @header = "Seção não recebeu nenhum voto!"
     end
 
+    @total_votos_secao = 0
+    @votos.each do |v|
+      @total_votos_secao += v.qtd_votos
+    end
     @votos = @votos.sort_by {|v| v.qtd_votos}.reverse
   end
 
@@ -43,6 +47,10 @@ class RelatoriosController < ApplicationController
       end
     end
     @candidatos = @candidatos.sort_by {|k,v| v.qtd_votos}.reverse
+    @total_votos_municipio = 0
+    @candidatos.each do |k,v|
+      @total_votos_municipio += v.qtd_votos
+    end
   end
 
   def zona
@@ -56,12 +64,15 @@ class RelatoriosController < ApplicationController
     end
 
     @secoes = {}
+    @total_votos_zona = 0
+
     @votos.each do |v|
       if @secoes[v.secao_id]
         @secoes[v.secao_id] << v
       else
         @secoes[v.secao_id] = [v]
       end
+      @total_votos_zona += v.qtd_votos
     end
 
     @secoes.each do |k,v|
