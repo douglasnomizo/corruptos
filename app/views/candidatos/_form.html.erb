@@ -14,15 +14,15 @@
   <h4>Dados do Eleitor</h4>
   <br />
 	<%= c.simple_fields_for :eleitor do |ele| %>
-		<%= c.input :cpf, label: "CPF", wrapper: :append do %>
+		<%= c.input :cpf, label: "Nome ou CPF", wrapper: :append do %>
 			<%= c.input_field :cpf, value: @candidato.eleitor.cpf %><span class="add-on"><a class="btn btn-small btn-info" onclick="busca_eleitor_cpf();">Buscar Eleitor</a></span>
 		<% end %>
 	  <%= c.input :eleitor_id, as: :hidden %>
 		<%= ele.input :nome, required: false, disabled: true %>
-		<%= ele.input :nome_mae, required: false, disabled: true %>
-		<%= ele.input :rg, required: false, disabled: true %>
-		<%= ele.input :data_nascimento, as: :string, required: false, disabled: true %>
-		<%= ele.input :endereco, as: :string, required: false, disabled: true, input_html: {style: 'width: 335px'} %>
+		<%= ele.input :nome_mae, required: false, disabled: true, label: "Mãe" %>
+		<%= ele.input :rg, required: false, disabled: true, label: "RG" %>
+		<%= ele.input :data_nascimento, as: :string, required: false, disabled: true, label: "Data de Nascimento" %>
+		<%= ele.input :endereco, as: :string, required: false, disabled: true, label: "Endereço", input_html: {style: 'width: 455px'} %>
 		<br />
 		<h4>Dados do Candidato</h4>
 		<br />
@@ -32,11 +32,11 @@
     	<%= can.input :partido_id, include_blank: false, collection: Partido.all, label_method: lambda { |obj| obj.nome }, input_html: {style: 'width: 350px'} %>
 
   		<% if @candidato.candidatura.cargo_eleicao %>
-  			<%= can.association :cargo_eleicao, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.cargo_eleicao.cargo.id %>
+  			<%= can.association :cargo_eleicao, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, selected: @candidato.candidatura.cargo_eleicao.cargo.id, label: "Cargo" %>
 			<% else %>
-  			<%= can.association :cargo_eleicao, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome } %>
+  			<%= can.association :cargo_eleicao, include_blank: false, collection: eleicao_atual.cargos.uniq, label_method: lambda { |obj| obj.nome }, label: "Cargo" %>
   		<% end %>
-			<%= can.input :codigo_candidato %>
+			<%= can.input :codigo_candidato, label: "Código do Candidato" %>
   	<% end %>
   	<br />
 		<%= submit_tag 'Cancelar', type: 'button', class: "btn", onclick: "history.back();" %>

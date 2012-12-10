@@ -25,7 +25,7 @@ class ColigacaosController < ApplicationController
   # GET /coligacaos/new
   # GET /coligacaos/new.json
   def new
-    @coligacao = Coligacao.new    
+    @coligacao = Coligacao.new
     @coligacao.cargo_eleicao = CargoEleicao.first
 
     respond_to do |format|
@@ -44,17 +44,17 @@ class ColigacaosController < ApplicationController
     Coligacao.transaction do
       coligacao_partido = params[:coligacao].delete :coligacao_partido
       cargo_eleicao = params[:coligacao].delete :cargo_eleicao
-      
+
       if cargo_eleicao[:municipio_id]
         @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:municipio_id]])
       elsif cargo_eleicao[:uf_id]
-        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])        
+        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])
       else
-        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao  
+        @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao
       end
-      
+
       @coligacao = Coligacao.new(params[:coligacao])
-      
+
       if @cargo_eleicao
         @coligacao.cargo_eleicao = @cargo_eleicao
       end
@@ -63,7 +63,7 @@ class ColigacaosController < ApplicationController
         redirect_to @coligacao, notice: 'Coligacao criada com sucesso!'
       else
         ActiveRecord::Rollback
-        render action: "new"    
+        render action: "new"
       end
     end
   end
@@ -73,13 +73,13 @@ class ColigacaosController < ApplicationController
   def update
     coligacao_partido = params[:coligacao].delete :coligacao_partido
     cargo_eleicao = params[:coligacao].delete :cargo_eleicao
-    
+
     if cargo_eleicao[:municipio_id]
       @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and municipio_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:municipio_id]])
     elsif cargo_eleicao[:uf_id]
-      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])        
+      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ? and uf_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id], cargo_eleicao[:uf_id]])
     else
-      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao  
+      @cargo_eleicao =  CargoEleicao.find(:first, conditions: ["eleicao_id = ? and cargo_id = ?", cargo_eleicao[:eleicao_id], cargo_eleicao[:cargo_id]]) unless @cargo_eleicao
     end
 
     @coligacao = Coligacao.find(params[:id])
@@ -105,6 +105,6 @@ class ColigacaosController < ApplicationController
     @coligacao = Coligacao.find(params[:id])
     @coligacao.destroy
 
-    redirect_to coligacaos_url    
+    redirect_to coligacaos_url
   end
 end

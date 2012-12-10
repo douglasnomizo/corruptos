@@ -3,10 +3,23 @@ class CandidatosController < ApplicationController
 
   def carrega_dados
     @eleitor = Eleitor.find(:first, :joins => :endereco, :conditions => ["cpf = ?", params[:cpf]])
-    if @eleitor
-      render :json => @eleitor
+
+    unless @eleitor
+      @eleitor = Eleitor.find(:first, :joins => :endereco, :conditions => ["nome like ?", "#{params[:cpf]}"])
+    end
+
+    unless @eleitor
+      @eleitor = Eleitor.find(:first, :joins => :endereco, :conditions => ["nome like ?", "%#{params[:cpf]}%"])
+    end
+
+    if @eleitor.candidato
+      render :json => '{"erro":"cadastrado"}'
     else
-      render :json => '{"erro":"true"}'
+      if @eleitor
+        render :json => @eleitor
+      else
+        render :json => '{"erro":"true"}'
+      end
     end
   end
 

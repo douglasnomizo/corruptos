@@ -8,6 +8,8 @@ function busca_eleitor_cpf() {
 function preenche_campos_eleitor(data) {
   if(data.erro == "true") {
     alert('Eleitor não encontrado!');
+  } else if(data.erro == "cadastrado") {
+    alert('Eleitor já é candidato da eleição!');
   } else {
     $("#candidato_eleitor_id").val(data.id);
     $("#candidato_eleitor_attributes_nome").val(data.nome);
